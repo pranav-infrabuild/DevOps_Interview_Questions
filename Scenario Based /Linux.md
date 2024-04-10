@@ -42,5 +42,10 @@ If specific applications are causing high memory usage, review and optimize thei
 
 #### 4) Can you explain how would you automate the deployment process of a web application on multiple linux servers?
 
-**ANS**: A
+**ANS**: Absolutely. I would use a configuration management tool like Ansible, Puppet, or Chef to automate the deployment process. I'd write playbooks or manifests to define the desired state of each server, including installing dependencies, configuring web servers, deploying the application code, and restarting services if needed. With these tools, I can ensure consistency across all servers and easily scale the deployment as needed.
+
+
+#### 5) One last question: How would you ensure the security of the Linux servers in your environment?
+
+**ANS**: Security is paramount in any environment. To secure Linux servers, I would implement best practices such as regularly applying security patches, using strong passwords and SSH key-based authentication, configuring firewalls (like iptables or firewalld) to restrict access, enabling SELinux.
 
