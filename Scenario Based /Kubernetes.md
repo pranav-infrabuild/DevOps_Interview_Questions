@@ -147,3 +147,37 @@ kubectl describe svc <service_name>
 
 kubectl port-forward <pod_name> 8080:80
 curl http://localhost:8080
+
+
+# Cluster - Level issues in Kubernetes:
+
+#### 1) Nodes not ready
+
+The "Nodes not ready" error in Kubernetes indicates that one or more nodes in your cluster are not in a healthy state and cannot accept workloads or schedule pods. This can happen due to various reasons, including networking issues, node failures, or resource constraints.
+
+#### 2) Networking issue
+
+
+"Networking issue"  in Kubernetes can manifest in various ways and are often related to problems with networking configuration, connectivity, or communication between components in the cluster. 
+
+#### 3) etcd Cluster is unavailable
+
+
+The "etcd cluster is unavailable" error in Kubernetes typically indicates a problem with the underlying etcd datastore, which is a critical component used for storing cluster state and configuration. 
+
+#### 4) Persistent volume Claims Stuck in Pending State:
+
+The "PersistentVolumeClaims (PVCs) stuck in Pending state" error in Kubernetes typically indicates that the system is unable to fulfill the PVC requests due to various reasons.
+
+
+**Steps to troubleshoot this issue**:
+
+1.Ensure that the required StorageClass exists and is accessible:
+
+kubectl get storageclasses
+
+2.Ensure the StorageClass has volumeBindingMode: Immediate for immediate binding.
+
+3.List available PersistentVolumes (PVs) in the cluster:
+
+kubectl get pv
