@@ -1,5 +1,7 @@
-# DevOps_Senariao_Based_Questions
-Welcome to the DevOps Scenario-based Interview Questions repository! This repository is designed to help DevOps professionals, interviewers, and candidates alike by providing a comprehensive collection of scenario-based questions tailored to assess practical knowledge and problem-solving skills in the DevOps domain.
+# DevOps_Interview_Questions
+
+Welcome to [DevOps_Interview_Questions](https://github.com/pranav278/DevOps_Interview_Questions/edit/main/README.md) 🌟 This repository is a treasure trove of scenario-based and technical questions designed to challenge and hone your skills. 🔍 Whether you're preparing for interviews or simply eager to expand your knowledge, you'll find a wide range of questions to explore. 🚀 Dive in, test your expertise, and elevate your understanding of various concepts! 📚
+
 
 
 
