@@ -14,3 +14,5 @@ Welcome to [DevOps_Interview_Questions](https://github.com/pranav278/DevOps_Inte
 3. [Docker](https://github.com/pranav278/DevOps_Interview_Questions/blob/df6fe3c93a9563700fc795e220256178488a1100/Scenario%20Based%20/Docker.md)
 
 ## To visit Technical based questions :
+
+1. [Linux](https://github.com/pranav278/DevOps_Interview_Questions/blob/05a36efd906b717760009dd051107e946dccf6cb/Technical%20Based%20%20/Linux.md)
