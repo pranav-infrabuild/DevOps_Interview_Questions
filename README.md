@@ -5,4 +5,4 @@ Welcome to the DevOps Scenario-based Interview Questions repository! This reposi
 
 ## To visit Scenario based questions
 
-1. [Linux]()
+1. [Linux](https://github.com/pranav278/DevOps_Senariao_Based_Questions/tree/main)
