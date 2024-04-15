@@ -51,7 +51,7 @@ If specific applications are causing high memory usage, review and optimize thei
 
 ## Some troubleshooting issues 
 
-1) Email delivery failure
+#### 1)Email delivery failure
 
 **Issue**: Email messages not being delivered
 
@@ -86,7 +86,7 @@ SMTP server settings (relayhost, mynetworks).
             
 **echo "This is a test email" | mail -s "Test Email" recipient@example.com**
 
-2) System shutdown delays
+#### 2)System shutdown delays
 
 **Issue**:System takes the long time to shutdown.
 
@@ -120,7 +120,7 @@ sudo apt upgrade**
 
 9.Experiment with kernel parameters that can affect shutdown behavior, such as ACPI settings **(acpi=force or acpi=off)**.
 
-3) System resolved DNS Caching
+#### 3)System resolved DNS Caching
 
 **Issue**: System resolved DNS Caching problem
 
@@ -146,7 +146,7 @@ sudo apt upgrade**
 
 **sudo systemctl restart systemd-resolved**
 
-4)Docker container networking issue
+#### 4)Docker container networking issue
 
 **Issue**:Networking problems with docker container
 
@@ -177,7 +177,7 @@ Inspect Container Network:
 
 Use docker inspect to inspect the network configuration of a running container and ensure that ports are correctly exposed and mapped.
 
-5)Failed RAID rebuild
+#### 5)Failed RAID rebuild
 
 **Issue**:RAID array rebuid fails.
 
@@ -199,7 +199,7 @@ Use docker inspect to inspect the network configuration of a running container a
 
 7.If the RAID array build fails due to data corruption or other issues, consider data recovery options using RAID recovery tools.
 
-6) Bash Scripting errors
+#### 6)Bash Scripting errors
 
 **Issue**: Errors in Bash Scripts
 
@@ -219,6 +219,10 @@ Use docker inspect to inspect the network configuration of a running container a
 
 **shellcheck script.sh**
 
+#### 7)SSL/TLS Vulnerabilities
 
+**Issue**:Vulnerabilties in SSL/TSL Protocols.
+
+**Solution**:
 
 
