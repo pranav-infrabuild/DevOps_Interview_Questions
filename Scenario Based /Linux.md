@@ -49,7 +49,7 @@ If specific applications are causing high memory usage, review and optimize thei
 
 **ANS**: Security is paramount in any environment. To secure Linux servers, I would implement best practices such as regularly applying security patches, using strong passwords and SSH key-based authentication, configuring firewalls (like iptables or firewalld) to restrict access, enabling SELinux.
 
-## Some troubleshooting issues
+## Some troubleshooting issues 
 
 1) Email delivery failure
 
