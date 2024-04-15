@@ -49,3 +49,17 @@ If specific applications are causing high memory usage, review and optimize thei
 
 **ANS**: Security is paramount in any environment. To secure Linux servers, I would implement best practices such as regularly applying security patches, using strong passwords and SSH key-based authentication, configuring firewalls (like iptables or firewalld) to restrict access, enabling SELinux.
 
+## Some troubleshooting issues
+
+1) Email delivery failure
+
+**Issue**: Email messages not being delivered
+
+**Solution**: 1.Start by checking the mail logs on your Linux system.
+             **tail -f /var/log/mail.log**
+
+              2.Ensure that your Linux system can resolve DNS queries correctly. Use tools like ping or nslookup to verify DNS resolution for the recipient's mail server.
+                 **nslookup recipientdomain.com**
+             
+
+
