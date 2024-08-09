@@ -1,15 +1,17 @@
-l# Linux based Scenarios Questions
+# Linux based Scenarios Questions
 
 #### 1) Can you describe a scenario where you need to troubleshoot a performance issue on a Linux server?
-
+<details>
 **Ans**: Sure. Let's say there is a web application running on a Linux server, and users are reporting slow response times. The first step would be to check the system resource utilization using commands like `top`, `htop`, or `ps`. This would give an overview of CPU, memory, and disk usage.
+</details>
 
 #### 2) let's say the CPU usage is high. How would you identify the processes consuming the most CPU?
-
+<details>
 **ANS**: I would use the 'top' command and sort processes by CPU usage. Alternatively, I could use `ps` with options like `aux --sort=-%cpu' to list processes by CPU consumption. Once identified, I would investigate those processes further to understand why they are consuming so much CPU.
-
+</details>
+            
 #### 3) Suppose the CPU usage seems normal but the memory usage is high. How would you troubleshoot this issue?
-
+<details>
 **ANS**: Check Overall Memory Usage:
 Use **free -h** to see how much memory is being used and available.
 
@@ -39,16 +41,18 @@ Ensure your system's memory settings (**sysctl** parameters) are appropriate.
 
 Optimize Applications:
 If specific applications are causing high memory usage, review and optimize their configurations.
-
+</details>
+            
 #### 4) Can you explain how would you automate the deployment process of a web application on multiple linux servers?
-
+<details>
 **ANS**: Absolutely. I would use a configuration management tool like Ansible, Puppet, or Chef to automate the deployment process. I'd write playbooks or manifests to define the desired state of each server, including installing dependencies, configuring web servers, deploying the application code, and restarting services if needed. With these tools, I can ensure consistency across all servers and easily scale the deployment as needed.
-
+</details>
 
 #### 5) One last question: How would you ensure the security of the Linux servers in your environment?
-
+<details>
 **ANS**: Security is paramount in any environment. To secure Linux servers, I would implement best practices such as regularly applying security patches, using strong passwords and SSH key-based authentication, configuring firewalls (like iptables or firewalld) to restrict access, enabling SELinux.
-
+</details>
+            
 ## Some troubleshooting issues 
 
 #### 1)Email delivery failure
