@@ -1,16 +1,51 @@
-# Scenario:
+# Docker Interview Question:
 
-#### 1) Imagine you are tasked with containerizing a Java based application for deployment.you start by creating a docker image using the openjdk:11 base image;as it includes the java run time environment and seems like a logical choice.However you soon realize that this image also includes unnecessary packages and tools,bloating the image size and potentially increasing the attack surface.How can you avoid including unnecessary components in your Docker imagewhile ensuring that it remains secure and efficient?
+### Question 1:
+1. **Identify the errors in the Dockerfile.**
+2. **Explain why each of the identified errors is a problem.**
+3. **Rewrite the Dockerfile with the correct syntax.**
 
-**ANS**: we can use distroless base image for our java application such as gcr.io/distroless/java, which includes only the java runtime and necessary libraries.This approach results in a similar more secure image that is fitting to your applications need.
+#### Dockerfile Submitted by the Candidate:
+```dockerfile
+FROM node:18
 
-**What are Distroless Images?**
+WORDIR app/
 
-:- Distroless images are the docker images that contain only the necessary dependencies to run your application, without including the full linux distribution or package manager.They are designed to be lean ,secure and optimized for specific use cases.
+COPY package.json
+
+COPY..
+
+RUN npm index.js
+
+EXPOSE 8000
+
+CMD['node' 'index.js']
+```
 
 
-#### 2) You are a devops engineer who received a complaint from a developer about running out of diskspace on their docker machine. upon investigation you discoverd that the issue was caused by large number of stopped containers consuming disk space. How can you resolve this issue and free up disk space on the Docker machine and also help developer to avoid this issue in the future?
+### Answer:
 
-**ANS**: To free up disk space we can use the **docker rm $(docker ps -a -q)** command,which removes all stopped containers.This command first lists all containers(including thos that are stopped).To avoid running into diskspace issues in the future consider using the --rm flags when running containers for temporary tasks or experiment **docker run -it --rm image-name**
+#### Errors Identified:
+1. **Typo in `WORKDIR`**: The keyword `WORDIR` is incorrect. It should be `WORKDIR`.
+2. **Incorrect Path in `COPY` Instruction**: The `COPY package.json` is missing the destination path. It should specify where to copy the file inside the container.
+3. **Missing Space in `COPY..`**: The instruction `COPY..` lacks the necessary space between `COPY` and `..`. This will result in a syntax error.
+4. **Incorrect `RUN` Command**: The command `RUN npm index.js` is incorrect. `npm` is used for managing Node.js packages, not for running a script. The correct command should be `RUN node index.js` or a different command that installs dependencies, like `RUN npm install`.
+5. **Incorrect Syntax for `CMD`**: The `CMD` instruction syntax is wrong. It should either be a JSON array (`CMD ["node", "index.js"]`) or a string with a shell form (`CMD node index.js`).
 
-        
+#### Corrected Dockerfile:
+```dockerfile
+FROM node:18
+
+WORKDIR /app
+
+COPY package.json /app
+
+COPY . /app
+
+RUN npm install
+
+EXPOSE 8000
+
+CMD ["node", "index.js"]
+```
+
