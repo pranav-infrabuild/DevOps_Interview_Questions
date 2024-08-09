@@ -1,9 +1,6 @@
 # Docker Interview Question:
 
-### Question 1:
-1. **Identify the errors in the Dockerfile.**
-2. **Explain why each of the identified errors is a problem.**
-3. **Rewrite the Dockerfile with the correct syntax.**
+### 1) Identify the errors in the Dockerfile. Explain why each of the identified errors is a problem. Rewrite the Dockerfile with the correct syntax.
 
 #### Dockerfile Submitted by the Candidate:
 ```dockerfile
@@ -22,9 +19,8 @@ EXPOSE 8000
 CMD['node' 'index.js']
 ```
 
-
-### Answer:
-
+<details>
+  
 #### Errors Identified:
 1. **Typo in `WORKDIR`**: The keyword `WORDIR` is incorrect. It should be `WORKDIR`.
 2. **Incorrect Path in `COPY` Instruction**: The `COPY package.json` is missing the destination path. It should specify where to copy the file inside the container.
@@ -48,4 +44,4 @@ EXPOSE 8000
 
 CMD ["node", "index.js"]
 ```
-
+</details>
