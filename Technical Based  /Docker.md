@@ -151,3 +151,36 @@ Based on the findings, you might:
 
 
 </details>
+
+### Question 11: What is Docker Compose, and how do you use it to manage multi-container applications?
+<details>
+   
+   **Docker Compose** is a tool used for defining and running multi-container Docker applications. It allows you to configure your application's services, networks, and volumes using a YAML file called `docker-compose.yml`. This file specifies how the containers should be built, linked, and configured, making it easier to manage complex applications that consist of multiple interdependent services.
+
+
+### Basic Workflow with Docker Compose:
+
+1. **Create a `docker-compose.yml` File**:
+   - Define the services (containers) that make up your application.
+   - Specify details like the image to use, ports to expose, volumes, environment variables, etc.
+
+   Example `docker-compose.yml`:
+   ```yaml
+   version: '3'
+   services:
+     web:
+       image: nginx
+       ports:
+         - "80:80"
+     db:
+       image: mysql
+       environment:
+         MYSQL_ROOT_PASSWORD: example
+       volumes:
+         - db-data:/var/lib/mysql
+
+   volumes:
+     db-data:
+   ```
+
+</details>
