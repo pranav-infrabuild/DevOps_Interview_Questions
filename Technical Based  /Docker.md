@@ -184,3 +184,9 @@ Based on the findings, you might:
    ```
 
 </details>
+
+### Question 12 : Can you explain the concept of a Docker image registry, and why it is essential in a containerized environment?
+<details>
+
+**Answer** : A Docker image registry is a repository for storing and managing Docker images. It is essential because it provides a centralized location to store and share images, making it easier to deploy applications consistently across multiple environments.
+</details>
