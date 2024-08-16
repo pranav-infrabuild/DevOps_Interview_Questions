@@ -190,3 +190,9 @@ Based on the findings, you might:
 
 **Answer** : A Docker image registry is a repository for storing and managing Docker images. It is essential because it provides a centralized location to store and share images, making it easier to deploy applications consistently across multiple environments.
 </details>
+
+### Question 13 : How do you handle image versioning and rollbacks in Docker to maintain application reliability?
+<details>
+   
+**Answer**: I use version tags for Docker images, ensuring that each image is associated with a specific version of the application. For rollbacks, I can easily revert to a previous version of the image if necessary.
+</details>
