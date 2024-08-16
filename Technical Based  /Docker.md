@@ -320,3 +320,8 @@ By combining these strategies, you can achieve both high availability and effici
 - If a layer hasn’t changed between builds, Docker can reuse the cached version of that layer rather than rebuilding it. This speeds up the build process significantly.
    
 </details>
+
+### Question 22: How do you manage Docker image updates and ensure all containers use the latest image versions?
+<details>
+- l automate image updates by integrating Docker image builds with CI/CD pipelines. This ensures that whenever a new version of the application is built, it's automatically deployed to the containers
+</details>
