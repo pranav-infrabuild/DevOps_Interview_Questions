@@ -92,3 +92,62 @@ So, if security is a top concern, Docker Secrets is the preferred way to manage 
 <details>
    - Using Prometheus and Grafana is a great choice for monitoring Docker containers, as they provide comprehensive insights and powerful visualization capabilities.
 </details>
+
+### Question 10: Describe your approach to troubleshooting Docker container- related issues in a production environment.
+<details>
+
+**Answer**:  
+My approach begins with reviewing container logs and inspecting their status using Docker commands. For more complex issues, I utilize tools like `docker stats` and `docker top` to gather detailed information, analyze the container's resource usage, and identify potential bottlenecks or performance issues.
+Let's walk through a specific issue to illustrate your approach:
+
+### Scenario: High CPU Usage in a Docker Container
+
+**Issue**:  
+You notice that one of your Docker containers is consuming an unusually high amount of CPU resources, which is affecting the performance of other services in the production environment.
+
+**Step 1: Review Container Logs**  
+First, you would check the container's logs to identify any obvious errors or anomalies. You can do this using the following command:
+
+```bash
+docker logs <container_id>
+```
+
+By reviewing the logs, you might spot error messages, exceptions, or repeated tasks that could be causing the high CPU usage.
+
+**Step 2: Inspect Container Status**  
+Next, you'd inspect the status of the container to check if it’s restarting frequently or has any unusual behavior:
+
+```bash
+docker inspect <container_id>
+```
+
+This command provides detailed information about the container's configuration and state, helping you identify if there are any misconfigurations or environmental issues.
+
+**Step 3: Analyze Resource Usage with `docker stats`**  
+Since the issue involves high CPU usage, you'd then use the `docker stats` command to monitor the real-time resource consumption of the container:
+
+```bash
+docker stats <container_id>
+```
+
+This will display the CPU, memory, network, and disk I/O usage of the container. If the CPU usage is consistently high, it could indicate an issue with the application running inside the container, such as an infinite loop or inefficient code.
+
+**Step 4: Investigate Running Processes with `docker top`**  
+To get more insight into what's happening inside the container, you can use the `docker top` command to list the running processes:
+
+```bash
+docker top <container_id>
+```
+
+This will show you the active processes and their resource consumption within the container. If a specific process is using a lot of CPU, you can investigate that process further to understand why it's consuming so many resources.
+
+**Step 5: Take Corrective Action**  
+Based on the findings, you might:
+
+- **Optimize the application code** to reduce CPU consumption.
+- **Limit CPU resources** allocated to the container by updating its configuration.
+- **Restart the container** to see if the issue resolves itself.
+- **Scale the application** by running additional container instances to distribute the load.
+
+
+</details>
