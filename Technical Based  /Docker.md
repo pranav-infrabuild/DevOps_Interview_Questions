@@ -196,3 +196,10 @@ Based on the findings, you might:
    
 **Answer**: I use version tags for Docker images, ensuring that each image is associated with a specific version of the application. For rollbacks, I can easily revert to a previous version of the image if necessary.
 </details>
+
+### Question 14 : Describe how you use Docker to set up a local development environment that mirrors the production environment.
+<details>
+
+**Answer**: I use Docker Compose to define services, networks, and volumes for the local development environment. This ensures that developers have a consistent environment with the same configurations as the production setup.
+</details>
+
