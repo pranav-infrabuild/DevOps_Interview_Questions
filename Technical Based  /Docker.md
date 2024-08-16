@@ -62,3 +62,28 @@ So, if security is a top concern, Docker Secrets is the preferred way to manage 
 - By using Docker's built-in secrets management or tools like HashiCorp Vault, you can securely store and manage sensitive data, making sure that only authorized containers can access these secrets.
 
 </details>
+
+## Question 8. Can you explain the difference between Docker Swarm and Kubernetes, and which one do you prefer for container orchestration?
+<details>
+### 1. **Scalability**
+   - **Docker Swarm**: 
+     - **Scalability**: It’s suitable for small to medium-scale deployments. It’s efficient but doesn’t scale as seamlessly as Kubernetes.
+  
+   - **Kubernetes**:
+     - **High Scalability**: Kubernetes excels in managing large-scale, distributed systems. It’s designed to handle complex workloads and can scale to thousands of nodes.
+
+### 2. **Ecosystem and Community Support**
+   - **Docker Swarm**: 
+     - **Limited Ecosystem**: While it integrates well with Docker tools, Docker Swarm has a smaller ecosystem and less community support compared to Kubernetes.
+  
+   - **Kubernetes**:
+     - **Rich Ecosystem**: Kubernetes has a vast and active community. It has extensive support from cloud providers (AWS, Azure, GCP) and a rich ecosystem of tools for monitoring, logging, and more.
+
+### 3. **Features**
+   - **Docker Swarm**: 
+     - **Basic Features**: Docker Swarm provides essential container orchestration features like load balancing, service discovery, and scaling.
+  
+   - **Kubernetes**:
+     - **Advanced Features**: Kubernetes offers advanced features like automated rollouts and rollbacks, self-healing, horizontal scaling, and secrets management. It also supports more complex networking and storage options.
+
+</details>
