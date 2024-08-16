@@ -307,3 +307,9 @@ By combining these strategies, you can achieve both high availability and effici
 
 
 </details>
+
+### Question 20: How do you handle resource allocation and constraints for Docker containers to ensure optimal performance and resource utilization?
+<details>
+- I use Docker's resource constraints, such as CPU limits and memory reservations, to control resource usage and avoid resource contention between containers running on the same host.
+- This helps maintain stability and ensures that all services receive their fair share of resources.
+</details>
