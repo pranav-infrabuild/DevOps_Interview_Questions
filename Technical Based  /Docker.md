@@ -270,3 +270,8 @@ By following these steps, you can deploy Docker containers to production servers
 
 By combining these strategies, you can achieve both high availability and efficient load balancing for your Docker Swarm services.
 </details>
+
+### Question 18 : How do you optimize Docker images to reduce their size and improve application performance?
+<details>
+- I use a multi-stage build approach, where I use one Docker image to build the application and another lightweight image to run it. This reduces the final image size and improves container startup times.
+</details>
