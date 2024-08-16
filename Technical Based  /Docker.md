@@ -203,3 +203,25 @@ Based on the findings, you might:
 **Answer**: I use Docker Compose to define services, networks, and volumes for the local development environment. This ensures that developers have a consistent environment with the same configurations as the production setup.
 </details>
 
+### Question 15 : How do you scale Docker services to handle increased traffic or demand?
+<details>
+
+To scale Docker services effectively:
+
+1. **Docker Swarm:**
+   - Use the `docker service scale` command to scale services horizontally by adjusting the number of replicas. For example:
+     ```bash
+     docker service scale my_service=5
+     ```
+   - This command increases the number of instances of `my_service` to 5.
+
+2. **Kubernetes:**
+   - Use the `kubectl scale` command to scale deployments or replicasets. For example:
+     ```bash
+     kubectl scale deployment my-deployment --replicas=5
+     ```
+   - This command sets the number of replicas for `my-deployment` to 5.
+
+Both approaches distribute the load among multiple instances of the service, allowing them to handle increased traffic or demand efficiently.
+   
+</details>
