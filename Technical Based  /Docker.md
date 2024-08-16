@@ -313,3 +313,10 @@ By combining these strategies, you can achieve both high availability and effici
 - I use Docker's resource constraints, such as CPU limits and memory reservations, to control resource usage and avoid resource contention between containers running on the same host.
 - This helps maintain stability and ensures that all services receive their fair share of resources.
 </details>
+
+### Question 21: Can you explain the significance of Docker image layers and how they impact image building and caching?
+<details>
+- Each instruction in a Dockerfile creates a new layer on top of the previous one. These layers are stacked, with the final image being a combination of all layers.
+- If a layer hasn’t changed between builds, Docker can reuse the cached version of that layer rather than rebuilding it. This speeds up the build process significantly.
+   
+</details>
