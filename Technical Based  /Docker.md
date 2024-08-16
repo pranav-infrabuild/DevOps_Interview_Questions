@@ -22,7 +22,6 @@ So, if security is a top concern, Docker Secrets is the preferred way to manage 
 
 ### Question 4. Can you briefly explain what Docker is and how it differs from traditional virtualization technologies?
 <details>
-
 ### Key Differences Between Docker and Traditional Virtualization:
 
 1. **Architecture**:
@@ -65,6 +64,7 @@ So, if security is a top concern, Docker Secrets is the preferred way to manage 
 
 ## Question 8. Can you explain the difference between Docker Swarm and Kubernetes, and which one do you prefer for container orchestration?
 <details>
+
 ### 1. **Scalability**
    - **Docker Swarm**: 
      - **Scalability**: It’s suitable for small to medium-scale deployments. It’s efficient but doesn’t scale as seamlessly as Kubernetes.
