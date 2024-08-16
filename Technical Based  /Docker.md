@@ -275,3 +275,35 @@ By combining these strategies, you can achieve both high availability and effici
 <details>
 - I use a multi-stage build approach, where I use one Docker image to build the application and another lightweight image to run it. This reduces the final image size and improves container startup times.
 </details>
+
+
+### Question 19 : Describe the use of Docker's health checks in service definition and how they contribute to container availability.
+<details>
+   By using health checks, you can ensure that your containers are running properly and that any issues are addressed automatically
+
+1. **Defining Health Checks**: In a Dockerfile or a Docker Compose file, you can define a health check using the `HEALTHCHECK` instruction. This instruction specifies a command that Docker will run inside the container to check its health. For example:
+
+   ```dockerfile
+   HEALTHCHECK --interval=30s --timeout=10s --start-period=30s --retries=3 \
+     CMD curl -f http://localhost/ || exit 1
+   ```
+
+   In this example, Docker will run the `curl` command to check if a web service is available on `localhost`. If the command fails, it will exit with a non-zero status.
+
+2. **Health Check Parameters**:
+   - `--interval`: How often to run the health check command (e.g., every 30 seconds).
+   - `--timeout`: How long to wait for the health check command to complete (e.g., 10 seconds).
+   - `--start-period`: Time to wait after container start before performing health checks (e.g., 30 seconds).
+   - `--retries`: Number of consecutive failures needed to mark the container as unhealthy (e.g., 3 retries).
+
+3. **Health Status**: Docker reports the health status of the container as one of the following:
+   - `healthy`: The container is running and the health check command succeeded.
+   - `unhealthy`: The health check command failed repeatedly as specified by the retries parameter.
+   - `starting`: The container is starting, and health checks are not yet performed.
+
+4. **Service Management**: Docker Swarm uses the health status to manage containers within a service:
+   - If a container is marked as unhealthy, Docker Swarm can automatically restart the container or replace it with a new one, ensuring minimal disruption to the service.
+   - Swarm managers use the health status to make scheduling decisions and maintain high availability.
+
+
+</details>
