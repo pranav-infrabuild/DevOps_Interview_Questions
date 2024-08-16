@@ -87,3 +87,8 @@ So, if security is a top concern, Docker Secrets is the preferred way to manage 
      - **Advanced Features**: Kubernetes offers advanced features like automated rollouts and rollbacks, self-healing, horizontal scaling, and secrets management. It also supports more complex networking and storage options.
 
 </details>
+
+### How do you monitor Docker containers in a production environment?
+<details>
+   - Using Prometheus and Grafana is a great choice for monitoring Docker containers, as they provide comprehensive insights and powerful visualization capabilities.
+</details>
