@@ -43,3 +43,10 @@ So, if security is a top concern, Docker Secrets is the preferred way to manage 
 
 
 </details>
+
+## Question 5. How do you ensure that the Docker images you use are secure and free from vulnerabilities?
+<details>
+
+**Answer**: To ensure Docker image security, I regularly scan images using security tools like Trivy or Anchore to detect and address vulnerabilities. I prioritize using images from trusted sources or official repositories to minimize risks. Additionally, I keep my base images and dependencies up to date to ensure that any known vulnerabilities are promptly patched. This proactive approach helps maintain a secure and stable environment for my applications.
+   
+</details>
