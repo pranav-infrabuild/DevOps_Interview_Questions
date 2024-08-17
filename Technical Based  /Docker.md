@@ -343,7 +343,7 @@ Imagine you have a web application with multiple services (e.g., front-end, back
    
 </details>
 
-### Question 23. How do you manage Docker secrets across different environments (e.g., development, staging, production)?
+### Question 24. How do you manage Docker secrets across different environments (e.g., development, staging, production)?
 <details>
 In Docker, secrets are typically stored using Docker's built-in secrets management feature. Here's how secrets are stored and managed:
 
