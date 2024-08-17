@@ -354,3 +354,30 @@ In Docker, secrets are typically stored using Docker's built-in secrets manageme
 3. **Third-Party Tools**: For environments where Docker Swarm is not used, you can integrate Docker with third-party secret management tools like HashiCorp Vault, AWS Secrets Manager, or Azure Key Vault. These tools provide more robust secret management features, such as versioning, audit logging, and dynamic secrets.
 
 </details>
+
+### Question 26: Explain the role of the Docker Registry API and how it facilitates image management and distribution.
+<details>
+
+The Docker Registry API plays a crucial role in managing and distributing Docker images by providing a standardized interface that allows users to interact with container registries. Here's how it facilitates image management and distribution:
+
+### 1. **Pushing and Pulling Images**
+   - **Pushing Images:** When a developer wants to share a Docker image, they can use the Docker Registry API to push the image to a registry (like Docker Hub or a private registry). This makes the image available for others to pull and use.
+   - **Pulling Images:** Users can pull Docker images from a registry to their local environment using the API. This is essential for deploying applications in various environments.
+
+### 2. **Version Management**
+   - The Docker Registry API allows for tagging different versions of an image. This ensures that specific versions of an image can be identified and used, providing consistency across development, testing, and production environments.
+
+### 3. **Image Search and Listing**
+   - Users can search for images within a registry or list available images using the API. This feature helps in identifying the correct image needed for a specific application or task.
+
+### 4. **Image Deletion**
+   - The API provides the capability to delete images from the registry. This is useful for removing outdated or unnecessary images, helping manage storage and maintain an organized registry.
+
+### 5. **Layered Image Storage**
+   - Docker images are composed of layers, and the Docker Registry API manages these layers efficiently. It ensures that common layers are reused, reducing the amount of storage required and speeding up image distribution.
+
+### 6. **Automated Builds and CI/CD Integration**
+   - The API facilitates integration with Continuous Integration/Continuous Deployment (CI/CD) pipelines. Automated builds can push new images to the registry, and deployments can pull these images, streamlining the release process.
+
+
+</details>
