@@ -342,3 +342,15 @@ Docker's multi-host networking enables containers running on different Docker ho
 Imagine you have a web application with multiple services (e.g., front-end, back-end, database). These services are containerized and distributed across different nodes in a Docker Swarm. Using Docker's multi-host networking, you can create an overlay network that all these containers join. The front-end container on Node A can communicate with the back-end container on Node B as if they were on the same machine, simplifying the application's architecture and deployment.
    
 </details>
+
+### Question 23. How do you manage Docker secrets across different environments (e.g., development, staging, production)?
+<details>
+In Docker, secrets are typically stored using Docker's built-in secrets management feature. Here's how secrets are stored and managed:
+
+1. **Docker Swarm**: If you are using Docker Swarm, secrets are stored in the Swarm manager nodes. The secrets are encrypted both at rest and in transit, ensuring secure storage. When you create a secret, it's stored in the Swarm and only sent to the nodes that require it for the services running on those nodes.
+
+2. **Docker Compose (non-Swarm)**: In a non-Swarm setup using Docker Compose, secrets can be defined in a Compose file, but they are not managed the same way as in a Swarm. For non-Swarm environments, secrets are typically passed as environment variables or mounted as files from a host directory. However, this approach does not provide the same level of security as Docker Swarm's secrets management.
+
+3. **Third-Party Tools**: For environments where Docker Swarm is not used, you can integrate Docker with third-party secret management tools like HashiCorp Vault, AWS Secrets Manager, or Azure Key Vault. These tools provide more robust secret management features, such as versioning, audit logging, and dynamic secrets.
+
+</details>
