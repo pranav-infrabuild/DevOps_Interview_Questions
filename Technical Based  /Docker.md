@@ -325,3 +325,20 @@ By combining these strategies, you can achieve both high availability and effici
 <details>
 - l automate image updates by integrating Docker image builds with CI/CD pipelines. This ensures that whenever a new version of the application is built, it's automatically deployed to the containers
 </details>
+
+### Question 23: Describe the use of Docker's multi-host networking and how it facilitates communication between containers running on different nodes.
+<details>
+
+Docker's multi-host networking enables containers running on different Docker hosts (nodes) to communicate with each other as if they were on the same network. This is particularly useful in distributed environments where applications are scaled across multiple nodes, such as in a Docker Swarm or Kubernetes cluster.
+
+### Key Concepts:
+
+1. **Overlay Networks**:
+   - Docker uses overlay networks to facilitate multi-host networking. An overlay network sits on top of the host network and allows containers on different Docker hosts to communicate with each other.
+   - When you create an overlay network, Docker creates a virtual network that spans across all the nodes in a Swarm or a cluster, allowing containers to communicate over this network regardless of the physical location of the nodes.
+
+### Example Use Case:
+
+Imagine you have a web application with multiple services (e.g., front-end, back-end, database). These services are containerized and distributed across different nodes in a Docker Swarm. Using Docker's multi-host networking, you can create an overlay network that all these containers join. The front-end container on Node A can communicate with the back-end container on Node B as if they were on the same machine, simplifying the application's architecture and deployment.
+   
+</details>
