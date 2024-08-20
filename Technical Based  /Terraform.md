@@ -12,7 +12,7 @@ The plan output helps users understand the changes before applying them, reducin
 
 </details>
 
-### Question 2: what tf state ?
+### Question 2: what tf state/state file ?
 <details>
 - TF state (Terraform state) is a file that keeps track of the infrastructure
 - State file is crucial because it allows Terraform to know the current status of the infrastructure and how it corresponds to the configuration described in the Terraform files.
