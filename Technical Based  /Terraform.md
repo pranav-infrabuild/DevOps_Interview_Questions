@@ -39,7 +39,17 @@ Terraform state locks occur to prevent concurrent operations on the same state f
 
 </details>
 
-### 3. what is terraform import ?
+### Question 3. what is terraform import ?
 <details>
 - terraform import is a Terraform command used to bring existing infrastructure that wasn't originally created by Terraform under Terraform management. This allows Terraform to recognize and manage resources that were manually created, or provisioned by other tools, and incorporate them into Terraform's state file without modifying or recreating them.
+</details>
+
+### Question 4. How to write terraform for 2 resources in two different location and having different versions?
+<details>
+- To manage two resources in different locations with different versions using Terraform, you can define separate resource blocks in your .tf configuration files.
+
+### **Explanation:**
+- **Providers with Aliases:** By using provider aliases (`azurerm.eastus` and `azurerm.westeurope`), you can deploy resources in different Azure locations and use different provider versions if needed.
+- **Separate Resource Blocks:** Each resource block is tied to a specific provider alias, which determines its location and version.
+- **Version Control:** Specifying different versions for each provider allows you to manage compatibility and functionality for different regions.
 </details>
