@@ -1,4 +1,4 @@
-### Question 1: What is the purpose of the terraform plan command?
+hmm### Question 1: What is the purpose of the terraform plan command?
 <details>
 - The terraform plan command is used to create an execution plan. It shows what actions Terraform will take to achieve the desired state defined in the configuration files. This includes:
 
@@ -37,4 +37,9 @@ Terraform state locks occur to prevent concurrent operations on the same state f
    - **Complex Changes**: Some Terraform operations might take a long time due to the complexity or number of resources being modified, leading to the state being locked for an extended period.
    - **Network Latency or Timeouts**: High network latency or timeouts can cause Terraform to lose connection with the state, potentially leaving it in a locked state.
 
+</details>
+
+### 3. what is terraform import ?
+<details>
+- terraform import is a Terraform command used to bring existing infrastructure that wasn't originally created by Terraform under Terraform management. This allows Terraform to recognize and manage resources that were manually created, or provisioned by other tools, and incorporate them into Terraform's state file without modifying or recreating them.
 </details>
