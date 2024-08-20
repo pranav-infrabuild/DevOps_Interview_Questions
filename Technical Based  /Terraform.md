@@ -53,3 +53,31 @@ Terraform state locks occur to prevent concurrent operations on the same state f
 - **Separate Resource Blocks:** Each resource block is tied to a specific provider alias, which determines its location and version.
 - **Version Control:** Specifying different versions for each provider allows you to manage compatibility and functionality for different regions.
 </details>
+
+### Question 5. How will u provide terafrom providers?
+<details>
+
+In Terraform, providers are plugins that allow Terraform to interact with APIs of cloud platforms.  Providers are responsible for defining and managing the lifecycle of the resources associated with a particular service.
+
+To use a provider in Terraform, you need to define it in your configuration files. This involves specifying which provider to use, configuring any necessary settings like authentication, and optionally locking the provider to a specific version.
+
+### **Steps to Provide a Terraform Provider:**
+
+#### 1. **Define the Provider in the Configuration**
+   - The provider is defined in the Terraform configuration using the `provider` block. This is where you specify the details of the provider you want to use.
+
+   ```hcl
+   provider "azurerm" {
+     features = {}
+     subscription_id = "your_subscription_id"
+     client_id       = "your_client_id"
+     client_secret   = "your_client_secret"
+     tenant_id       = "your_tenant_id"
+   }
+   ```
+
+   In this example, the `azurerm` provider is configured with authentication details for Azure.
+
+
+  
+</details>
