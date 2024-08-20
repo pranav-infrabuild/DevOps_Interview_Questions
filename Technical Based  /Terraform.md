@@ -1,4 +1,4 @@
-hmm### Question 1: What is the purpose of the terraform plan command?
+### Question 1: What is the purpose of the terraform plan command?
 <details>
 - The terraform plan command is used to create an execution plan. It shows what actions Terraform will take to achieve the desired state defined in the configuration files. This includes:
 
