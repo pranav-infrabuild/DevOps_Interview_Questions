@@ -99,3 +99,9 @@ To use a provider in Terraform, you need to define it in your configuration file
  - State Files: Terraform uses state files to keep track of the current state of the infrastructure. No Persistent State: These tools typically do not maintain a persistent state file. Instead, they check the current state of a system and make changes as needed each time they run.
 
  </details>
+
+### Question 8. What is Infrastructure as Code (laC)?
+<details>
+ - 
+Infrastructure as Code is the practice of managing infrastructure using code and automation  
+</details>
