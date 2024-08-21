@@ -91,3 +91,11 @@ To use a provider in Terraform, you need to define it in your configuration file
 - The provisioning of cloud resources, for instance, is one of the main use cases of Terraform.
 
 </details>
+
+### Question 7. Explain the difference between Terraform and other configuration management tools like Ansible or Chef. Terraform is focused on infrastructure provisioning and management, while tools like Ansible or Chef are primarily configuration management tools for servers and applications.
+<details>
+
+ - Terraform is focused on infrastructure provisioning and management, while tools like Ansible or Chef are primarily configuration management tools for servers and applications.
+ - State Files: Terraform uses state files to keep track of the current state of the infrastructure. No Persistent State: These tools typically do not maintain a persistent state file. Instead, they check the current state of a system and make changes as needed each time they run.
+
+ </details>
