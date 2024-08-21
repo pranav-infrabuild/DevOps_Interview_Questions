@@ -202,3 +202,27 @@ provider "aws" {
 <details>
 - A subnet in Terraform represents a range of IP addresses within a virtual network. Subnets are used to divide a network into smaller, more manageable segments.
 </details>
+
+### Question 21. What is a Terraform workspace?
+<details>
+
+A **Terraform workspace** is essentially an isolated environment where Terraform operations can be executed independently, allowing for separate state management. Each workspace has its own state file, which means that changes made in one workspace do not affect others. This is useful for managing multiple environments like development, staging, and production within the same Terraform configuration.
+
+### How to Create and Switch Between Terraform Workspaces
+
+1. **Creating a New Workspace:**
+   - Use the command:
+     ```bash
+     terraform workspace new <workspace-name>
+     ```
+   - This will create a new workspace with the specified name and switch to it.
+
+2. **Switching Between Workspaces:**
+   - Use the command:
+     ```bash
+     terraform workspace select <workspace-name>
+     ```
+   - This will switch to the specified workspace.
+
+
+</details>
