@@ -172,3 +172,10 @@ provider "aws" {
 <details>
 • Storing Terraform state locally can lead to issues with collaboration and concurrency, as multiple users working on the same configuration can overwrite each other's changes
 </details>
+
+### Question 16. What is the purpose of locking in Terraform state?
+<details>
+
+- Locking in Terraform state prevents concurrent operations from multiple users, ensuring that changes are applied sequentially and preventing conflicts.
+
+</details>
