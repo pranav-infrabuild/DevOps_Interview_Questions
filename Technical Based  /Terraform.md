@@ -111,3 +111,18 @@ To use a provider in Terraform, you need to define it in your configuration file
 - You initialize a Terraform configuration by running the terraform init command in the directory containing your Terraform configuration files
 
 </details>
+
+### Question 10. What command is used to validate Terraform configuration files?
+<details>
+
+ Correct command to validate Terraform configuration files is:
+
+```bash
+terraform validate
+```
+
+### **Explanation:**
+- **`terraform validate`**: This command checks the syntax and validity of the Terraform configuration files. It ensures that the configuration is syntactically correct and internally consistent, but it does not interact with any infrastructure resources. This is a useful command to run before applying your configuration to ensure there are no errors in your `.tf` files.
+
+
+</details>
