@@ -158,3 +158,12 @@ provider "aws" {
 
  - Resource is a fundamental component that represents a piece of your infrastructure. Each resource block defines a specific infrastructure object, like anAzure Virtual Machine (VM), Azure Virtual Network (VNet), Azure Storage Account, Azure Resource Group 
 </details>
+
+### Question 14. What is a module in Terraform?
+<details>
+
+- Terraform is indeed a collection of configuration files that are organized together
+- Modules can be stored locally, in a version control system like GitHub, or on Terraform's module registry, allowing easy distribution and versioning
+- 
+
+</details>
