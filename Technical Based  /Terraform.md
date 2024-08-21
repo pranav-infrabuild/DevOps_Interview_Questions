@@ -102,6 +102,12 @@ To use a provider in Terraform, you need to define it in your configuration file
 
 ### Question 8. What is Infrastructure as Code (laC)?
 <details>
- - 
-Infrastructure as Code is the practice of managing infrastructure using code and automation  
+ - Infrastructure as Code is the practice of managing infrastructure using code and automation  
+</details>
+
+### Question 9. How do you initialize a Terraform configuration?
+<details>
+
+- You initialize a Terraform configuration by running the terraform init command in the directory containing your Terraform configuration files
+
 </details>
