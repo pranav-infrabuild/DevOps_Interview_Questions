@@ -19,3 +19,12 @@
 - Review Logs: Check cloud provider logs for any unauthorized access or suspicious activity that may have occurred using the exposed credentials
 </details>
 
+### Question 3. You are using a remote backend with S3 for storing the Terraform state file and DynamoDB for state locking. Suddenly, a `terraform apply' command is blocked because the state is locked. How would you resolve this?
+<details>
+
+- Only manually remove the lock if you are certain that no other Terraform operations are running, as this can lead to state corruption if done incorrectly.
+
+- Remove the Lock Using AWS Management Console:
+Select the locked item in the DynamoDB table and delete it.
+
+</details>
