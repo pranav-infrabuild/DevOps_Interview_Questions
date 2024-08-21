@@ -126,3 +126,9 @@ terraform validate
 
 
 </details>
+
+### Question 11. What is a provider in Terraform?
+<details>
+• A provider is a plugin that Terraform uses to interact with a specific cloud or infrastructure service. Examples include AWS, Azure, Google Cloud, etc.
+
+</details>
