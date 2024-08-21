@@ -187,3 +187,8 @@ provider "aws" {
 
 
 </details>
+
+### Question 18. How do you call a module from within another Terraform configuration?
+<details>
+- You call a module using the module block in your Terraform configuration file, providing values for any input variables defined by the module.
+</details>
