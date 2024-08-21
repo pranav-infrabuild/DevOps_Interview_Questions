@@ -197,3 +197,8 @@ provider "aws" {
 <details>
 - To create a virtual network in Azure using Terraform, you would use the azurerm_virtual_network resource block. 
 </details>
+
+### Question 20. What is subnet in Terraform?
+<details>
+- A subnet in Terraform represents a range of IP addresses within a virtual network. Subnets are used to divide a network into smaller, more manageable segments.
+</details>
