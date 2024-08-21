@@ -81,3 +81,13 @@ To use a provider in Terraform, you need to define it in your configuration file
 
   
 </details>
+
+### Question 6. What is Terraform?
+<details>
+
+- Terraform is an open-source infrastructure as code software tool created by HashiCorp. It allows users to define and provision infrastructure using a high- level configuration language known as HashiCorp Configuration Language (HCL).
+
+- written in the Go language
+- The provisioning of cloud resources, for instance, is one of the main use cases of Terraform.
+
+</details>
