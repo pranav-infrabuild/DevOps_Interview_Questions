@@ -179,3 +179,11 @@ provider "aws" {
 - Locking in Terraform state prevents concurrent operations from multiple users, ensuring that changes are applied sequentially and preventing conflicts.
 
 </details>
+
+### Question 17. What is terraform Output?
+<details>
+
+- Terraform outputs are a feature in Terraform that allows you to extract and display specific information from your Terraform configuration after it has been applied
+
+
+</details>
