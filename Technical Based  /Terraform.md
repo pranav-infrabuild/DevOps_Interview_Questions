@@ -132,3 +132,23 @@ terraform validate
 • A provider is a plugin that Terraform uses to interact with a specific cloud or infrastructure service. Examples include AWS, Azure, Google Cloud, etc.
 
 </details>
+
+### Question 12. How do you define a provider in Terraform configuration? 
+<details>
+
+To define a provider in a Terraform configuration, you use the `provider` block within your `.tf` file. This block specifies the provider and any necessary configuration settings for that provider. 
+
+Here's an example for defining the AWS provider:
+
+```hcl
+provider "aws" {
+  region = "us-west-2"
+}
+```
+
+### **Explanation:**
+- **`provider "aws"`**: This block specifies that you are using the AWS provider.
+- **`region = "us-west-2"`**: The `region` attribute sets the AWS region where Terraform will create and manage resources, in this case, "us-west-2" (Oregon).
+
+
+</details>
