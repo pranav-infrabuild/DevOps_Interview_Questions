@@ -226,3 +226,35 @@ A **Terraform workspace** is essentially an isolated environment where Terraform
 
 
 </details>
+
+### Question 22. What is Terraform interpolation?
+<details>
+
+ **Terraform interpolation** is a feature that allows you to insert dynamic values into your Terraform configuration files. This means you can reference attributes of other resources, use variables, and call built-in functions directly within your configuration. Interpolation makes your Terraform configurations more flexible and reusable by enabling you to dynamically set values based on the current state or context.
+
+### How to Use Interpolation in Terraform
+
+Interpolation in Terraform is done using the `${}` syntax. Here's how you can use it:
+
+1. **Referencing a Resource Attribute:**
+   - To reference an attribute of another resource, you can use the following syntax:
+     ```hcl
+     resource "aws_instance" "example" {
+       instance_type = "t2.micro"
+       ami           = "${aws_ami.example.id}"
+     }
+     ```
+   - In this example, `${aws_ami.example.id}` dynamically retrieves the `id` of the `aws_ami.example` resource.
+
+2. **Using Variables:**
+   - You can also use variables in interpolation:
+     ```hcl
+     resource "aws_instance" "example" {
+       instance_type = "${var.instance_type}"
+       ami           = "${var.ami_id}"
+     }
+     ```
+   - Here, `${var.instance_type}` and `${var.ami_id}` will be replaced with the values provided for these variables.
+
+
+</details>
