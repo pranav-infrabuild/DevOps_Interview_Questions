@@ -167,3 +167,8 @@ provider "aws" {
 - 
 
 </details>
+
+### Question 15. What are the drawbacks of storing Terraform state locally?
+<details>
+• Storing Terraform state locally can lead to issues with collaboration and concurrency, as multiple users working on the same configuration can overwrite each other's changes
+</details>
