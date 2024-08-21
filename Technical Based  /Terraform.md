@@ -192,3 +192,8 @@ provider "aws" {
 <details>
 - You call a module using the module block in your Terraform configuration file, providing values for any input variables defined by the module.
 </details>
+
+### Question 19. How do you create a virtual network in Terraform?
+<details>
+- To create a virtual network in Azure using Terraform, you would use the azurerm_virtual_network resource block. 
+</details>
