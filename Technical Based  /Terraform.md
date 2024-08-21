@@ -152,3 +152,9 @@ provider "aws" {
 
 
 </details>
+
+### Question 13. What is a resource in Terraform?
+<details>
+
+ - Resource is a fundamental component that represents a piece of your infrastructure. Each resource block defines a specific infrastructure object, like anAzure Virtual Machine (VM), Azure Virtual Network (VNet), Azure Storage Account, Azure Resource Group 
+</details>
