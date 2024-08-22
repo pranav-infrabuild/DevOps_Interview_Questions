@@ -41,3 +41,12 @@
 
 Helm charts simplify the deployment, management, and scaling of Kubernetes applications by packaging all required resources into a single, reusable package.
 </details>
+
+### Question 4. What is the difference between a Helm release and a Helm chart?
+<details>
+
+- **Helm Chart**: A template or blueprint that defines the Kubernetes resources required to run an application.
+- **Helm Release**: A specific deployment of a Helm chart in a Kubernetes cluster, representing a running instance of the application.
+
+For example, if you have a Helm chart for a web application, you can use that chart to create multiple releases in your Kubernetes cluster, such as `myapp-dev`, `myapp-test`, and `myapp-prod`, each configured differently but based on the same chart.
+</details>
