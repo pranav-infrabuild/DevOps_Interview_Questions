@@ -117,3 +117,12 @@ Use case: Set up pre-requisites like database migrations or secret generation be
   - 
 
 </details>
+
+### Question 9. What are Helm repositories, and how do you add or remove them?
+<details>
+
+- Helm repositories are collections of Helm charts that are stored and made available for use. These repositories provide a centralized location from which you can download and install charts for deploying applications on Kubernetes.
+- helm repo add <repo-name> <repo-url>
+- helm repo remove <repo-name>
+
+</details>
