@@ -24,3 +24,20 @@
    - By using Helm, scaling Kubernetes applications becomes more manageable, allowing you to apply consistent updates and configurations across multiple environments.
 
 </details>
+
+
+### Question 2: How do you install Helm and initialize a Helm chart repository?
+<details>
+
+ 
+</details>
+
+### Question 3. What is a Helm Chart?
+<details>
+
+- A **Helm chart** is a package that contains all necessary Kubernetes resources for deploying an application.
+- Use the `helm create <chart-name>` command to create a new Helm chart, which will generate a directory with all necessary files.
+- Customize the chart by modifying the files and templates, and then deploy it using `helm install`.
+
+Helm charts simplify the deployment, management, and scaling of Kubernetes applications by packaging all required resources into a single, reusable package.
+</details>
