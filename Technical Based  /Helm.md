@@ -131,8 +131,7 @@ Use case: Set up pre-requisites like database migrations or secret generation be
 <details>
 To rollback to a specific revision, use the helm rollback command followed by the release name and the revision number.
 Syntax:
-```
-helm rollback <release-name> <revision>
+```helm rollback <release-name> <revision>
 ```
   
 </details>
@@ -145,3 +144,16 @@ RBAC Policies:
 Define strict RBAC policies to control who can access and modify Helm releases
  
 </details>
+
+### Question 12. What is the purpose of Helm plugins, and can you name a few useful Helm plugins?
+
+Useful Helm Plugins:
+
+- Helm Diff:
+Purpose: Shows differences between the Helm chart releases. Useful for previewing changes before applying updates.
+Installation: helm plugin install https://github.com/databus23/helm-diff
+
+- Helm Secrets:
+
+Purpose: Manages secrets in Helm charts using encrypted files. Integrates with tools like SOPS (Secrets OPerationS).
+Installation: helm plugin install https://github.com/jkroepke/helm-secrets
