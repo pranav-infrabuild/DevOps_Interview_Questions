@@ -146,7 +146,7 @@ Define strict RBAC policies to control who can access and modify Helm releases
 </details>
 
 ### Question 12. What is the purpose of Helm plugins, and can you name a few useful Helm plugins?
-
+<details>
 Useful Helm Plugins:
 
 - Helm Diff:
@@ -157,3 +157,31 @@ Installation: helm plugin install https://github.com/databus23/helm-diff
 
 Purpose: Manages secrets in Helm charts using encrypted files. Integrates with tools like SOPS (Secrets OPerationS).
 Installation: helm plugin install https://github.com/jkroepke/helm-secrets
+
+</details>
+
+### Question 13. How do you perform linting and testing of Helm charts?
+<details>
+
+### **1. Linting the Helm Chart**
+
+**Command:**
+```bash
+helm lint nginx-chart
+```
+
+**Explanation:**
+- This command checks your `nginx-chart` directory for common issues and best practices.
+- **Output:**
+  ```
+  == Linting nginx-chart
+  [INFO] Chart.yaml file is valid
+  [INFO] Values.yaml file is valid
+  [INFO] Templates file is valid
+  [INFO] No issues found
+  ```
+
+**What It Does:**
+- Verifies the `Chart.yaml` and `values.yaml` files.
+- Checks the templates for syntax errors or common mistakes.
+</details>
