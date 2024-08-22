@@ -80,3 +80,14 @@ For example, if you have a Helm chart for a web application, you can use that ch
 
 
 </details>
+
+### Question 7. What is a Helm hook, and when might you use one?
+<details>
+- A Helm hook is a mechanism that allows you to run specific actions at certain points in the lifecycle of a Helm release
+
+- pre-install:
+
+Runs before any resources are installed during the helm install command.
+Use case: Set up pre-requisites like database migrations or secret generation before deploying the main application.
+ 
+</details>
