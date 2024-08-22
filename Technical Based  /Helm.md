@@ -69,3 +69,14 @@ For example, if you have a Helm chart for a web application, you can use that ch
 
  
 </details>
+
+
+### Question 6. What are Helm values and how are they used ?
+<details>
+
+- Helm values are a powerful feature that allows you to customize and control the deployment of applications on Kubernetes. By adjusting these values, you can tailor deployments to match specific environments, requirements
+- Using a Custom values.yaml File
+- helm install my-release ./my-chart -f custom-values.yaml
+
+
+</details>
