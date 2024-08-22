@@ -91,3 +91,29 @@ Runs before any resources are installed during the helm install command.
 Use case: Set up pre-requisites like database migrations or secret generation before deploying the main application.
  
 </details>
+
+### Question 8. Explain the difference between Helm 2 and Helm 3
+<details>
+
+### 1. **Tiller (Helm 2) vs. No Tiller (Helm 3)**
+
+- **Helm 2:**
+  - Helm 2 uses a server-side component called **Tiller**, which runs inside the Kubernetes cluster. 
+  - **Security Concerns:** Tiller required special permissions (RBAC) to operate, which led to potential security risks. Tiller had access to the entire Kubernetes cluster, 
+
+- **Helm 3:**
+  - Helm 3 eliminates Tiller, meaning that Helm operates as a purely client-side tool. 
+  - **Improved Security:** By removing Tiller, Helm 3 reduces security risks. 
+
+
+
+### 2. **Helm Testing**
+
+- **Helm 2:**
+  - Helm 2 supported the creation of tests in charts, but these were less  limited in scope.
+
+- **Helm 3:**
+  - Helm 3 enhances support for testing by providing more structured hooks (`test-success`, `test-failure`) and better tooling around running and managing tests in your Helm charts.
+  - 
+
+</details>
