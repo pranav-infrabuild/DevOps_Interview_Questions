@@ -131,7 +131,8 @@ Use case: Set up pre-requisites like database migrations or secret generation be
 <details>
 To rollback to a specific revision, use the helm rollback command followed by the release name and the revision number.
 Syntax:
-helm rollback <release-name> <revision>
+
+   - helm rollback <release-name> <revision>
 
   
 </details>
