@@ -136,3 +136,12 @@ helm rollback <release-name> <revision>
 ```
   
 </details>
+
+### Question 11. How can you secure Helm deployments in a Kubernetes cluster?
+<details>
+
+By the Use Role-Based Access Control (RBAC)
+RBAC Policies:
+Define strict RBAC policies to control who can access and modify Helm releases
+ 
+</details>
