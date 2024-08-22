@@ -50,3 +50,22 @@ Helm charts simplify the deployment, management, and scaling of Kubernetes appli
 
 For example, if you have a Helm chart for a web application, you can use that chart to create multiple releases in your Kubernetes cluster, such as `myapp-dev`, `myapp-test`, and `myapp-prod`, each configured differently but based on the same chart.
 </details>
+
+### Question 5. How do you deploy a Helm chart to a Kubernetes cluster?
+<details>
+
+
+### 1. **Deploy the Helm Chart**
+   - Deploy a Helm chart to your Kubernetes cluster using the `helm install` command. You need to specify a release name (an identifier for this deployment) and the chart name:
+     ```bash
+     helm install <release-name> <chart-name> [--namespace <namespace>]
+     ```
+   - Example:
+     ```bash
+     helm install my-release stable/nginx
+     ```
+   - This command deploys the `nginx` chart from the `stable` repository to your Kubernetes cluster.
+
+
+ 
+</details>
