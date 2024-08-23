@@ -18,3 +18,9 @@
 <details>
 - yes we can change while going inside /conf/sonar.properties
 </details>
+
+### Question 4. Which SonarQube version are you using in your project?
+<details>
+
+- 10.6
+</details>
