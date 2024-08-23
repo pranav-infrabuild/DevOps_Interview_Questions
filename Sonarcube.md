@@ -24,3 +24,16 @@
 
 - 10.6
 </details>
+
+### Question 5. Types of issues in SonarQube? Could you please explain on it
+<details>
+
+1. Bugs :- code defects
+- Array index out of bounds
+
+2. Vulnerabilities :- security-related issues
+- Hardcoded passwords
+
+3. 3. Code Smells :- poor coding practices
+- Duplicate code
+</details>
