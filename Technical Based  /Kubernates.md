@@ -148,3 +148,8 @@ Kubernetes supports various types of volumes:
 
 
 </details>
+
+### Question 12. What are DaemonSets in Kubernetes?
+<details>
+- DaemonSets ensure that a copy of a Pod runs on all (or some) nodes. in the cluster. They are typically used for background processes such as logging, monitoring, and other system-level services that need to run on every node.
+</details>
