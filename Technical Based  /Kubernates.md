@@ -64,3 +64,11 @@ Kubernetes handles load balancing primarily through **Services**, which distribu
   
 A Deployment provides declarative updates to applications and ensures that the desired number of pod replicas are running. It allows for rolling updates, rollbacks, and scaling of applications. Deployments use a Pod template to create Pods and manage the lifecycle of these Pods through ReplicaSets.
 </details>
+
+### Question 7 :Explain the difference between a ReplicaSet and a ReplicationController.
+<details>
+
+- **ReplicationController** is an older method for ensuring a specified number of Pods are running, limited to equality-based selectors.
+- **ReplicaSet** is a more modern and flexible method, supporting both equality-based and set-based selectors, and is preferred for most use cases.
+Supports both **equality-based** and **set-based** selectors. Set-based selectors allow for more flexible selection criteria, such as selecting Pods with labels that are in a specified set or not in a set. For example, you could use a selector like `env in (production, staging)` to select Pods with the `env` label set to either `production` or `staging`.
+</details>
