@@ -22,6 +22,6 @@ Pods: The smallest deployable units that can contain one or more containers.
 
 Services: logical set of Pods and a policy by which to access them. . Services enable communication between different components within a Kubernetes cluster, allowing Pods. even if the pod scale up or down.
 
-Namespaces: Provide a way to divide cluster resources between multiple users.
+Namespaces: Namespaces allow for the isolation of resources within a Kubernetes cluster. Resources like Pods, Services, ConfigMaps, and Secrets are scoped to a particular namespace. Provide a way to divide cluster resources between multiple users.
 
 <details>
