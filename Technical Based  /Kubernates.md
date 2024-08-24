@@ -71,4 +71,25 @@ A Deployment provides declarative updates to applications and ensures that the d
 - **ReplicationController** is an older method for ensuring a specified number of Pods are running, limited to equality-based selectors.
 - **ReplicaSet** is a more modern and flexible method, supporting both equality-based and set-based selectors, and is preferred for most use cases.
 Supports both **equality-based** and **set-based** selectors. Set-based selectors allow for more flexible selection criteria, such as selecting Pods with labels that are in a specified set or not in a set. For example, you could use a selector like `env in (production, staging)` to select Pods with the `env` label set to either `production` or `staging`.
+</details
+
+### Question 8: What is a StatefulSet in Kubernetes?
+<details>
+
+A **StatefulSet** in Kubernetes is a resource designed for managing stateful applications that require persistent storage and stable network identities. 
+
+### Key Features of StatefulSet:
+
+1. **Stable Network Identities**:
+   - Each Pod in a StatefulSet has a stable, unique network identity. Pods are assigned a unique name that includes an ordinal index (e.g., `myapp-0`, `myapp-1`, etc.), which is maintained across Pod restarts. 
+
+2. **Stable Persistent Storage**:
+   - StatefulSets can be configured with PersistentVolumeClaims (PVCs) that provide stable, persistent storage. Each Pod gets its own PVC that is not shared with other Pods. 
+
+3. **Ordered Deployment and Scaling**:
+   - StatefulSets deploy and scale Pods in a specific, sequential order.
+
+4. **Graceful Shutdown**:
+   - StatefulSets ensure that Pods are shut down gracefully and in the reverse order of their creation. 
+
 </details>
