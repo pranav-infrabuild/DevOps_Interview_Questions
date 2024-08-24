@@ -24,4 +24,11 @@ Services: logical set of Pods and a policy by which to access them. . Services e
 
 Namespaces: Namespaces allow for the isolation of resources within a Kubernetes cluster. Resources like Pods, Services, ConfigMaps, and Secrets are scoped to a particular namespace. Provide a way to divide cluster resources between multiple users.
 
+</details>
+
+### Question 3: What is a Pod in Kubernetes?
 <details>
+
+- A Pod is the smallest deployable unit in Kubernetes and represents a single instance of a running process in a cluster. A Pod can contain one or more containers that share the same network namespace and storage volumes.
+
+</details>
