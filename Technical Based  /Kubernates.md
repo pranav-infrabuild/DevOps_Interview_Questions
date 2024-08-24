@@ -159,3 +159,9 @@ Kubernetes supports various types of volumes:
 
 - etcd stores the entire state of the Kubernetes cluster, including information about nodes, Pods, ConfigMaps, Secrets, services, and more. Any change in the cluster's state, such as the creation or deletion of resources, is recorded in etcd.
 </details>
+
+### Question 14. What is ingress ?
+<details>
+
+- Ingress is a Kubernetes resource that manages external access to services within a cluster. It acts as a single entry point for incoming traffic, routing it to the appropriate services based on the routing rules the developer sets. Kubernetes Ingress provides a way to securely and efficiently expose services
+</details>
