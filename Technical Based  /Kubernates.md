@@ -71,7 +71,10 @@ A Deployment provides declarative updates to applications and ensures that the d
 - **ReplicationController** is an older method for ensuring a specified number of Pods are running, limited to equality-based selectors.
 - **ReplicaSet** is a more modern and flexible method, supporting both equality-based and set-based selectors, and is preferred for most use cases.
 Supports both **equality-based** and **set-based** selectors. Set-based selectors allow for more flexible selection criteria, such as selecting Pods with labels that are in a specified set or not in a set. For example, you could use a selector like `env in (production, staging)` to select Pods with the `env` label set to either `production` or `staging`.
+
 </details
+
+
 
 ### Question 8: What is a StatefulSet in Kubernetes?
 <details>
