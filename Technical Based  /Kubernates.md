@@ -120,3 +120,31 @@ A **StatefulSet** in Kubernetes is a resource designed for managing stateful app
 - Secrets are used to store sensitive data, such as passwords, OAuth tokens, and SSH keys. They are similar to Config Maps but provide additional functionalities to ensure the data is handled securely. Secrets can be encrypted at rest and are only accessible to Pods that have been explicitly granted access.
 
 </details>
+
+
+### Question 11. How does Kubernetes handle storage
+<details>
+
+Kubernetes manages storage through several key abstractions and components that allow Pods to manage, and use storage resources effectively. 
+
+### 1. **Volumes**
+
+- **Volumes**: Volumes are storage resources that can be attached to Pods. They exist as long as the Pod exists, and can be shared between containers in the same Pod. 
+
+Kubernetes supports various types of volumes:
+  - **emptyDir**: Provides a temporary storage volume that is created when a Pod is assigned to a Node and is deleted when the Pod is removed. Useful for scratch space.
+  - **hostPath**: Mounts a file or directory from the host Node’s filesystem into a Pod. Typically used for testing or development.
+  - **nfs**: Mounts a Network File System (NFS) share into the Pod, allowing Pods to share storage across Nodes.
+  - **configMap**: Provides configuration data to Pods in the form of files or environment variables.
+  - **secret**: Provides sensitive data to Pods in a secure way, often used for credentials or keys.
+
+### 2. **Persistent Volumes (PV)**
+
+- **Persistent Volumes (PV)**:  that have been provisioned by an administrator or dynamically created by the system. PVs can represent various types of storage, such as local disks, network storage (NFS, iSCSI), cloud provider storage (AWS EBS, GCE PD), and more.
+
+### 3. **PersistentVolumeClaims (PVC)**
+
+- **PersistentVolumeClaims (PVC)**: PVCs are requests for storage made by users. They specify the amount of storage required and can include other parameters such as access modes (e.g., ReadWriteOnce, ReadOnlyMany). When a PVC is created, Kubernetes will find an available PV that meets the criteria and bind them together.
+
+
+</details>
