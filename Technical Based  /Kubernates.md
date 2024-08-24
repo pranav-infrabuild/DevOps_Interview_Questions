@@ -96,3 +96,20 @@ A **StatefulSet** in Kubernetes is a resource designed for managing stateful app
    - StatefulSets ensure that Pods are shut down gracefully and in the reverse order of their creation. 
 
 </details>
+
+
+### Question 9. What are ConfigMaps in Kubernetes?
+<details>
+
+**ConfigMaps** in Kubernetes are used to store non-confidential configuration data in key-value pairs. They allow you to decouple configuration details from your application code, making your containerized applications more portable and easier to manage.
+
+### Key Features of ConfigMaps:
+
+1. **Storage of Configuration Data**:
+   - ConfigMaps are designed to store configuration data that doesn't contain sensitive information. Examples include environment variables, configuration files, command-line arguments, or any other data your application needs to function properly.
+
+2. **Decoupling Configuration from Code**:
+   - By using ConfigMaps, you can separate your application's configuration from its container image. This means you can reuse the same container image across different environments (e.g., development, staging, production) while providing environment-specific configurations via ConfigMaps.
+
+
+</details>
