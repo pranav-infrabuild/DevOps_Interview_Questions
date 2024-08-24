@@ -113,3 +113,10 @@ A **StatefulSet** in Kubernetes is a resource designed for managing stateful app
 
 
 </details>
+
+### Question 10. What are Secrets in Kubernetes?
+<details>
+  
+- Secrets are used to store sensitive data, such as passwords, OAuth tokens, and SSH keys. They are similar to Config Maps but provide additional functionalities to ensure the data is handled securely. Secrets can be encrypted at rest and are only accessible to Pods that have been explicitly granted access.
+
+</details>
