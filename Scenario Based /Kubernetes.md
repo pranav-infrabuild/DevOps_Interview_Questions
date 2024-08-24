@@ -46,7 +46,7 @@ The `CrashLoopBackOff` status in Kubernetes indicates that a container in a Pod 
 
 </details>
 
-### 2. "Failed to pull image" or "ImagePullBackOff."
+### 2. `Failed to pull image" or "ImagePullBackOff`
 
 <details>
 
