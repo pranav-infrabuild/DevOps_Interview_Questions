@@ -32,3 +32,22 @@ Namespaces: Namespaces allow for the isolation of resources within a Kubernetes 
 - A Pod is the smallest deployable unit in Kubernetes and represents a single instance of a running process in a cluster. A Pod can contain one or more containers that share the same network namespace and storage volumes.
 
 </details>
+
+### Question 4: How does Kubernetes handle load balancing?
+<details>
+
+Kubernetes handles load balancing primarily through **Services**, which distribute network traffic across a set of Pods to ensure that no single Pod is overwhelmed. 
+
+### 1. **Service-Based Load Balancing**
+   - **ClusterIP (default)**: 
+     - The default type of Service, `ClusterIP`, creates an internal IP address for a set of Pods within the cluster. This type of Service is only accessible within the cluster and is typically used for internal communication between services.
+
+   - **NodePort**: 
+     - If you have a web application running on a Kubernetes cluster, that makes an application accessible from outside the cluster by opening a specific port on all the nodes
+
+   - **LoadBalancer**: 
+     - The `LoadBalancer` type of Service integrates that routes traffic to the Kubernetes Service. The external load balancer directs traffic to the appropriate node and then distributes it across the Pods in the Service. 
+
+   - **ExternalName**: 
+     - it maps a Service to an external DNS name
+</details>
