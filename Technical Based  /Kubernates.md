@@ -51,3 +51,10 @@ Kubernetes handles load balancing primarily through **Services**, which distribu
    - **ExternalName**: 
      - it maps a Service to an external DNS name
 </details>
+
+### Question 5: What is a ReplicaSet in Kubernetes?
+<details>
+
+- A ReplicaSet ensures that a specified number of pod replicas arerunning at any given time. It can be used to scale pods up or down, replace failed pods, and ensure the desired state of the application is maintained. A ReplicaSet is defined using a YAML or JSON file, specifying the desired number of replicas and the template for the pods.
+
+</details>
