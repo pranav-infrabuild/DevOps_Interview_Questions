@@ -153,3 +153,9 @@ Kubernetes supports various types of volumes:
 <details>
 - DaemonSets ensure that a copy of a Pod runs on all (or some) nodes. in the cluster. They are typically used for background processes such as logging, monitoring, and other system-level services that need to run on every node.
 </details>
+
+### Question 13. What is etcd ?
+<details>
+
+- etcd stores the entire state of the Kubernetes cluster, including information about nodes, Pods, ConfigMaps, Secrets, services, and more. Any change in the cluster's state, such as the creation or deletion of resources, is recorded in etcd.
+</details>
