@@ -45,3 +45,77 @@ The `CrashLoopBackOff` status in Kubernetes indicates that a container in a Pod 
 
 
 </details>
+
+### 2. "Failed to pull image" or "ImagePullBackOff."
+
+<details>
+
+When Kubernetes is unable to pull a container image, it typically results in an error and the Pod will not start properly. Here are common reasons for this issue and steps to troubleshoot:
+
+### Common Reasons for Image Pull Issues
+
+1. **Incorrect Image Name or Tag**: The image name or tag specified in your Pod or Deployment configuration may be incorrect or misspelled.
+2. **Image Not Found**: The specified image may not exist in the container registry.
+3. **Authentication Issues**: Kubernetes may not have the required credentials to access a private container registry.
+4. **Registry Connectivity Issues**: There may be network issues preventing Kubernetes from reaching the container registry.
+5. **Rate Limiting**: Some container registries impose rate limits on image pulls, which may cause failures if exceeded.
+
+### Troubleshooting Steps
+
+1. **Check Pod Events**: Use `kubectl describe pod <pod-name>` to check the events and error messages related to the image pull.
+
+   **Example**:
+   ```bash
+   kubectl describe pod my-pod
+   ```
+
+   Look for messages like "Failed to pull image" or "ImagePullBackOff."
+
+2. **Verify Image Name and Tag**: Ensure that the image name and tag are correctly specified in your Pod or Deployment YAML file. The format should be `repository/image:tag`.
+
+   **Example**:
+   ```yaml
+   spec:
+     containers:
+     - name: my-container
+       image: my-repo/my-image:latest
+   ```
+
+3. **Check Image Availability**: Verify that the image exists in the container registry and is accessible. You can try pulling the image manually using Docker:
+
+   **Example**:
+   ```bash
+   docker pull my-repo/my-image:latest
+   ```
+
+4. **Verify Registry Credentials**:
+   - If using a private registry, ensure that you have created a Kubernetes Secret with the registry credentials and configured it in your Pod or Deployment.
+
+   **Example**:
+   ```bash
+   kubectl create secret docker-registry my-registry-secret \
+     --docker-server=<registry-url> \
+     --docker-username=<username> \
+     --docker-password=<password> \
+     --docker-email=<email>
+   ```
+
+   Then, reference the Secret in your Pod or Deployment YAML:
+
+   **Example**:
+   ```yaml
+   spec:
+     containers:
+     - name: my-container
+       image: my-repo/my-image:latest
+     imagePullSecrets:
+     - name: my-registry-secret
+   ```
+
+5. **Check Network Connectivity**: Ensure that your Kubernetes nodes have network access to the container registry. This might involve checking firewall rules, network policies, or DNS settings.
+
+6. **Inspect Registry Limits**: If you suspect rate limiting, check the registry documentation or contact support to understand any rate limits that might be affecting your pulls.
+
+By following these steps, you can identify and resolve issues related to pulling container images in Kubernetes.
+
+</details>
