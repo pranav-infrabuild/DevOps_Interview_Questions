@@ -165,3 +165,11 @@ Kubernetes supports various types of volumes:
 
 - Ingress is a Kubernetes resource that manages external access to services within a cluster. It acts as a single entry point for incoming traffic, routing it to the appropriate services based on the routing rules the developer sets. Kubernetes Ingress provides a way to securely and efficiently expose services
 </details>
+
+### Question 15. What is the difference between ingress and load balancer ?
+<details>
+
+- Ingress in Kubernetes that manages external access to services within the cluster, typically HTTP and HTTPS traffic. It provides rules that define how incoming requests should be routed to the appropriate services based on the URL path, host, or other criteria.
+- A Load Balancer in Kubernetes is a type of service that automatically distributes incoming network traffic across multiple Pods
+
+</details>
