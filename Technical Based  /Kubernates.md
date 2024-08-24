@@ -58,3 +58,9 @@ Kubernetes handles load balancing primarily through **Services**, which distribu
 - A ReplicaSet ensures that a specified number of pod replicas arerunning at any given time. It can be used to scale pods up or down, replace failed pods, and ensure the desired state of the application is maintained. A ReplicaSet is defined using a YAML or JSON file, specifying the desired number of replicas and the template for the pods.
 
 </details>
+
+### Question 6: What is a Deployment in Kubernetes?
+<details>
+  
+A Deployment provides declarative updates to applications and ensures that the desired number of pod replicas are running. It allows for rolling updates, rollbacks, and scaling of applications. Deployments use a Pod template to create Pods and manage the lifecycle of these Pods through ReplicaSets.
+</details>
