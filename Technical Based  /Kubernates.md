@@ -175,7 +175,10 @@ Kubernetes supports various types of volumes:
 </details>
 
 ## Some Commands 
+
 <details>
+
+  
 1. **`kubectl cluster-info`**: This command displays essential information about your Kubernetes cluster, such as the addresses of the Kubernetes master and any services that are running.
 
    **Usage**: 
