@@ -119,3 +119,24 @@ When Kubernetes is unable to pull a container image, it typically results in an 
 By following these steps, you can identify and resolve issues related to pulling container images in Kubernetes.
 
 </details>
+
+### 3. `pod is in a `Pending` state`
+<details>
+
+
+When a pod is in a `Pending` state, it means that the pod has been accepted by the Kubernetes system but it is not yet running on any node in the cluster. 
+
+### 1. **Insufficient Resources:**
+   - **Issue:** The nodes in your cluster may not have enough CPU, memory, or other resources to schedule the pod.
+   - **Solution:** 
+     - Check the available resources in your nodes using `kubectl describe nodes`.
+     - If resources are insufficient, consider scaling up your cluster by adding more nodes or resizing the existing ones.
+
+
+
+You can gather more information about why the pod is in a `Pending` state by running the following command:
+```bash
+kubectl describe pod <pod-name>
+```
+This will provide detailed information, including events that might explain why the pod is not being scheduled.
+</details>
