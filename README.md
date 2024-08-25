@@ -13,8 +13,7 @@ Welcome to [DevOps_Interview_Questions](https://github.com/pranav278/DevOps_Inte
 
 3. [ Terraform ]
 
-4. [Kubernetes](https://github.com/pranav278/DevOps_Interview_Questions/blob/12f3afbb704ee8d6a2693bda374d08325f27ea16/Scenario%20Based%20/Kubernetes.md)
-
+4. [Kubernetes](https://github.com/pranav278/DevOps_Interview_Questions/blob/main/Scenario%20Based%20/Kubernetes.md)
 
 ## To visit Technical based questions :
 
