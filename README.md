@@ -28,3 +28,5 @@ Welcome to [DevOps_Interview_Questions](https://github.com/pranav278/DevOps_Inte
 5. [Ansible](https://github.com/pranav278/DevOps_Interview_Questions/blob/main/Technical%20Based%20%20/Ansible.md)
 
 6. [Helm](https://github.com/pranav278/DevOps_Interview_Questions/blob/main/Technical%20Based%20%20/Helm.md)
+
+7. [Sonarcube](https://github.com/pranav278/DevOps_Interview_Questions/blob/main/Technical%20Based%20%20/Sonarcube.md)
