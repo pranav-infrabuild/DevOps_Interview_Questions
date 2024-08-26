@@ -21,8 +21,10 @@ Welcome to [DevOps_Interview_Questions](https://github.com/pranav278/DevOps_Inte
 
 2. [Docker](https://github.com/pranav278/DevOps_Interview_Questions/blob/b69e5352981571f13a8111413996e8a14ea4f8b3/Technical%20Based%20%20/Docker.md)
 
-3. [ Terraform ](https://github.com/pranav278/DevOps_Interview_Questions/blob/main/Technical%20Based%20%20/Terraform.md)
+3. [Terraform](https://github.com/pranav278/DevOps_Interview_Questions/blob/main/Technical%20Based%20%20/Terraform.md)
 
 4. [Kubernetes](https://github.com/pranav278/DevOps_Interview_Questions/blob/main/Technical%20Based%20%20/Kubernates.md)
 
 5. [Ansible](https://github.com/pranav278/DevOps_Interview_Questions/blob/main/Technical%20Based%20%20/Ansible.md)
+
+6. [Helm](https://github.com/pranav278/DevOps_Interview_Questions/blob/main/Technical%20Based%20%20/Helm.md)
