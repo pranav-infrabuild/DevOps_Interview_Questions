@@ -190,3 +190,71 @@ An invalid pod specification error typically occurs when there are issues in the
 
 
 </details>
+
+### 5. `Service Unavailable`
+<details>
+
+If you're encountering a "Service Unavailable" error in Kubernetes, it typically indicates that the service is not reachable or the backend Pods are not responding correctly. Here’s a step-by-step guide to troubleshoot this issue:
+
+### 1. **Check Service Configuration**
+   - Ensure that the service is correctly configured and running:
+     ```bash
+     kubectl get svc
+     ```
+   - Review the service configuration using:
+     ```bash
+     kubectl describe svc <service-name>
+     ```
+   - Ensure that the service type (ClusterIP, NodePort, LoadBalancer) is correctly set and the ports are properly configured.
+
+### 2. **Verify Pods are Running**
+   - Confirm that the backend Pods are running and ready to serve requests:
+     ```bash
+     kubectl get pods
+     ```
+   - Use `kubectl describe pod <pod-name>` to check the Pod's status, including readiness and liveness probes.
+
+### 3. **Check Endpoint Readiness**
+   - Ensure that the service has healthy endpoints:
+     ```bash
+     kubectl get endpoints <service-name>
+     ```
+   - Verify that the endpoints are correctly mapped to the Pods. If the endpoints list is empty, it indicates that no Pods match the service’s selector.
+
+### 4. **Review Network Policies**
+   - If network policies are implemented, make sure they are not blocking traffic between the service and the Pods:
+     ```bash
+     kubectl get networkpolicy
+     ```
+   - Review the policies using `kubectl describe networkpolicy <policy-name>` to ensure they allow traffic to the service.
+
+### 5. **Check Service Connectivity**
+   - Test connectivity to the service using `kubectl exec` to run commands inside a Pod:
+     ```bash
+     kubectl exec -it <pod-name> -- curl http://<service-name>:<port>
+     ```
+   - This command checks if the service is accessible from within the cluster.
+
+### 6. **DNS Resolution**
+   - Confirm that the service's DNS name is resolving correctly within the cluster:
+     ```bash
+     kubectl exec -it <pod-name> -- nslookup <service-name>
+     ```
+   - Ensure that the DNS setup is working properly if the service is not resolving.
+
+### 7. **Review Service Logs**
+   - Check the logs of the Pods backing the service to see if they are receiving requests and if any errors are occurring:
+     ```bash
+     kubectl logs <pod-name>
+     ```
+
+### 8. **Restart Pods or Service**
+   - As a last resort, try restarting the Pods or the service to see if it resolves the issue:
+     ```bash
+     kubectl delete pod <pod-name>
+     kubectl rollout restart deployment <deployment-name>
+     ```
+
+By following these steps, you should be able to diagnose and resolve the "Service Unavailable" issue in your Kubernetes cluster. If you need further assistance or have specific configurations you'd like to review, feel free to share them.
+
+</details>
