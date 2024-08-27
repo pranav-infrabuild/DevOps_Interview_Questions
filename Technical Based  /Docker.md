@@ -409,3 +409,50 @@ The `ADD` and `COPY` instructions are both used in Dockerfiles to copy files and
 
 
 </details>
+
+### Question 28. What are the types of Networking in Docker and Which one is Default ?
+<details>
+
+Docker provides several networking options to manage how containers communicate with each other, with the host system, and with external networks. Here are the main types of networking in Docker:
+
+### **1. Bridge Network (Default)**
+- **Description**: The bridge network is Docker’s default network type. When you create a container, it is automatically connected to the bridge network unless you specify otherwise.
+- **Behavior**: Containers on the same bridge network can communicate with each other using their IP addresses or container names. The host machine can also communicate with the containers using port mapping.
+- **Use Case**: Good for isolating containers and keeping them separate from your host and other networks unless explicitly connected.
+- **Command**:
+  ```bash
+  docker network ls
+  ```
+  You’ll see `bridge` listed as the default network.
+
+### **2. Host Network**
+- **Description**: In the host network, the container shares the host machine’s network stack. This means the container has direct access to the host's network interfaces.
+- **Behavior**: The container's network is not isolated from the host, so it uses the host's IP address and ports directly.
+- **Use Case**: Useful when you want to avoid the overhead of NAT (Network Address Translation) or need the container to access network services on the host as if it were running directly on the host.
+- **Command**:
+  ```bash
+  docker run --network host myimage
+  ```
+
+
+
+### **3. Overlay Network**
+- **Description**: The overlay network is used in Docker Swarm or Kubernetes for multi-host networking. It allows containers running on different Docker hosts (nodes) to communicate securely as if they were on the same local network.
+- **Behavior**: Overlay networks work by creating a virtual network that spans across multiple Docker hosts, allowing services to communicate even if they're on different machines.
+- **Use Case**: Ideal for distributed systems and microservices architectures where services are spread across multiple hosts.
+- **Command**:
+  ```bash
+  docker network create -d overlay my-overlay-network
+  ```
+
+### **4. Macvlan Network**
+- **Description**: The Macvlan network allows you to assign a MAC address to each container, making it appear as a physical device on your network. The container gets its own IP address on the local network.
+- **Behavior**: This network mode allows containers to have direct access to the physical network interface of the host, effectively bypassing Docker's network stack.
+- **Use Case**: Useful when you need containers to appear as individual devices on your network, such as in network appliances or legacy applications that require unique IP addresses.
+- **Command**:
+  ```bash
+  docker network create -d macvlan --subnet=192.168.1.0/24 --gateway=192.168.1.1 -o parent=eth0 my-macvlan-network
+  ```
+
+
+</details>
