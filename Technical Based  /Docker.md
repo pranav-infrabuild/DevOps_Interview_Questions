@@ -479,10 +479,56 @@ Isolating networking between containers in Docker ensures that containers cannot
 
 </details>
 
-### Question 23. What is Distro less image?
+### Question 30. What is Distro less image?
 <details>
 
 - Distroless images contain only what’s necessary for the application to run, such as the runtime (e.g., Java, Python), the application code, and any required dependencies.
 - Distroless images are ideal for production environments where security and efficiency are paramount.
+
+</details>
+
+### Question 31. difference between CMD and ENTRYPOINT in Docker
+<details>
+
+Certainly! Here's a refined explanation of the difference between `CMD` and `ENTRYPOINT` in Docker:
+
+---
+
+### **Difference Between `CMD` and `ENTRYPOINT`**
+
+**1. Purpose:**
+
+- **`CMD`:**
+  - **Purpose**: Sets the default command to run when a container starts.
+  - **Behavior**: If you provide a command when running the container, it will override the `CMD`. If no command is provided, Docker will use the `CMD` instruction as the default.
+
+- **`ENTRYPOINT`:**
+  - **Purpose**: Defines the main command that is always executed when the container starts.
+  - **Behavior**: Any arguments provided at runtime are passed to the `ENTRYPOINT` command. `ENTRYPOINT` cannot be overridden by command-line arguments but can have its arguments modified.
+
+**2. Syntax:**
+
+- **`CMD`**:
+  - **Shell Form**: `CMD command param1 param2`
+  - **Exec Form**: `CMD ["executable", "param1", "param2"]`
+
+- **`ENTRYPOINT`**:
+  - **Shell Form**: `ENTRYPOINT command param1 param2`
+  - **Exec Form**: `ENTRYPOINT ["executable", "param1", "param2"]`
+
+**3. Examples:**
+
+- **Using `CMD`**:
+  ```dockerfile
+  CMD ["echo", "Hello World"]
+  ```
+  - **Behavior**: By default, this Dockerfile will print "Hello World". If you run `docker run myimage ls`, it will override `CMD` and execute `ls` instead.
+
+- **Using `ENTRYPOINT`**:
+  ```dockerfile
+  ENTRYPOINT ["echo"]
+  ```
+  - **Behavior**: This Dockerfile will always execute `echo`. If you run `docker run myimage Hello World`, it will print "Hello World" because "Hello World" is passed as an argument to `echo`.
+
 
 </details>
