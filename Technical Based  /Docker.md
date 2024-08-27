@@ -456,3 +456,25 @@ Docker provides several networking options to manage how containers communicate 
 
 
 </details>
+
+### Question 29. Can you explain how to isolate networking between containers
+<details>
+
+Isolating networking between containers in Docker ensures that containers cannot communicate with each other unless explicitly allowed. There are several ways to achieve this level of isolation:
+
+### **1. Use Separate Custom Networks**
+- **How It Works**: By default, containers connected to the same Docker network can communicate with each other. To isolate containers, you can create separate custom networks and attach each container to its own network. Containers on different networks cannot communicate with each other.
+- **Steps**:
+  1. **Create Separate Networks**:
+     ```bash
+     docker network create network1
+     docker network create network2
+     ```
+  2. **Run Containers on Separate Networks**:
+     ```bash
+     docker run -d --network network1 --name container1 myimage
+     docker run -d --network network2 --name container2 myimage
+     ```
+  - **Outcome**: `container1` and `container2` are isolated and cannot communicate because they are on different networks.
+
+</details>
