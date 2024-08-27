@@ -381,3 +381,31 @@ The Docker Registry API plays a crucial role in managing and distributing Docker
 
 
 </details>
+
+### Question 27. What is the Difference between Docker Copy And Docker Add ?
+<details>
+
+The `ADD` and `COPY` instructions are both used in Dockerfiles to copy files and directories from the host system into a Docker image. However, they have some key differences in functionality:
+
+### **1. Basic Functionality**
+
+- **`COPY`**: 
+  - **Purpose**: The `COPY` instruction is a straightforward command that copies files and directories from the host file system into the Docker image.
+  - **Syntax**: 
+    ```dockerfile
+    COPY <src> <dest>
+    ```
+  - **Use Case**: Use `COPY` when you just need to copy files or directories from your host machine into the image without any additional processing or features.
+
+- **`ADD`**: 
+  - **Purpose**: The `ADD` instruction is more powerful than `COPY` and can do everything `COPY` does, plus some additional features.
+  - **Syntax**:
+    ```dockerfile
+    ADD <src> <dest>
+    ```
+  - **Additional Features**:
+    - **Automatic Extraction**: If the source (`<src>`) is a local `.tar`, `.tar.gz`, or other archive format, `ADD` will automatically extract the archive into the destination (`<dest>`).
+    - **Remote URL Handling**: `ADD` can also fetch files from remote URLs and copy them into the image, which `COPY` cannot do.
+
+
+</details>
