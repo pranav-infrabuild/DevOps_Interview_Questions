@@ -478,3 +478,11 @@ Isolating networking between containers in Docker ensures that containers cannot
   - **Outcome**: `container1` and `container2` are isolated and cannot communicate because they are on different networks.
 
 </details>
+
+### Question 23. What is Distro less image?
+<details>
+
+- Distroless images contain only what’s necessary for the application to run, such as the runtime (e.g., Java, Python), the application code, and any required dependencies.
+- Distroless images are ideal for production environments where security and efficiency are paramount.
+
+</details>
