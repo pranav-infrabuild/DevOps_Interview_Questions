@@ -145,3 +145,14 @@ Here are some essential Git commands that are commonly asked in a DevOps intervi
 
 These commands are essential for managing code versions, collaborating with others, and ensuring smooth project development. Having a strong understanding of Git will help you in a DevOps role!
 </details>
+
+
+### Question 3. What is difference in git , GitHub and gitlab ?
+<details>
+ 
+- Git is the tool you use to track changes in your code locally.
+- GitHub is an online platform for sharing Git repositories and collaborating with others.
+- GitLab is a more advanced Git hosting platform with built-in DevOps tools and can be self-hosted.
+
+
+</details>
