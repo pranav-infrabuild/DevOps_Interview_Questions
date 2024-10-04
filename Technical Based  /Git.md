@@ -170,3 +170,22 @@ git revert <commit_hash>: Creates a new commit to undo a previous commit (preser
 - What it is: Forking is used on platforms like GitHub or GitLab to create a copy of someone else’s repository into your own account.
 
 </details>
+
+### Question 6. What is difference between git pull and git featch ?
+<details>
+
+
+
+### **Key Differences**:
+- **git fetch**:
+  - Only **downloads** changes from the remote repository.
+  - Does **not merge** the changes into your current code.
+  - Safe to use when you want to check for changes but not apply them immediately.
+  
+- **git pull**:
+  - **Downloads and merges** the changes in one step.
+  - Directly affects your current working directory by applying the new changes.
+  - Faster but can lead to conflicts if not used carefully.
+
+
+</details>
