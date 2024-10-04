@@ -162,3 +162,11 @@ These commands are essential for managing code versions, collaborating with othe
 git revert <commit_hash>: Creates a new commit to undo a previous commit (preserves history).
 
 </details>
+
+### Question 5. Explain the difference between git clone and git fork ?
+<details>
+
+- What it is: git clone is used to copy an existing Git repository from a remote source (like GitHub or GitLab) to your local computer.
+- What it is: Forking is used on platforms like GitHub or GitLab to create a copy of someone else’s repository into your own account.
+
+</details>
