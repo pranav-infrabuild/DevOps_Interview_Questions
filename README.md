@@ -19,6 +19,8 @@ Welcome to [DevOps_Interview_Questions](https://github.com/pranav278/DevOps_Inte
 
 ## To visit Technical based questions :
 
+1. [Git](https://github.com/pranav278/DevOps_Interview_Questions/blob/main/Technical%20Based%20%20/Git.md)
+
 1. [Linux](https://github.com/pranav278/DevOps_Interview_Questions/blob/05a36efd906b717760009dd051107e946dccf6cb/Technical%20Based%20%20/Linux.md)
 
 2. [Docker](https://github.com/pranav278/DevOps_Interview_Questions/blob/b69e5352981571f13a8111413996e8a14ea4f8b3/Technical%20Based%20%20/Docker.md)
