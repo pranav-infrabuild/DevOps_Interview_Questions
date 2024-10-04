@@ -156,3 +156,9 @@ These commands are essential for managing code versions, collaborating with othe
 
 
 </details>
+
+### Question 4. How do you revert a commit in Git ?
+<details>
+git revert <commit_hash>: Creates a new commit to undo a previous commit (preserves history).
+
+</details>
