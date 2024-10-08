@@ -133,3 +133,32 @@ Here’s how you can do it in simple steps:
 
 After doing this, you should be able to connect to the Docker daemon and use Docker commands normally.
 </details>
+
+
+### Question 4. The error "Permission denied while trying to connect to the Docker daemon socket"
+<details>
+
+ This Errors occurs because your user account doesn't have the necessary permissions to run Docker commands without using `sudo`.
+
+Here’s the solution explained in simple steps:
+
+1. **Add your user to the Docker group**:
+   - Run the following command to give your user the needed permissions:
+     ```bash
+     sudo usermod -aG docker $USER
+     ```
+   - This command adds your user (represented by `$USER`) to the **docker group**.
+
+2. **Log out and log back in**:
+   - For the changes to take effect, you need to log out of your computer and then log back in.
+
+3. **Verify the solution**:
+   - After logging back in, try running a Docker command (e.g., `docker ps`) **without** using `sudo`:
+     ```bash
+     docker ps
+     ```
+   - If it works without showing the "Permission denied" error, the problem is solved!
+
+This way, you can run Docker commands without needing `sudo` every time.
+
+</details>
