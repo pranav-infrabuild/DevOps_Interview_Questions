@@ -103,3 +103,33 @@ When explaining this Dockerfile to an interviewer, it's important to convey both
 
 This explanation demonstrates not only your technical understanding but also your ability to communicate complex concepts clearly and effectively.
 </details>
+
+
+### Question 3. The error "Cannot connect to the Docker daemon" 
+<details>
+The Docker service isn't running on your system. To fix this, you need to start the Docker service.
+
+Here’s how you can do it in simple steps:
+
+1. **Start the Docker service (Linux/Ubuntu)**:
+   - Run the following command in your terminal:
+     ```bash
+     sudo systemctl start docker
+     ```
+   - This command tells your system to start the Docker service.
+
+2. **Check if Docker is running**:
+   - You can verify if Docker is running by typing:
+     ```bash
+     sudo systemctl status docker
+     ```
+   - This will show you the status of the Docker service. If it's running, you’re good to go!
+
+3. **If you're using Docker Machine**:
+   - Run the following command to start Docker Machine:
+     ```bash
+     docker-machine start
+     ```
+
+After doing this, you should be able to connect to the Docker daemon and use Docker commands normally.
+</details>
