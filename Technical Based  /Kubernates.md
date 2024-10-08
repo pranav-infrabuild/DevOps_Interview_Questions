@@ -174,6 +174,43 @@ Kubernetes supports various types of volumes:
 
 </details>
 
+### Question 16. Explain Architecture of Kubernates?
+<details>
+
+Kubernetes architecture can be thought of as a system made up of two main parts:
+
+1. **Control Plane** (The brain)
+2. **Worker Nodes** (The workers)
+
+### 1. Control Plane (The brain of Kubernetes)
+The control plane is like the "manager" or "controller" of the entire Kubernetes system. It makes important decisions about what happens in the system and oversees everything.
+
+- **API Server**: This is how all parts of Kubernetes talk to each other. You (or other tools) send requests to the API server, and it passes the message to the right part of Kubernetes.
+  
+- **Scheduler**: Think of it as a "job planner." It decides which worker (node) should run a new task (called a pod) based on available resources.
+  
+- **Controller Manager**: This is the part that keeps an eye on everything. It makes sure things are running as they should and takes action if something isn't right. For example, if a pod crashes, the controller will try to restart it.
+  
+- **etcd**: This is the memory of the system. It stores all the important data about the current state of the system (like how many apps are running, where they are running, etc.).
+
+### 2. Worker Nodes (The workers)
+The worker nodes are where the actual work happens. Each worker node is a computer (or a virtual machine) that runs the apps (in containers) you want to manage.
+
+- **Kubelet**: This is the worker’s "boss." It gets instructions from the control plane (via the API server) about what tasks (pods) to run and makes sure they are running correctly.
+
+- **Container Runtime**: This is the part that actually runs your apps inside containers. The most common container runtime is Docker.
+
+- **Kube-proxy**: This helps route traffic between different parts of your app. It makes sure that the right app or service gets the right network request.
+
+### Putting It All Together
+- The **control plane** is like a manager, overseeing everything and making sure it all runs smoothly.
+- The **worker nodes** do the actual work, running your applications.
+
+In a Kubernetes cluster, there’s usually one control plane and many worker nodes. The control plane tells the worker nodes what to do, and the worker nodes carry out the tasks (run your apps in containers).
+
+
+</details>
+
 ## Some Commands 
 
 <details>
