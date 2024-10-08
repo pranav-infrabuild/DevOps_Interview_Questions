@@ -162,3 +162,26 @@ Here’s the solution explained in simple steps:
 This way, you can run Docker commands without needing `sudo` every time.
 
 </details>
+
+### Question 5. The error "No space left on device" 
+<details>
+
+The error "No space left on device" occurs when your system runs out of disk space, often due to unused Docker images, containers, or volumes piling up. To fix this, you can clean up those unused Docker resources by following these simple steps:
+
+1. **Run the Docker cleanup command**:
+   - This command removes all stopped containers, unused networks, dangling images (images that aren’t used by any container), and build cache:
+     ```bash
+     docker system prune
+     ```
+
+2. **Add `-a` flag to remove all unused resources**:
+   - If you want to remove *all* unused images (not just dangling ones), along with containers and volumes, use:
+     ```bash
+     docker system prune -a
+     ```
+
+3. **Confirm the cleanup**:
+   - Docker will ask you to confirm the cleanup. Type `y` when prompted.
+
+After running this command, Docker will free up space by removing unnecessary files.
+</details>
