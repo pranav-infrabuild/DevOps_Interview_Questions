@@ -185,3 +185,38 @@ The error "No space left on device" occurs when your system runs out of disk spa
 
 After running this command, Docker will free up space by removing unnecessary files.
 </details>
+
+### Question 6. The "Container is unhealthy" error
+<details>
+
+  that Docker's health check has determined that something inside the container isn't working as expected. Here’s how you can fix this:
+
+### Solution:
+
+1. **Check the health check command in your `Dockerfile`**:
+   - Look at the `HEALTHCHECK` command in your `Dockerfile`. It defines how Docker checks if your container is working properly.
+   - Example of a health check in a Dockerfile:
+     ```Dockerfile
+     HEALTHCHECK CMD curl --fail http://localhost:8080 || exit 1
+     ```
+   - Make sure this command is correct and relevant for your application. If it's checking something like a URL or a service that’s not responding, you need to investigate why that is.
+
+2. **Check the container logs**:
+   - Use the following command to see what’s happening inside the container:
+     ```bash
+     docker logs <container_name>
+     ```
+   - This will give you details about what might be going wrong (e.g., service not starting, dependency failure, etc.).
+
+3. **Inspect container health status**:
+   - You can also check the health status of the container with:
+     ```bash
+     docker inspect <container_name>
+     ```
+   - Look for the "Health" section in the output to see the recent health check results and failures.
+
+4. **Fix the root cause**:
+   - Based on the logs and the health check command, fix the underlying issue (such as updating the health check command, making sure a required service is running, or correcting network configurations).
+
+After fixing the issue, rebuild and restart the container to ensure it runs smoothly.
+</details>
