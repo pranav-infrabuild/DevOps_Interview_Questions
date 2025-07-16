@@ -12,6 +12,18 @@ Welcome to [DevOps_Interview_Questions](https://github.com/pranav278/DevOps_Inte
 | 3      | Docker     | [Docker](https://github.com/pranav-infrabuild/DevOps_Interview_Questions/blob/main/Technical%20Based%20%20/Docker.md)| [Docker](https://github.com/pranav278/DevOps_Interview_Questions/blob/df6fe3c93a9563700fc795e220256178488a1100/Scenario%20Based%20/Docker.md) |
 | 4      | Terraform  | [Terraform](https://github.com/pranav278/DevOps_Interview_Questions/blob/main/Technical%20Based%20%20/Terraform.md) | [Terraform](https://github.com/pranav-infrabuild/DevOps_Interview_Questions/blob/main/Scenario%20Based%20/Terraform.md) |
 | 5      | Kubernetes | [Kubernetes](https://github.com/pranav278/DevOps_Interview_Questions/blob/main/Technical%20Based%20%20/Kubernates.md) | [Kubernetes](https://github.com/pranav278/DevOps_Interview_Questions/blob/main/Scenario%20Based%20/Kubernetes) |
-| 6      | Ansible    | [Ansible](https://github.com/pranav278/DevOps_Interview_Questions/blob/main/Technical%20Based%20%20/Ansible.md) | *Link not provided*                                                                |
-| 7      | Helm       | [Helm](https://github.com/pranav278/DevOps_Interview_Questions/blob/main/Technical%20Based%20%20/Helm.md)       | *Link not provided*                                                                |
-| 8      | SonarQube  | [SonarQube](https://github.com/pranav278/DevOps_Interview_Questions/blob/main/Technical%20Based%20%20/Sonarcube.md) | *Link not provided*                                                                |
+| 6      | Ansible    | [Ansible](https://github.com/pranav278/DevOps_Interview_Questions/blob/main/Technical%20Based%20%20/Ansible.md) | *Working on it*                                                                |
+| 7      | Helm       | [Helm](https://github.com/pranav278/DevOps_Interview_Questions/blob/main/Technical%20Based%20%20/Helm.md)       |  *Working on it*                                                              |
+| 8      | SonarQube  | [SonarQube](https://github.com/pranav278/DevOps_Interview_Questions/blob/main/Technical%20Based%20%20/Sonarcube.md) | *Working on it*  | 
+| 9      | Script      | [Script](https://github.com/pranav-infrabuild/DevOps_Interview_Questions/blob/main/Scenario%20Based%20/Scripting.md) | [Script](https://github.com/pranav-infrabuild/DevOps_Interview_Questions/blob/main/Scenario%20Based%20/Scripting.md)     |
+| 10     | Jenkins     | *Working on it*                                                                                           | *Working on it*        |
+| 11     | Networking  | [Networking](https://github.com/pranav-infrabuild/DevOps_Interview_Questions/blob/main/Technical%20Based%20%20/Networking.md)| *Working on it*     | 
+
+
+
+
+
+
+
+
+
