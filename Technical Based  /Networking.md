@@ -1,6 +1,6 @@
 ## Networking Technical Questions 
 
-### What is a VPC?
+### 1) What is a VPC?
 <details>
 
 A **Virtual Private Cloud (VPC)** is a logically isolated section of a public cloud where you can launch and manage resources like virtual machines, databases, and storage. It provides a high level of control over your network environment, including the selection of your own IP address range, creation of subnets, and configuration of route tables and network gateways.
@@ -16,7 +16,7 @@ A **Virtual Private Cloud (VPC)** is a logically isolated section of a public cl
 
 
 
-### What are Subnets?
+### 2) What are Subnets?
 <details>
   
 
@@ -39,7 +39,7 @@ Subnets, short for **subnetworks**, are subdivisions of your VPC's IP address ra
 
 
 
-### What is a NAT Gateway?
+### 3) What is a NAT Gateway?
 <Details>
 
 A **NAT (Network Address Translation) Gateway** is a service that enables instances in a private subnet to connect to the internet or other external services without exposing those instances to unsolicited inbound traffic. Essentially, it acts as a middleman, allowing outbound communication while keeping the internal network secure.
@@ -67,7 +67,7 @@ A **NAT (Network Address Translation) Gateway** is a service that enables instan
 
 
 
-### **Internet Gateway (IGW)**
+### 4) **Internet Gateway (IGW)**
 <details>
 
 
@@ -79,7 +79,7 @@ An Internet Gateway is a component that allows communication between your VPC an
 </details>
 
 
-### Real-time examples to make it easier to understand.
+### 5) Real-time examples to make it easier to understand.
 <Details>
   
 ### **Virtual Private Cloud (VPC)**
@@ -117,7 +117,7 @@ Internet
 ```
 </Details>
 
-### OSI Model
+### 6) OSI Model
 <details>
   
 
@@ -133,7 +133,7 @@ The OSI (Open Systems Interconnection) model is a way to understand how differen
 
 </details>
 
-### IP addressing and subnetting.
+### 7) IP addressing and subnetting.
 <details>
   
 ### IP Addressing
@@ -143,7 +143,7 @@ The OSI (Open Systems Interconnection) model is a way to understand how differen
 1. **IPv4**: Consists of four octets (32 bits) separated by dots (e.g., 192.168.1.1). Each octet can range from 0 to 255.
 2. **IPv6**: Consists of eight groups of four hexadecimal digits (128 bits) separated by colons (e.g., 2001:0db8:85a3:0000:0000:8a2e:0370:7334). IPv6 was introduced to address the exhaustion of IPv4 addresses.
 
-### Subnetting
+### 8) Subnetting
 
 **Subnetting** is the process of dividing a larger network into smaller, more manageable segments called subnets. This improves network performance and security by reducing congestion and isolating network segments. Here's how subnetting is done:
 
@@ -166,7 +166,7 @@ Number of Devices: Sales (50), HR (30), IT (20), Finance (40).
 
 </details>
 
-### TCP/IP
+### 9) TCP/IP
 <details>
   
 ### 1. **Transmission Control Protocol (TCP)**
@@ -186,7 +186,7 @@ Number of Devices: Sales (50), HR (30), IT (20), Finance (40).
 
 </details>
 
-### UDP
+### 10) UDP
 <details>
   
 **UDP** stands for **User Datagram Protocol**. It's one of the core protocols of the Internet Protocol (IP) suite, used for transmitting data over a network.
@@ -199,7 +199,7 @@ Here's a simple way to understand it:
 </details>
 
 
-### What is DNS?
+### 11) What is DNS?
 <details>
 
 The Domain Name System (DNS) is like the phonebook of the internet. It translates human-friendly domain names (like www.example.com) into IP addresses (like 192.0.2.1) that computers use to identify each other on the network. This translation is crucial because, while domain names are easy for people to remember, computers and networking equipment use IP addresses to route data.
