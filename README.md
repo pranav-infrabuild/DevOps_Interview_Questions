@@ -1,4 +1,4 @@
-# 🚀 DevOps Interview Questions
+# 🚀 [DevOps Interview Questions](https://github.com/pranav278/DevOps_Interview_Questions/edit/main/README.md)
 
 ![Repo Size](https://img.shields.io/github/repo-size/pranav278/DevOps_Interview_Questions?style=for-the-badge)
 ![Stars](https://img.shields.io/github/stars/pranav278/DevOps_Interview_Questions?style=for-the-badge)
