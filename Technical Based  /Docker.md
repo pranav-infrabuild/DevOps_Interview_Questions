@@ -535,3 +535,74 @@ Certainly! Here's a refined explanation of the difference between `CMD` and `ENT
 
 
 </details>
+
+
+### Question 32. Explain the Docker architecture ?
+<details>
+  
+<img width="622" height="332" alt="image" src="https://github.com/user-attachments/assets/efe19cd9-8a78-4bf4-8970-3eb82eb54499" />
+
+---
+
+### 🔹 1. **Client (You)**
+
+This is where you interact with Docker. You use commands like:
+
+* `docker build`: To create an image.
+* `docker pull`: To download an image.
+* `docker run`: To start a container.
+
+These commands are sent to the Docker engine.
+
+---
+
+### 🔹 2. **Docker Host**
+
+This is the machine (your laptop, server, etc.) that actually runs Docker. It includes:
+
+#### 🧠 Docker Daemon
+
+* A background service that listens for your commands.
+* It does all the heavy lifting like building images, running containers, and interacting with registries.
+
+#### 📦 Images
+
+* These are like blueprints or templates for creating containers.
+* For example, an image of Ubuntu or Redis.
+
+#### 📬 Containers
+
+* These are running instances of images.
+* Think of a container as a tiny, fast, and lightweight virtual machine created from an image.
+
+---
+
+### 🔹 3. **Registry**
+
+* A storage place for Docker images.
+* The most common registry is **Docker Hub**.
+* You can **pull** images from here (like Ubuntu, Nginx, Redis) to use locally.
+* You can also **push** your own images here to share with others.
+
+---
+
+### ⚙️ How It All Works Together:
+
+1. You run a command like `docker pull ubuntu`.
+2. The Docker client sends this command to the Docker daemon.
+3. The daemon checks the **Registry** and downloads the **Ubuntu image** to your system.
+4. Then you run `docker run ubuntu`, and it creates a **container** from that image.
+5. You now have a lightweight, isolated environment running Ubuntu.
+
+---
+
+### 🧩 Summary:
+
+* **Client**: Where you type Docker commands.
+* **Docker Host**: Runs Docker daemon, images, and containers.
+* **Registry**: Stores Docker images.
+
+Together, they allow you to **build, share, and run applications** in a portable and efficient way using containers.
+
+</details>
+
