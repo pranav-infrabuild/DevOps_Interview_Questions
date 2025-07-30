@@ -228,3 +228,23 @@ The Domain Name System (DNS) is like the phonebook of the internet. It translate
 - **DNS Records**: Entries in the DNS database that map domain names to IP addresses (A records), mail servers (MX records), and other resources.
 </details>
 
+
+
+### Question 12. What is Network ? and what are the Types of Network?
+<details>
+
+### A network is a system that connects two or more devices to exchange data.
+
+---
+
+## 📶 Types of Networks
+
+| Network Type | Full Form                  | Coverage Area                    | Examples                          | Use Case                                   |
+|--------------|----------------------------|----------------------------------|-----------------------------------|--------------------------------------------|
+| **LAN**      | Local Area Network         | Small (room, office, building)   | Home Wi-Fi, Office Ethernet       | File sharing, printers, intranet           |
+| **WAN**      | Wide Area Network          | Large (cities, countries)        | The Internet, MPLS                | Global communication, internet services    |
+| **MAN**      | Metropolitan Area Network  | Medium (city or campus)          | City-wide Wi-Fi, Cable TV network | Universities, city-level internet sharing  |
+| **PAN**      | Personal Area Network      | Very small (around 10 meters)    | Bluetooth, Hotspot                | Wireless headphones, smartwatch sync       |
+---
+
+</details>
