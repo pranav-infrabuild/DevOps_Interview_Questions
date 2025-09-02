@@ -28,3 +28,66 @@
 Select the locked item in the DynamoDB table and delete it.
 
 </details>
+
+
+### Question 4. What will Exactly Happen when you hit `terraform init` ?
+<details>
+
+
+1. Initialize backend
+
+If you’re storing state remotely (e.g., Azure Storage, S3, Terraform Cloud), it sets that up.
+
+If no backend is defined, it just uses a local terraform.tfstate file.
+
+
+
+2. Download providers
+
+Terraform checks the terraform block → required_providers.
+
+It downloads the correct versions (e.g., azurerm, vault, azapi) from the Terraform Registry.
+
+Saves them in .terraform folder locally.
+
+
+
+3. Check versions
+
+Confirms your Terraform CLI version meets the required_version.
+
+Verifies provider plugin versions match what you specified.
+
+
+
+4. Prepare modules (if any)
+
+If your code uses external modules (source = "git... or registry"), Terraform downloads them into .terraform/modules.
+
+
+
+5. Lock dependencies
+
+Creates/updates .terraform.lock.hcl → keeps track of exact provider versions, so builds are reproducible across environments.
+
+
+
+
+
+---
+
+🔎 In short:
+
+terraform init =
+📦 Download providers + modules
+🗂️ Setup backend
+🔒 Lock versions
+
+It’s like “installing dependencies” in programming (similar to npm install or pip install).
+
+
+---
+
+
+
+</details>
