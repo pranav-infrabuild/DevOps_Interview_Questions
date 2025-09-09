@@ -50,3 +50,25 @@
 - ✅ **NACL (Network ACL) restrictions**  
   If Network ACL is denying outbound/inbound HTTP/HTTPS traffic.  
 </Details>
+
+
+## Question 4: How can you restore data from an S3 bucket if it was accidentally deleted?
+
+<Details>
+  
+- ✅ **Check S3 Versioning**  
+  - If **versioning is enabled**, you can simply restore the previous version of the object.  
+  - Deleted objects are marked with a "delete marker," but old versions still exist.  
+
+- ✅ **Check S3 Replication (Cross-Region or Same-Region)**  
+  - If replication was enabled, you may recover data from the **replica bucket**.  
+
+- ✅ **Check Backup Services**  
+  - If AWS **Backup** or a custom backup solution was in place, restore from backup.  
+
+- ✅ **If Versioning/Backup Not Enabled**  
+  - Unfortunately, **you cannot recover deleted data** once it's permanently removed.  
+  - That’s why AWS recommends enabling **S3 Versioning + Lifecycle Policies** for safety.
+    
+
+</Details>
