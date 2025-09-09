@@ -72,3 +72,24 @@
     
 
 </Details>
+
+
+## Question 5: How can you connect your on-premises data center to AWS?
+<Details>
+
+- ✅ **VPN Connection (Site-to-Site VPN)**  
+  - Set up an **IPSec VPN** between your on-premises network and AWS VPC.  
+  - Secure and quick, but depends on internet bandwidth.  
+
+- ✅ **AWS Direct Connect**  
+  - A **dedicated private network connection** from your data center to AWS.  
+  - Offers low latency and high bandwidth.  
+  - Best for large-scale or sensitive data transfers.  
+
+- ✅ **Hybrid Approach**  
+  - Use **VPN for quick setup** and later switch to **Direct Connect** for better performance.  
+
+- ✅ **Data Transfer Services**  
+  - For bulk data, use **AWS Snowball/Snowmobile** to physically move data into AWS.  
+
+</Details>
