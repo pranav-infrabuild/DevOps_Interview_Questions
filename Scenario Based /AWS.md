@@ -93,3 +93,24 @@
   - For bulk data, use **AWS Snowball/Snowmobile** to physically move data into AWS.  
 
 </Details>
+
+
+## Question 6: You have two EC2 instances in two different VPCs (one running the frontend app and another running the backend app). These two apps need to communicate, but they are not able to. How will you fix this?
+<Details>
+
+
+- ✅ **VPC Peering**  
+  - Create a **VPC Peering Connection** between the two VPCs.  
+  - Update **route tables** in both VPCs to allow traffic through the peering connection.  
+  - Ensure **security groups** and **NACLs** allow traffic between the two instances (e.g., port 80/443/5000 etc. depending on the app).  
+
+- ✅ **Transit Gateway** (for multiple VPCs)  
+  - If you have many VPCs that need communication, use an **AWS Transit Gateway** instead of multiple peerings.  
+
+- ✅ **Check DNS Resolution**  
+  - Enable **DNS resolution in VPC peering settings** so apps can resolve hostnames.  
+
+- ✅ **Other Options**  
+  - If direct communication is not required, you could also expose the backend via an **internal load balancer** and connect securely.
+
+</Details>
