@@ -2,7 +2,7 @@
   <img src="https://capsule-render.vercel.app/api?type=waving&color=0:FF6F61,100:FFB347&height=140&section=header&text=AWS%20SCENARIO%20BASED%20QUESTIONS&fontSize=28&fontColor=fff" />
 </p>
 
-## Question1. Suppose your application is hosted on an EC2 instance. Suddenly, there is a huge traffic spike and your application becomes slow. As a DevOps Engineer, what steps will you take?
+## Question 1. Suppose your application is hosted on an EC2 instance. Suddenly, there is a huge traffic spike and your application becomes slow. As a DevOps Engineer, what steps will you take?
 
 <Details>
   
@@ -14,3 +14,16 @@
 </Details>
 
 
+## Question 2. Suppose your EC2 instance crashed unexpectedly. As a DevOps Engineer, what steps will you take to handle this situation?
+
+<Details>
+
+- ✅ **Check AWS CloudWatch logs/metrics** to find the reason (CPU, Memory, Disk, etc.).  
+- ✅ **Verify system logs** from the EC2 console (boot errors, kernel issues).  
+- ✅ If it’s a one-time issue → **Reboot** the instance from the AWS console.  
+- ✅ If the instance does not recover:  
+  - Detach the **root EBS volume**, attach it to another instance, and check logs or recover important data.  
+  - Launch a **new EC2 instance** with the same AMI, attach the old volume, and restore configuration.  
+- ✅ For high availability → Use **Auto Scaling Group with Load Balancer**, so even if one instance crashes, traffic shifts automatically.  
+  
+</Details>
