@@ -1,4 +1,6 @@
-# AWS SCENARIO BASED QUESTIONS 
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:FF6F61,100:FFB347&height=140&section=header&text=AWS%20SCENARIO%20BASED%20QUESTIONS&fontSize=28&fontColor=fff" />
+</p>
 
 ## Question1. Suppose your application is hosted on an EC2 instance. Suddenly, there is a huge traffic spike and your application becomes slow. As a DevOps Engineer, what steps will you take?
 
