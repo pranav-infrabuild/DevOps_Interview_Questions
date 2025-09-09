@@ -27,3 +27,26 @@
 - ✅ For high availability → Use **Auto Scaling Group with Load Balancer**, so even if one instance crashes, traffic shifts automatically.  
   
 </Details>
+
+## Question 3. Suppose you are using an EC2 instance and trying to pull Docker images or access data over the internet, but it is not working. What could be the possible reasons?
+
+<Details>
+
+- ✅ **Internet Gateway not attached**  
+  If your EC2 is in a **public subnet**, the VPC must have an **Internet Gateway (IGW)** attached. Without it, no outbound internet access.  
+
+- ✅ **No Elastic IP / Public IP**  
+  If the EC2 does not have a **public IP or Elastic IP**, it cannot access the internet directly.  
+
+- ✅ **Incorrect Route Table**  
+  The route table of the subnet must have a **0.0.0.0/0 route pointing to IGW** (for public subnets) or **NAT Gateway** (for private subnets).  
+
+- ✅ **Private Subnet without NAT Gateway**  
+  If the instance is in a **private subnet**, it needs a **NAT Gateway or NAT instance** to reach the internet.  
+
+- ✅ **Security Group Restrictions**  
+  The **outbound rules** in the EC2 Security Group may be too restrictive (e.g., blocking HTTP/HTTPS traffic).  
+
+- ✅ **NACL (Network ACL) restrictions**  
+  If Network ACL is denying outbound/inbound HTTP/HTTPS traffic.  
+</Details>
