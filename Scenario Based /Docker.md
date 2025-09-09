@@ -1,4 +1,8 @@
-# Docker Interview Question:
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:2699E6,100:FFB347&height=140&section=header&text=DOCKER%20SCNERIO%20BASED%20INTERVIEW%20QUESTIONS&fontSize=28&fontColor=fff" />
+</p>
+
+
 
 ### 1) Identify the errors in the Dockerfile. Explain why each of the identified errors is a problem. Rewrite the Dockerfile with the correct syntax.
 
