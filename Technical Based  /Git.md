@@ -1,4 +1,7 @@
-# Git Interview Questions 
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0000FF,100:FFB347&height=140&section=header&text=%F0%9F%92%BB%20GIT%20TECHNICAL%20QUESTIONS&fontSize=28&fontColor=fff" />
+</p>
+
 
 ### Question 1: What is the difference between git merge and git rebase ?
 <details>
