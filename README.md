@@ -1,4 +1,7 @@
-# 🚀 [DevOps Interview Questions](https://github.com/pranav278/DevOps_Interview_Questions/edit/main/README.md)
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0000FF,100:FFB347&height=140&section=header&text=%F0%9F%9A%80%20DevOps%20Interview%20Questions&fontSize=28&fontColor=fff" />
+</p>
+
 
 ![Repo Size](https://img.shields.io/github/repo-size/pranav278/DevOps_Interview_Questions?style=for-the-badge)
 ![Stars](https://img.shields.io/github/stars/pranav278/DevOps_Interview_Questions?style=for-the-badge)
