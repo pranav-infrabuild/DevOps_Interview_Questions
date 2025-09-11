@@ -1,4 +1,7 @@
-## Linux Technical Questions 
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:000000,100:FFD700&height=140&section=header&text=%F0%9F%90%A7%20LINUX%20TECHNICAL%20QUESTIONS&fontSize=28&fontColor=ffffff" />
+</p>
+
 
 ### Question 1: What is kernal in Linux ?
 <details>
