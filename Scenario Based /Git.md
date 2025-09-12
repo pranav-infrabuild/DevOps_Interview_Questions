@@ -36,3 +36,17 @@ To push only 5 specific commits from the Develop branch to the Release branch in
 
 
 </details>
+
+
+### Question 3. How do you create a user with a non-interactive shell in Linux, and why would you use it?
+
+<details>
+
+We can create a user with **no interactive login access** by assigning a **non-interactive shell** such as `/sbin/nologin` or `/bin/false`
+
+### 🔹 Command:
+```bash
+sudo useradd -m -s /sbin/nologin myuser
+```
+
+</details>
