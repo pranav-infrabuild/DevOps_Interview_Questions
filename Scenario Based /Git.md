@@ -18,3 +18,21 @@ To push only 5 specific commits from the Develop branch to the Release branch in
 
 
 </details>
+
+### Question 2. As a DevOps Engineer, how do you log in to a server? Can you explain the different ways depending on the type of server and environment?
+
+<details>
+
+### 1. Linux Servers (SSH)
+- Use **SSH (Secure Shell)** to connect.
+- Command:
+  ```bash
+  ssh username@server-ip
+
+- With a private key:
+- Command:
+  ```bash
+  ssh -i /path/to/private-key.pem username@server-i
+
+
+</details>
