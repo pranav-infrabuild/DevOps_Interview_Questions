@@ -512,6 +512,76 @@ Terraform will show something like this:
 ---
 </details>
 
+###  Question 10. What is a Dependency Graph?
+<details>
+  
+* Terraform automatically figures out **the order in which resources should be created, updated, or destroyed**.
+* This order is called the **dependency graph**.
+* It ensures that resources are managed **safely** without breaking dependencies.
 
+---
 
+## 🔹 Simple Explanation
 
+Think of it like **a family tree of resources**:
+
+* If Resource A **depends on** Resource B, Terraform knows it must **create B first**, then **A**.
+* Similarly, when destroying:
+
+  * Terraform will destroy **A first**, then **B** (reverse order) to avoid errors.
+
+---
+
+### Example
+
+```hcl
+resource "azurerm_resource_group" "example" {
+  name     = "DevRG"
+  location = "East US"
+}
+
+resource "azurerm_virtual_network" "vnet" {
+  name                = "DevVNet"
+  address_space       = ["10.0.0.0/16"]
+  location            = azurerm_resource_group.example.location
+  resource_group_name = azurerm_resource_group.example.name
+}
+```
+
+**Explanation:**
+
+* `vnet` **depends on** `example` resource group.
+* Terraform **creates `example` first**, then `vnet`.
+* When destroying: Terraform **destroys `vnet` first**, then the resource group.
+
+---
+
+### 🔹 Key Points
+
+1. Terraform automatically builds the **dependency graph**.
+2. Ensures **resources are created/destroyed in the correct order**.
+3. Helps prevent **errors due to missing dependencies**.
+
+---
+
+### 🔁 Flow (Simplified)
+
+```mermaid
+flowchart TD
+A[Resource Group] --> B[Virtual Network]
+B --> C[Subnets]
+C --> D[VMs]
+```
+
+* Arrow = **"depends on"**
+* Terraform creates top-down, destroys bottom-up.
+
+---
+
+⚡ **Summary:**
+
+* Dependency graph = Terraform’s **internal map of resource relationships**.
+* Ensures **safe creation and deletion order** automatically.
+
+---
+</details>
