@@ -585,3 +585,62 @@ C --> D[VMs]
 
 ---
 </details>
+
+### Quesion 10. You run `terraform destroy`. It **fails halfway** because some resources cannot be deleted (e.g., a VM is still attached to a network interface). Question: How do you clean up the remaining resources **without manual deletion**?
+
+<details>
+
+
+## ✅ Simple Explanation
+
+1. **Terraform tracks destroyed resources**
+
+   * Resources that were successfully destroyed are **removed from the state**.
+   * Terraform **knows which resources still exist**.
+
+2. **Fix dependency issues**
+
+   * Identify blocked resources (from Terraform error messages).
+   * Resolve dependencies (e.g., detach network interface from VM).
+
+3. **Re-run `terraform destroy`**
+
+   ```bash
+   terraform destroy
+   ```
+
+   * Terraform automatically continues destroying the **remaining resources**.
+   * No need to manually delete already destroyed resources.
+
+4. **Optional: Use `-target` for specific resources**
+
+   ```bash
+   terraform destroy -target=azurerm_network_interface.nic1
+   ```
+
+   * Destroy blocked resources first, then run a full destroy.
+
+---
+
+### 🔁 Simple Flowchart
+
+```mermaid
+flowchart TD
+A[Run terraform destroy] --> B{All resources destroyed?}
+B -->|Yes| C[Done ✅]
+B -->|No| D[Destroy fails due to dependency]
+D --> E[Fix dependency issues]
+E --> F[Re-run terraform destroy]
+F --> B
+```
+
+---
+
+### ⚡ Key Points
+
+* Terraform **tracks what is destroyed**, so re-running destroy only targets remaining resources.
+* Fix dependencies → re-run destroy → cleanup is automatic.
+* Using `-target` for **automate the cleanup**.
+
+---
+</details>
