@@ -93,3 +93,72 @@ It’s like “installing dependencies” in programming (similar to npm install
 
 
 </details>
+
+### Question 5. If you have a `terraform apply` running and someone else pushes state changes, what happens to your local operation and how do you recover safely?
+
+
+<details>
+# 🌍 Terraform Apply Without Remote Backend
+
+
+
+
+---
+
+
+- State file (`terraform.tfstate`) is stored **only on local machine**.  
+- Each user has their **own copy of state**.  
+- Terraform has **no locking and no sync**, so:  
+  - Resource drift can occur.  
+  - Duplicate resources may be created.  
+  - Existing resources may be deleted/overwritten.  
+
+---
+
+## 📌 Example:
+- **User A** runs `terraform apply` → creates VM `vm1`.  
+- State file updated only on **User A’s machine**.  
+- **User B** runs `terraform apply` → since their state doesn’t know about `vm1`, Terraform may:  
+  - Try to **recreate `vm1`**.  
+  - Or delete/update resources incorrectly.  
+  - Result → **conflicts and downtime**.
+
+---
+
+## ✅ Recovery:
+1. Stop the apply immediately.  
+2. Share the latest `terraform.tfstate` with the team.  
+3. Run:
+   ```bash
+   terraform refresh
+   ```
+```mermaid
+flowchart TD
+
+A[Start terraform apply 
+by User A] --> B[State updated only 
+on User A's local machine]
+
+B --> C[User B runs terraform apply 
+with outdated state]
+
+C --> D{State differences?}
+
+D -->|Yes| E[Terraform may recreate, 
+modify, or delete resources wrongly]
+D -->|No| F[No issues but 
+state not synced]
+
+E --> G[Infrastructure drift 
+or duplication occurs]
+F --> G
+
+G --> H[Manual sync needed: 
+share updated state file]
+
+H --> I[Re-run terraform plan 
+and apply safely]
+
+I --> J[End]
+```
+</details>
