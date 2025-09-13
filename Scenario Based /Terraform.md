@@ -281,3 +281,81 @@ Soft delete protects your data from accidental deletion or overwrite.
 
   
 </details>
+
+### Question 7. What is the difference between `count` and `for_each` in Terraform? Can you give an example of when you would use one over the other?
+
+<details>
+
+---
+
+## 🔹 `count` vs `for_each` in Terraform
+
+### 1. **count**
+
+* Creates multiple **instances of a resource** based on a number.
+* Indexed using **numeric indices** (`0,1,2,…`).
+* Best when you need **a fixed number of identical resources**.
+
+👉 Example:
+
+```hcl
+resource "azurerm_resource_group" "example" {
+  count    = 2
+  name     = "rg-${count.index}"
+  location = "East US"
+}
+```
+
+✅ Creates `rg-0` and `rg-1`.
+⚠️ But if you remove one, the indices can **shift**, causing Terraform to recreate resources unnecessarily.
+
+---
+
+### 2. **for\_each**
+
+* Creates multiple resource instances based on **map** 
+* Indexed using **keys**, not numbers.
+* Best when you need resources with **unique identifiers**.
+
+👉 Example:
+
+```hcl
+resource "azurerm_resource_group" "example" {
+  for_each = {
+    dev  = "DevRG"
+    prod = "ProdRG"
+  }
+
+  name     = each.value
+  location = "East US"
+}
+```
+### 🔎 How it works:
+
+* `for_each` is looping over the map `{ dev = "DevRG", prod = "ProdRG" }`.
+* `each.key` → gives the key (`dev`, `prod`).
+* `each.value` → gives the value (`DevRG`, `ProdRG`).
+
+### ✅ Result:
+
+Terraform will create **two resource groups**:
+
+1. `azurerm_resource_group.example["dev"]` → with name **DevRG**
+2. `azurerm_resource_group.example["prod"]` → with name **ProdRG**
+
+
+✅ Creates `example["dev"]` and `example["prod"]`.
+⚠️ If you remove one key (`prod`), **only that resource is destroyed** (no index shifting issue).
+
+---
+
+
+## ⚡Difference
+
+* Use **`count`** → when you just need “N copies” of something.
+* Use **`for_each`** → when you want to manage resources with meaningful **keys** (e.g., `dev`, `prod`, `qa`).
+
+---
+</details>
+
+
