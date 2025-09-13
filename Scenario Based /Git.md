@@ -50,3 +50,17 @@ sudo useradd -m -s /sbin/nologin myuser
 ```
 
 </details>
+
+### Question 4. You are working on a project where a developer named **kareem** requires access to a server only until **March 28, 2024**.  How would you create a **temporary user account** in Linux that automatically expires on that date?  
+
+<details>
+In Linux, you can use the `useradd` command with the `-e` option to set an expiry date for a user account.
+
+```bash
+sudo useradd -e 2024-03-28 kareem
+```
+You can verify expiry details using:
+```bash
+sudo chage -l kareem
+```
+</details>
