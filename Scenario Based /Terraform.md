@@ -227,3 +227,57 @@ run terraform apply]
 G --> H
 ```
 </details>
+
+### Question 6. You are storing your Terraform state in Azure Blob Storage. One of your teammates accidentally overwrites the `terraform.tfstate` file with an invalid state or Accidentaly delete the ``terraform.tfstate` file 👉 How do you recover?
+
+<details>
+
+---
+
+Azure Blob Storage supports **versioning**.
+
+* Every time the `terraform.tfstate` file is updated, **a new version is created automatically**.
+* If someone **overwrites** or **deletes** the file, you can **roll back to a previous version**.
+
+#### Recovery Steps:
+
+1. Go to your **Azure Blob Storage account** in the portal.
+2. Open the container where `terraform.tfstate` is stored.
+3. Enable **Show Deleted/Versioned Blobs**.
+4. Select the **previous valid version** of the `terraform.tfstate`.
+5. **Promote or restore** that version to make it the current state file.
+
+👉 This ensures Terraform continues working without re-creating all resources.
+
+---
+
+
+---
+
+### 🔹 What is Soft Delete in Azure Blob Storage?
+
+Soft delete protects your data from accidental deletion or overwrite.
+
+* When enabled, if someone **deletes** or **overwrites** the `terraform.tfstate` file, Azure **keeps a recoverable copy** for a retention period (you decide the number of days).
+* You can then restore the file anytime within that retention period.
+
+---
+
+## 🔹 How to Enable Soft Delete for Azure Blob Storage
+
+### Using **Azure Portal**
+
+1. Go to your **Storage Account** in the Azure portal.
+2. In the left-hand menu, under **Data Management**, click **Data protection**.
+3. Find **Blob soft delete**.
+4. Toggle it to **Enabled**.
+5. Set the **retention period** (e.g., 7, 14, or 30 days).
+6. Click **Save**.
+
+---
+
+
+
+
+  
+</details>
