@@ -642,3 +642,113 @@ F --> B
 
 ---
 </details>
+
+
+### Question 12. If you accidentally commit sensitive data to terraform state, what's the proper way to remove it without breaking your infrastructure?
+
+<details>
+
+* Sensitive data (e.g., DB password, API key) was accidentally stored in Terraform state and committed to version control.
+* Goal: **Remove it safely without breaking infrastructure**.
+
+---
+
+## ✅ Proper Way to Handle It
+
+### 1. **Never edit `.tfstate` manually**
+
+* Directly editing the state file can **break Terraform**.
+* Always use Terraform commands or scripts.
+
+---
+
+### 2. **Use `terraform state rm` for sensitive resources**
+
+* If the sensitive resource can be **managed separately**, remove it from Terraform state:
+
+```bash
+terraform state rm <resource_address>
+```
+
+* Example:
+
+```bash
+terraform state rm azurerm_key_vault_secret.db_password
+```
+
+* This **removes the resource from state**, but the actual resource still exists in the cloud.
+
+---
+
+### 3. **Move sensitive values to a secure place**
+
+* Use **Terraform variables marked as sensitive**:
+
+```hcl
+variable "db_password" {
+  type      = string
+  sensitive = true
+}
+```
+
+* Or use **secret managers** like:
+
+  * Azure Key Vault
+  * HashiCorp Vault
+  * AWS Secrets Manager
+
+---
+
+### 4. **Re-import resources if needed**
+
+* If you removed a resource from state, you can **re-import it without including sensitive values**:
+
+```bash
+terraform import <resource_address> <resource_id>
+```
+
+---
+
+### 5. **Purge sensitive data from Git history**
+
+* If the state file with secrets was committed, **remove it from version control**:
+
+```bash
+git rm --cached terraform.tfstate
+git commit -m "Remove sensitive state from repo"
+```
+
+
+---
+
+### 🔹 Key Notes
+
+* **Do not store secrets in `.tf` or `.tfstate` files in VCS**.
+* Use **remote state with encryption** (e.g., Azure Blob Storage with encryption) to safely store state.
+* Mark variables as **sensitive** in Terraform → they won’t appear in CLI output.
+
+---
+
+### 🔁 Flow (Simplified)
+
+```mermaid
+flowchart TD
+A[Accidental sensitive data in state] --> B[Do not edit tfstate manually]
+B --> C[Remove sensitive resource using terraform state rm]
+C --> D[Move secrets to secure variable / secret manager]
+D --> E[Re-import resource if needed without secrets]
+E --> F[Purge sensitive data from version control]
+```
+
+---
+
+⚡ **Summary:**
+
+1. Remove resource from Terraform state (`state rm`).
+2. Move secrets to secure storage or sensitive variables.
+3. Re-import resource if necessary.
+4. Clean Git history to remove committed secrets.
+
+---
+</details>
+
