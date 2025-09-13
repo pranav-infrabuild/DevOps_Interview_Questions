@@ -98,7 +98,8 @@ It’s like “installing dependencies” in programming (similar to npm install
 
 
 <details>
-# 🌍 Terraform Apply Without Remote Backend
+
+### 🌍 Terraform Apply Without Remote Backend
 
 
 
@@ -160,5 +161,69 @@ H --> I[Re-run terraform plan
 and apply safely]
 
 I --> J[End]
+```
+</details>
+
+<details>
+
+### 🌍 Terraform State Locking with Azure Blob Storage
+
+
+If I enable state locking with **Azure Blob Storage**, what happens?
+
+---
+
+## 🔎 Explanation:
+- **State locking** prevents multiple people from modifying the same Terraform state at the same time.  
+- Azure Blob itself does **not natively lock state**, but Terraform uses **Azure Blob leases** to implement locking.  
+
+### How it works:
+1. When you run `terraform apply`, Terraform requests a **lease** on the state blob.  
+2. If lease is granted → You hold the lock and your operation runs safely.  
+3. If someone else tries to run Terraform at the same time → They get an error:  
+
+4. Once your operation finishes → Lease is released → Others can continue.  
+
+---
+
+## 📌 Example:
+- **User A** runs `terraform apply` → acquires lease on blob.  
+- **User B** runs `terraform apply` at the same time → gets lock error.  
+- **User B** must wait until **User A’s apply finishes**.  
+
+---
+
+## ✅ Recovery if Locked:
+- If another person is applying → **wait until their operation completes**.  
+- If Terraform crashed and didn’t release lock → use:  
+```bash
+terraform force-unlock <LOCK_ID>
+
+```
+
+```mermaid
+flowchart TD
+
+A[User A runs terraform apply] --> B[Terraform requests lease 
+on state blob]
+
+B --> C{Is lease available?}
+
+C -->|Yes| D[Lease acquired 
+→ Apply runs safely]
+
+C -->|No| E[Lock error: 
+state blob already locked]
+
+D --> F[Apply completes 
+→ Lease released]
+
+E --> G[Wait until lease is free 
+or force-unlock if safe]
+
+F --> H[Other users can now 
+run terraform apply]
+
+G --> H
 ```
 </details>
