@@ -359,3 +359,72 @@ Terraform will create **two resource groups**:
 </details>
 
 
+
+### Question 8. When using `for_each` with a map, if you remove a key from the map, will Terraform destroy the associated resource or just ignore it?
+<details>
+  
+---
+
+## ✅ Explanation with Example
+
+Let’s take the same `for_each` scenario:
+
+### Initial Code
+
+```hcl
+resource "azurerm_resource_group" "example" {
+  for_each = {
+    dev  = "DevRG"
+    prod = "ProdRG"
+  }
+
+  name     = each.value
+  location = "East US"
+}
+```
+
+👉 Terraform creates:
+
+* `example["dev"]` → DevRG
+* `example["prod"]` → ProdRG
+
+---
+
+### Modified Code (remove `prod`)
+
+```hcl
+resource "azurerm_resource_group" "example" {
+  for_each = {
+    dev = "DevRG"
+  }
+
+  name     = each.value
+  location = "East US"
+}
+```
+
+👉 On next `terraform plan` / `apply`:
+
+* `example["dev"]` → stays (unchanged ✅)
+* `example["prod"]` → destroyed ❌ because the `prod` key is no longer in the map
+
+---
+
+## ⚡ Key Point
+
+* `for_each` ties each resource to a **map key**.
+* If the key disappears, Terraform considers the resource **orphaned** and **destroys it**.
+* Terraform never ignores missing keys, otherwise it would create **state drift** (infrastructure not matching config).
+
+---
+
+## 🔹 Compared to `count`
+
+* With `count`, removing an element in the middle can cause **index shifting**, leading to accidental re-creations.
+* With `for_each`, removing a key only deletes **that one resource** → safer and more predictable.
+
+---
+
+</details>
+
+
