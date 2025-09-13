@@ -586,12 +586,10 @@ C --> D[VMs]
 ---
 </details>
 
-### Quesion 10. You run `terraform destroy`. It **fails halfway** because some resources cannot be deleted (e.g., a VM is still attached to a network interface). Question: How do you clean up the remaining resources **without manual deletion**?
+### Quesion 11. You run `terraform destroy`. It **fails halfway** because some resources cannot be deleted (e.g., a VM is still attached to a network interface). Question: How do you clean up the remaining resources **without manual deletion**?
 
 <details>
 
-
-## ✅ Simple Explanation
 
 1. **Terraform tracks destroyed resources**
 
