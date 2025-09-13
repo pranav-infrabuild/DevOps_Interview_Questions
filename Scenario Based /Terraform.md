@@ -427,4 +427,91 @@ resource "azurerm_resource_group" "example" {
 
 </details>
 
+### Question 9. You are using Terraform to manage Azure Resource Groups. Later, someone creates a resource manually in the Azure Portal.
+
+<details>
+
+* Terraform does **not know about this manual resource yet**.
+* You want Terraform to manage it **without accidentally destroying it**.
+
+---
+
+## Step 1: Terraform Configuration
+
+```hcl
+resource "azurerm_resource_group" "example" {
+  name     = "DevRG"
+  location = "East US"
+  tags = {
+    Owner = "terraform-player"
+  }
+}
+```
+
+* This is your Terraform config.
+* `terraform.tfstate` currently **does not include** `DevRG` (because it was created manually).
+
+---
+
+## Step 2: Manual Resource Creation
+
+* Someone manually creates `DevRG` in Azure Portal.
+* The resource has tag:
+
+```text
+Owner = portal-player
+```
+
+---
+
+## Step 3: Import the Resource into Terraform State
+
+```bash
+terraform import azurerm_resource_group.example /subscriptions/<sub-id>/resourceGroups/DevRG
+```
+
+* Terraform now **knows about the existing resource**.
+* **But the configuration tags (`Owner = terraform-player`) are different from the actual resource (`Owner = portal-player`)**.
+
+---
+
+## Step 4: Run `terraform plan`
+
+```bash
+terraform plan
+```
+
+Terraform will show something like this:
+
+```text
+  # azurerm_resource_group.example will be updated in-place
+  ~ tags = {
+      "Owner" = "portal-player" -> " terraform-player"
+    }
+```
+
+---
+
+### 🔹 What this means
+
+* Terraform **does not apply changes yet**.
+* It **shows exactly what will change** if you run `terraform apply`.
+* You can then **review and decide**:
+
+  1. Apply the plan → updates the tag to ` terraform-player`
+  2. Or update your Terraform config to match existing tags → keeps `portal-player`
+
+---
+
+### ✅ Key Takeaways
+
+* `terraform plan` is a **preview** → shows differences between configuration and actual resource.
+* After **importing manual resources**, plan ensures Terraform **doesn’t accidentally destroy or overwrite anything**.
+* This is how Terraform **handles drift** safely.
+
+---
+</details>
+
+
+
 
