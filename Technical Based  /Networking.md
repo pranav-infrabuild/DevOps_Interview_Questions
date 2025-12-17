@@ -248,3 +248,55 @@ The Domain Name System (DNS) is like the phonebook of the internet. It translate
 ---
 
 </details>
+
+### Question 13. What is the difference between a public IP and a private IP?
+<details> 
+# Difference between Public IP and Private IP
+
+## Public IP
+- A **Public IP** is an address that is **accessible over the internet**.
+- It is **globally unique**.
+- Assigned by an **ISP (Internet Service Provider)**.
+- Used when a device needs to **communicate with the outside world**.
+
+**Example:**  
+A web server hosting a website must have a **public IP** so users across the world can access it.
+
+**Common use cases:**
+- Websites  
+- Public APIs  
+- Internet-facing servers  
+
+---
+
+## Private IP
+- A **Private IP** is used **inside a local network**.
+- It is **not accessible from the internet directly**.
+- Assigned by a **router or DHCP server**.
+- Same private IP ranges can be reused in different networks.
+
+**Example:**  
+Your laptop and mobile connected to home Wi-Fi use **private IPs**.
+
+**Common private IP ranges:**
+- `10.0.0.0 – 10.255.255.255`
+- `172.16.0.0 – 172.31.255.255`
+- `192.168.0.0 – 192.168.255.255`
+
+---
+
+## Key Difference (Interview One-Liner)
+> **Public IPs are used for internet communication, while private IPs are used for internal network communication.**
+
+---
+
+## How Public and Private IPs Work Together (NAT)
+- Devices with **private IPs** access the internet using **NAT (Network Address Translation)**.
+- The router converts the **private IP → public IP**.
+
+**Example flow:**  
+Phone (private IP) → Wi-Fi Router → Router’s Public IP → Internet 🌍
+
+---
+
+</details>
