@@ -661,3 +661,76 @@ A recipe:
 > A cookbook is a collection of related configuration files and recipes, while a recipe is a specific set of instructions inside a cookbook that defines how to configure a system.
 
 </details>
+
+### Question 11. What is a Data Bag in Chef?
+
+<details>
+
+  
+
+A **Data Bag** in Chef is a **global data store** used to keep **JSON-formatted data** that can be accessed by any cookbook or recipe during a Chef run.
+
+---
+
+## 🔹 Purpose of Data Bags
+
+Data Bags are used to store information that needs to be **shared across multiple nodes**.
+
+Common use cases include:
+- User accounts
+- API keys
+- Passwords
+- Application configuration settings
+- Environment-specific data
+
+---
+
+## 🔹 How Data Bags Work
+
+- Stored on the **Chef Server**
+- Data is written in **JSON format**
+- Recipes can read Data Bag items during execution
+- Same Data Bag can be accessed by many nodes
+
+---
+
+## 🔹 Example Use Case
+
+- A Data Bag named `users`
+- Contains user account information
+- Multiple servers read from the same Data Bag to create users
+
+---
+
+## 🔹 Encrypted Data Bags 🔐
+
+- Chef supports **encrypted Data Bags**
+- Used to protect **sensitive information**
+- Only authorized nodes or users with the secret key can read the data
+
+---
+
+## 🔹 Benefits of Data Bags
+
+- Centralized data storage
+- Reusable across nodes
+- Improves configuration consistency
+- Secure storage for secrets (when encrypted)
+
+---
+
+## 🔹 Key Interview Points ⭐
+
+- Data Bags store **JSON data**
+- Accessible during Chef runs
+- Shared across multiple nodes
+- Can be **encrypted for security**
+
+---
+
+## 🔹 One-Line Interview Answer ✅
+
+> A Data Bag in Chef is a global JSON-based data store used to share configuration data across multiple nodes, and it can be encrypted to protect sensitive information.
+
+</details>
+> 
