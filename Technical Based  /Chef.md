@@ -405,3 +405,93 @@ Using Chef environments, you can specify:
 > A Chef environment defines deployment stages like development, testing, and production, allowing different configurations, attributes, and cookbook version constraints for each stage.
 
 </details>
+
+
+### Question 7. What is Idempotency?
+
+<details>
+  
+
+**Idempotency** in Chef means that **applying the same resource multiple times always produces the same result**.
+
+In simple words:
+
+> Running a Chef recipe again and again will **not change the system** if it is already in the desired state.
+
+---
+
+## 🔹 How Idempotency Works in Chef
+
+Chef compares:
+- **Current state of the system**
+- **Desired state defined in the resource**
+
+If the desired state is already achieved, **Chef does nothing**.
+
+---
+
+## 🔹 Example
+
+```ruby
+package 'nginx' do
+  action :install
+end
+```
+
+What happens:
+
+* First run → Nginx is installed
+
+* Second run → Chef sees Nginx is already installed
+
+* Result → No reinstallation
+
+
+
+---
+
+🔹 Why Idempotency is Important
+
+* Ensures consistent system state
+
+* Makes deployments safe and repeatable
+
+* Prevents unnecessary changes
+
+* Reduces configuration drift
+
+* Makes automation predictable
+
+
+
+---
+
+🔹 Real-Life Analogy
+
+* Think of a light switch:
+
+If the light is already ON, pressing ON again does nothing
+
+The result is always the same → light stays ON
+
+
+
+---
+
+🔹 Key Interview Points ⭐
+
+* Chef resources are idempotent by design
+
+* Re-running recipes does not cause side effects
+
+* Chef enforces desired state configuration
+
+
+
+---
+
+🔹 One-Line Interview Answer ✅
+
+> Idempotency in Chef means that running a resource multiple times results in the same system state, ensuring consistency and predictability.
+
+</details>
