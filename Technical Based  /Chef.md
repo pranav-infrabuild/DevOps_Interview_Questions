@@ -74,3 +74,60 @@ Chef continuously checks and brings the system back to that **desired state** if
 ---
 
 </details>
+
+### Question 2. Explain the Chef Architecture ?
+<details>
+  
+
+
+## Chef Architecture
+
+Chef architecture has **three main components** that work together to automate server management.
+
+---
+
+## 1️⃣ Chef Workstation
+- Used by the **DevOps engineer**
+- Where **cookbooks and recipes are written and tested**
+- Cookbooks are **uploaded to the Chef Server** from here
+
+👉 *Think of it as the place where instructions are prepared.*
+
+---
+
+## 2️⃣ Chef Server
+- Acts as the **central brain**
+- Stores:
+  - Cookbooks
+  - Policies
+  - Node information
+- Does **not** configure servers directly
+- Nodes **pull configurations** from the Chef Server
+
+👉 *Think of it as a library that holds all server instructions.*
+
+---
+
+## 3️⃣ Chef Client / Node
+- Runs on **each server (node)**
+- Chef Client:
+  - Connects to the Chef Server
+  - Downloads required cookbooks
+  - Applies configurations on the server
+- Ensures the server stays in the **desired state**
+
+👉 *Think of it as a worker that follows instructions and fixes drift.*
+
+---
+
+## 🔁 Configuration Flow
+
+Chef Workstation → Chef Server → Chef Client (Node)
+
+---
+
+## 🧠 Interview One-Liner
+> **Chef uses a pull-based model where nodes pull configurations from the Chef Server to maintain the desired state automatically.**
+
+
+</details>
