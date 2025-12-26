@@ -131,3 +131,59 @@ Chef Workstation → Chef Server → Chef Client (Node)
 
 
 </details>
+
+### Question 3. What are Cookbooks and Recipes in Chef ?
+<details>
+  
+## Cookbooks and Recipes in Chef
+
+---
+
+## 🍱 Cookbook
+A **Cookbook** is a **collection of configuration instructions** used to manage and configure servers.
+
+It can contain:
+- Recipes
+- Templates
+- Files
+- Attributes
+- Metadata
+
+👉 *Think of a cookbook as a folder that holds everything needed to configure an application or service.*
+
+**Example:**
+- `nginx` cookbook
+  - Install nginx
+  - Configure nginx
+  - Start nginx service
+
+---
+
+## 📄 Recipe
+A **Recipe** is a **step-by-step set of instructions** written in Chef’s **Ruby-based DSL**.
+
+Recipes define:
+- Which package to install
+- How to configure services
+- Which services should be started or stopped
+
+👉 *Think of a recipe as the actual steps inside the cookbook.*
+
+**Example idea:**
+> Install nginx → copy config file → start nginx service
+
+---
+
+## 🔗 Relationship Between Cookbook and Recipe
+- **Cookbook = Collection**
+- **Recipe = Instructions inside the collection**
+
+A single cookbook can contain **multiple recipes**.
+
+---
+
+## 🧠 Interview One-Liner
+> **A cookbook is a package that holds all configuration logic, and a recipe is the code that defines how a server should be configured.**
+
+
+</details>
