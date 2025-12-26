@@ -576,3 +576,88 @@ The result is always the same → light stays ON
 > Chef cookbooks are tested using ChefSpec for unit testing, Test Kitchen for integration testing across environments, and Foodcritic for linting and best-practice validation.
 
 </details>
+
+### Question 10. What is Difference Between a Cookbook and a Recipe in Chef ?
+
+<details>
+
+  
+# Difference Between a Cookbook and a Recipe in Chef
+
+In **Chef**, both **cookbooks** and **recipes** are core components, but they serve different purposes.
+
+---
+
+## 🔹 What is a Cookbook?
+
+A **cookbook** is a **complete package** that contains everything needed to configure a system for a specific purpose.
+
+A cookbook may include:
+- Multiple **recipes**
+- **Resources**
+- **Attributes**
+- **Files**
+- **Templates**
+- Libraries and metadata
+
+👉 It represents a **full configuration or functionality**, such as setting up a web server or database.
+
+---
+
+## 🔹 What is a Recipe?
+
+A **recipe** is a **single file** inside a cookbook that defines **step-by-step instructions** to configure a system.
+
+A recipe:
+- Uses **Chef resources**
+- Describes **what actions to perform**
+- Is written in **Ruby DSL**
+- Performs tasks like installing software or configuring services
+
+---
+
+## 🔹 Relationship Between Cookbook and Recipe
+
+- A **cookbook** can contain **multiple recipes**
+- A **recipe** cannot exist outside a cookbook
+- Cookbooks organize and group related recipes
+
+---
+
+## 🔹 Simple Example
+
+**Cookbook:** `nginx`  
+- `default.rb`
+- `install.rb`
+- `config.rb`
+- `service.rb`
+
+👉 All recipes together manage the full nginx setup.
+
+---
+
+## 🔹 Key Differences (Quick View)
+
+| Cookbook | Recipe |
+|--------|--------|
+| Collection of configurations | Single configuration file |
+| Contains multiple recipes | Part of a cookbook |
+| High-level functionality | Step-by-step instructions |
+| Reusable unit | Execution unit |
+
+---
+
+## 🔹 Key Interview Points ⭐
+
+- Cookbooks are **containers**
+- Recipes define **actions**
+- Multiple recipes belong to one cookbook
+- Cookbooks promote reuse and organization
+
+---
+
+## 🔹 One-Line Interview Answer ✅
+
+> A cookbook is a collection of related configuration files and recipes, while a recipe is a specific set of instructions inside a cookbook that defines how to configure a system.
+
+</details>
