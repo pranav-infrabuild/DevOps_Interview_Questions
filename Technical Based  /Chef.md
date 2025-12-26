@@ -187,3 +187,85 @@ A single cookbook can contain **multiple recipes**.
 
 
 </details>
+
+
+### Question 4. What is a Resource in Chef?
+<details>
+  ---
+
+## 🔹 Simple Definition (Interview-friendly)
+
+> A **resource** in Chef is an instruction that defines **the desired state of a system component**, such as a package, file, service, or user.
+
+---
+
+## 🔹 Examples of Chef Resources
+
+Some commonly used Chef resources are:
+
+- `package` → install or remove software  
+- `service` → start, stop, restart a service  
+- `file` → create or delete a file  
+- `directory` → create a folder  
+- `user` → manage users  
+- `group` → manage groups  
+
+---
+
+## 🔹 Example Resource
+
+```ruby
+package 'nginx' do
+  action :install
+end
+```
+
+Explanation:
+
+Chef ensures nginx is installed
+
+If it is already installed → no action is taken
+
+If it is missing → Chef installs it
+
+
+
+---
+
+🔹 Another Example
+```ruby
+service 'nginx' do
+  action [:enable, :start]
+end
+```
+This ensures:
+
+Nginx starts automatically on boot
+
+Nginx service is running
+
+
+
+---
+
+🔹 Key Points to Remember
+
+Resources are idempotent
+(Running them multiple times gives the same result)
+
+Resources are written inside recipes
+
+Chef compares current state vs desired state
+
+Chef only makes changes when needed
+
+
+
+---
+
+🔹 One-Line Interview Answer ⭐
+
+> In Chef, a resource defines the desired state of a system component like a package, file, or service, and Chef ensures the system matches that state.
+
+
+</details>
