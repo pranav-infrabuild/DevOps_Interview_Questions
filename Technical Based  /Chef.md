@@ -733,4 +733,79 @@ Common use cases include:
 > A Data Bag in Chef is a global JSON-based data store used to share configuration data across multiple nodes, and it can be encrypted to protect sensitive information.
 
 </details>
-> 
+
+
+### Question 12. How Do You Manage Secrets in Chef?
+
+<details>
+
+  Managing secrets securely is an important part of configuration management.  
+In **Chef**, secrets are handled using **encrypted storage mechanisms** and **external secret management tools**.
+
+---
+
+## 🔹 Encrypted Data Bags
+
+The most common way to manage secrets in Chef is using **Encrypted Data Bags**.
+
+### How they work:
+- Sensitive data is stored in **encrypted JSON format**
+- Only users or nodes with the **secret key** can decrypt and access the data
+- Data remains secure even if the Chef Server is compromised
+
+### Commonly stored secrets:
+- Passwords
+- API keys
+- Database credentials
+- Tokens
+
+---
+
+## 🔹 Benefits of Encrypted Data Bags
+
+- Prevents plaintext storage of secrets
+- Secure access control
+- Centralized secret management
+- Easily shared across multiple nodes
+
+---
+
+## 🔹 Integration with External Secret Managers
+
+Chef can also integrate with **dedicated secret management tools** for enhanced security:
+
+- **HashiCorp Vault**
+- **AWS Secrets Manager**
+- **Azure Key Vault**
+
+### Advantages:
+- Secrets are rotated automatically
+- Fine-grained access control
+- Improved auditing and compliance
+- Better security for production environments
+
+---
+
+## 🔹 Best Practice Approach
+
+- Use **Encrypted Data Bags** for basic secret management
+- Use **Vault or cloud secret managers** for enterprise-grade security
+- Never hardcode secrets inside recipes or cookbooks
+
+---
+
+## 🔹 Key Interview Points ⭐
+
+- Secrets are stored securely using **Encrypted Data Bags**
+- Only authorized nodes can access them
+- Chef supports integration with external secret managers
+- Improves security and compliance
+
+---
+
+## 🔹 One-Line Interview Answer ✅
+
+> Secrets in Chef are managed using encrypted data bags, and for advanced security, Chef can integrate with tools like HashiCorp Vault or AWS Secrets Manager.
+
+  
+</details>
