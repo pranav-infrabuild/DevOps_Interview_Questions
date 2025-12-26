@@ -900,3 +900,43 @@ Chef infrastructure can be scaled in multiple ways depending on the size and com
 ---
 
 </details>
+
+
+### Question 15. What is Chef Automate?
+
+<details>
+
+  
+
+
+**Chef Automate** is an **enterprise automation platform** that helps organizations manage, monitor, and secure their infrastructure at scale.
+
+It provides a **single unified interface** for infrastructure automation, compliance, and application delivery.
+
+---
+
+## 🔗 Tools Integrated with Chef Automate
+
+Chef Automate integrates with:
+
+- **Chef Infra** – Infrastructure configuration and management  
+- **Chef InSpec** – Security and compliance testing  
+- **Chef Habitat** – Application automation and deployment  
+
+---
+
+## 🧠 Key Features of Chef Automate
+
+- Centralized **dashboards and reporting**
+- **Compliance management** and audit visibility
+- Infrastructure **health and status monitoring**
+- Enterprise-level **automation and governance**
+
+---
+
+## 🎯 Simple Interview Explanation
+
+> Chef Automate is an enterprise platform that combines infrastructure automation, compliance, and application deployment into a single dashboard, making it easier to manage large-scale environments.
+
+---
+</details>
