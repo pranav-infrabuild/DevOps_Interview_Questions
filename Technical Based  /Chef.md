@@ -269,3 +269,64 @@ Chef only makes changes when needed
 
 
 </details>
+
+### Question 5. How dependencies are managed in Chef ?
+
+<details>
+  
+### Managing Dependencies in Chef
+
+In **Chef**, dependencies are managed through **cookbook metadata**.
+
+Each cookbook contains a **`metadata.rb`** file where dependencies on other cookbooks are declared.
+
+---
+
+## 🔹 Declaring Dependencies
+
+Dependencies are defined using the **`depends`** keyword in the `metadata.rb` file.
+
+### Example
+
+```ruby
+depends 'apt'
+depends 'java'
+depends 'nginx'
+```
+👉 This indicates that the current cookbook requires the apt, java, and nginx cookbooks to function correctly.
+
+
+---
+
+🔹 Dependency Resolution
+
+When a cookbook is uploaded to the Chef Server
+
+Chef automatically resolves the dependency graph
+
+It ensures that all required cookbooks and their versions are available
+
+If any dependency is missing, the upload or Chef run will fail
+
+
+
+---
+
+🔹 Key Points (Interview-ready ⭐)
+
+Dependencies are declared in metadata.rb
+
+The depends keyword is used to specify cookbook dependencies
+
+Chef Server handles automatic dependency resolution
+
+Guarantees that all required cookbooks are available before execution
+
+
+
+---
+
+🔹 One-Line Interview Answer ✅
+
+> In Chef, dependencies are managed through the metadata.rb file using the depends keyword, and the Chef Server automatically resolves the dependency graph to ensure all required cookbooks are available.
+</details>
