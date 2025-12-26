@@ -809,3 +809,41 @@ Chef can also integrate with **dedicated secret management tools** for enhanced 
 
   
 </details>
+
+
+### Question 13. What is Knife in Chef?
+
+<details>
+  
+
+
+**Knife** is a **command-line tool** used to communicate with the **Chef Server**.
+
+It helps administrators and DevOps engineers **manage and control Chef infrastructure** from their local machine.
+
+---
+
+## 🔧 What can Knife do?
+
+Using Knife, you can:
+
+- Upload **cookbooks** to the Chef Server  
+- **Bootstrap nodes** (install Chef Client on new servers)  
+- Manage **nodes**, **roles**, and **environments**  
+- View and modify data stored on the **Chef Server**
+
+---
+
+## 🧠 Why is Knife important?
+
+- Acts as a **bridge between Chef Workstation and Chef Server**
+- Makes **administrative tasks fast and automated**
+- Essential for **day-to-day Chef operations**
+
+---
+
+## 🎯 Simple Interview Explanation
+
+> Knife is a command-line tool in Chef that we use from the Chef Workstation to manage servers, cookbooks, and configurations stored on the Chef Server.
+
+</details>
