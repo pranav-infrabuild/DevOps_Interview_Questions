@@ -847,3 +847,56 @@ Using Knife, you can:
 > Knife is a command-line tool in Chef that we use from the Chef Workstation to manage servers, cookbooks, and configurations stored on the Chef Server.
 
 </details>
+
+
+### Question 14. How do you scale Chef Infrastructure?
+
+<details>
+
+  
+Chef infrastructure can be scaled in multiple ways depending on the size and complexity of the environment.
+
+---
+
+## 🏗️ 1. High Availability (HA) Chef Servers
+
+- Deploy **multiple Chef Servers** in a **high-availability (HA)** setup
+- Use **load balancers** to distribute requests across Chef Servers
+- Ensures **better performance, fault tolerance, and reliability**
+
+---
+
+## 🔌 2. Use Chef Server API Endpoints
+
+- Chef Clients communicate using **Chef Server APIs**
+- API-based communication helps **distribute load efficiently**
+- Allows scaling to **thousands of nodes**
+
+---
+
+## 🧩 3. Chef Automate for Enterprise Scale
+
+- **Chef Automate** provides centralized:
+  - Visibility
+  - Compliance
+  - Workflow management
+- Ideal for **large enterprise environments**
+
+---
+
+## ⚙️ 4. Chef Solo / Chef Zero (Small Environments)
+
+- **Chef Solo** or **Chef Zero** can be used when:
+  - No central Chef Server is required
+  - Managing **small or temporary environments**
+- Simplifies setup but **not suitable for large-scale systems**
+
+---
+
+## 🎯 Interview One-Liner
+
+> Chef infrastructure is scaled by using high-availability Chef Servers, distributing load via APIs, and leveraging Chef Automate for enterprise-level management.
+
+---
+
+</details>
