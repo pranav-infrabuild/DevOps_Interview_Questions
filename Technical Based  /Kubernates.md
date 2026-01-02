@@ -360,6 +360,32 @@ Azure Key Vault / Storage / SQL
 
 </details>
 
+
+### Question 19. What is Service Account ? What is Managed Identity ?
+
+<details>
+
+### What is a Service Account?
+- A Service Account is a Kubernetes identity used by pods
+- It is used by pods, not humans
+- is used to Authenticate to Kubernetes APIs
+
+```
+spec:
+  serviceAccountName: workload-identity-sa
+```
+>  This means:
+- Pod runs as workload-identity-sa
+- Pod does not have any Azure credentials
+
+### What is a Managed Identity?
+- Managed Identity is an Azure identity used to access Azure resources securely without credentials
+- Uses Azure RBAC, not secrets
+
+
+
+</details>
+
 ## Some Commands 
 
 <details>
