@@ -211,6 +211,94 @@ In a Kubernetes cluster, there’s usually one control plane and many worker nod
 
 </details>
 
+### Question 17.  How Secrets Handling in K8 Cluster?
+
+<details>
+---
+
+## Why Azure Key Vault is Used
+
+Azure Key Vault is used to securely store sensitive data such as:
+
+- Database passwords  
+- API keys  
+- Certificates  
+- Connection strings  
+
+---
+
+## Why Not Normal Kubernetes Secrets?
+
+- Kubernetes Secrets are only **Base64 encoded**, not encrypted  
+- Secrets can get exposed in:
+  - Git repositories  
+  - Kubernetes YAML files  
+- Secret rotation and compliance are difficult to manage  
+
+---
+
+## Benefits of Azure Key Vault
+
+- Centralized and secure secret storage  
+- No secrets hardcoded in code or YAML  
+- Easy secret rotation and compliance  
+- Access controlled using **Azure RBAC**
+
+👉 **Azure Key Vault acts as a secure external secret manager**
+
+---
+
+## How Exactly It Works (Simple Flow)
+
+---
+
+### Step 1: Secrets Store CSI Driver
+
+- Kubernetes uses the **Secrets Store CSI Driver**
+- This driver allows Pods to:
+  - Talk to external secret managers  
+  - Mount secrets at runtime as files  
+- The CSI driver runs as a **pod on each AKS node**
+
+👉 This acts as the bridge between Kubernetes and external secret systems
+
+---
+
+### Step 2: Azure Key Vault Provider
+
+- CSI Driver is **generic**
+- Provider tells the CSI driver **which secret manager to use**
+- In this case:
+  - **Provider = Azure Key Vault**
+
+👉 CSI Driver + Azure Provider fetch secrets from Azure Key Vault
+
+---
+
+### Step 3: Authentication Using Managed Identity
+
+- Every Pod runs with a **Kubernetes Service Account**
+- The Service Account is linked to a **Managed Identity**
+- Managed Identity has **RBAC access** to Azure Key Vault
+
+#### Authentication Flow
+
+- Pod → Service Account → Managed Identity → Azure Key Vault
+
+👉 No passwords, no secrets, no credentials stored anywhere
+
+---
+
+## One-Line Interview Summary
+
+> “Azure Key Vault securely stores secrets, and Kubernetes accesses them at runtime using Secrets Store CSI Driver and Managed Identity, without storing secrets in code or YAML files.”
+
+---
+
+
+</details>
+
+
 ## Some Commands 
 
 <details>
