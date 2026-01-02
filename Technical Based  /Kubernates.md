@@ -299,6 +299,67 @@ Azure Key Vault is used to securely store sensitive data such as:
 </details>
 
 
+### Question 18. How do you Enable this Secret Store csi driver and Provider ?
+
+<details>
+
+### 1️⃣ Enable CSI Driver on an Existing AKS Cluster
+- If the cluster already exists, we just enable the addon.
+
+```
+az aks enable-addons \
+  --addons azure-keyvault-secrets-provider \
+  --name keyvault-demo-cluster \
+  --resource-group keyvault-demo
+```
+👉 This installs:
+- Secrets Store CSI Driver
+- Azure Key Vault Provider
+
+These components run as pods in the kube-system namespace on every node.
+
+### 2️⃣ Verify CSI Driver and Provider Pods
+
+```
+kubectl get pods -n kube-system \
+-l 'app in (secrets-store-csi-driver,secrets-store-provider-azure)'
+```
+👉  Expected:
+- CSI driver pods → Running
+- Azure provider pods → Running
+
+### 3️⃣ Enable Workload Identity (If Not Enabled)
+- If workload identity was not enabled during cluster creation:
+
+```
+az aks update \
+  --name keyvault-demo-cluster \
+  --resource-group keyvault-demo \
+  --enable-oidc-issuer \
+  --enable-workload-identity
+
+```
+
+
+- This command enables Azure Workload Identity on an AKS cluster.
+- It allows Kubernetes pods to authenticate to Azure services using Azure AD without storing secrets.
+- AKS issues OIDC tokens to pods, which Azure AD trusts, enabling secure and passwordless access to services like Azure Key Vault.
+
+
+### Simple Flow (How It Works)
+
+Pod
+↓
+Kubernetes Service Account
+↓
+OIDC Token (issued by AKS)
+↓
+Azure AD (Workload Identity)
+↓
+Azure Key Vault / Storage / SQL
+
+</details>
+
 ## Some Commands 
 
 <details>
