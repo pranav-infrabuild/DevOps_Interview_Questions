@@ -354,3 +354,78 @@ This does NOT expose the app outside. For external access, you need:
 
    
 </details>
+
+
+### Question 7: How do you inject environment variables from a ConfigMap into a Node.js Pod in Kubernetes?
+
+<details>
+---
+
+## ✅ Correct Pod YAML (Final Answer)
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: node-app-pod
+  labels:
+    app: node-app
+spec:
+  containers:
+    - name: app
+      image: node:18
+      envFrom:
+        - configMapRef:
+            name: node-env-config
+```
+
+---
+
+## Very Simple Explanation (Real-time Scenario)
+
+### Scenario
+
+You have:
+- A Node.js app
+- It needs environment variables
+- Variables are already stored in a ConfigMap
+- ConfigMap name → `node-env-config`
+- You want Kubernetes to inject those variables into the container
+
+---
+
+## Key Part (Most Important)
+
+```yaml
+envFrom:
+  - configMapRef:
+      name: node-env-config
+```
+
+👉 **This tells Kubernetes:**
+
+> "Take all key-value pairs from the ConfigMap `node-env-config` and load them as environment variables inside my container."
+
+### Example ConfigMap:
+
+```yaml
+NODE_ENV=production
+DB_HOST=localhost
+```
+
+### Inside the Node.js App:
+
+```javascript
+process.env.NODE_ENV
+process.env.DB_HOST
+```
+
+---
+
+## Interview-friendly Explanation (1–2 Lines)
+
+> "I use `envFrom` with `configMapRef` in the container spec to inject all environment variables from a ConfigMap into my Node.js Pod."
+
+---
+</details>
+
