@@ -429,3 +429,128 @@ process.env.DB_HOST
 ---
 </details>
 
+
+### Question 8 : How do you securely inject database credentials into a Pod using Kubernetes Secrets instead of hardcoding them?
+
+<details>
+---
+
+## What This Task Means (Real-world)
+
+You have:
+- Database credentials (password)
+- You must NOT hardcode them in YAML or code
+- Kubernetes provides Secrets for sensitive data
+- You want to inject the secret into the Pod as an environment variable
+
+---
+
+
+## ✅ Correct & Secure YAML
+
+**File:** `k8s_deployment_db_secret.yaml`
+
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: db-secret
+type: Opaque
+data:
+  password: cGFzc3dvcmQ=
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: postgres-client
+spec:
+  containers:
+    - name: db-client
+      image: postgres
+      env:
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-secret
+              key: password
+```
+
+---
+
+## Explanation in Very Simple Language
+
+### 1️⃣ Kubernetes Secret
+
+```yaml
+kind: Secret
+data:
+  password: cGFzc3dvcmQ=
+```
+
+- Secrets store sensitive values
+- Value is Base64 encoded
+- `cGFzc3dvcmQ=` → decodes to `password`
+
+**Command to encode:**
+
+```bash
+echo -n password | base64
+```
+
+---
+
+### 2️⃣ Inject Secret into Pod
+
+```yaml
+env:
+  - name: DB_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: db-secret
+        key: password
+```
+
+👉 **This tells Kubernetes:**
+
+> "Read the `password` from `db-secret` and set it as an environment variable called `DB_PASSWORD` inside the container."
+
+---
+
+### 3️⃣ Inside the Container
+
+Your application can access it as:
+
+**Linux / Shell**
+```bash
+echo $DB_PASSWORD
+```
+
+**Node.js**
+```javascript
+process.env.DB_PASSWORD
+```
+
+**Java / Spring Boot**
+```java
+System.getenv("DB_PASSWORD");
+```
+
+---
+
+## Interview-ready Explanation (2 Lines)
+
+> "To avoid hardcoding credentials, I store them in Kubernetes Secrets and inject them into the Pod using `env` with `secretKeyRef`, making the application secure and configurable."
+
+---
+
+## Why This is Secure ✅
+
+- ✅ No password in source code
+- ✅ No password in plain YAML
+- ✅ Can rotate secrets without code change
+- ✅ RBAC-controlled access
+
+---
+
+
+</details>
