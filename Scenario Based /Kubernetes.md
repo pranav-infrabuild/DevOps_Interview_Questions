@@ -258,3 +258,97 @@ If you're encountering a "Service Unavailable" error in Kubernetes, it typically
 By following these steps, you should be able to diagnose and resolve the "Service Unavailable" issue in your Kubernetes cluster. If you need further assistance or have specific configurations you'd like to review, feel free to share them.
 
 </details>
+
+### Question 6. How would you define a Kubernetes Pod YAML to run a Spring Boot application as a single container exposing port 8080?
+
+<details>
+
+So Kubernetes needs to know:
+
+1. **What kind of object** → Pod
+2. **Which image to run** → Docker image
+3. **Which port the app listens on** → 8080
+
+---
+
+
+## Correct Pod YAML (Final Answer)
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: springboot-app
+spec:
+  containers:
+    - name: springboot-app-container
+      image: myrepo/springboot-app:1.0
+      ports:
+        - containerPort: 8080
+```
+
+---
+
+## Explanation in Very Simple Language
+
+### 1️⃣ `apiVersion: v1`
+
+- Tells Kubernetes which API version to use
+- Pods use `v1`
+
+### 2️⃣ `kind: Pod`
+
+- Tells Kubernetes what you are creating
+- Here → a Pod
+
+### 3️⃣ `metadata`
+
+```yaml
+metadata:
+  name: springboot-app
+```
+
+- Name of the Pod
+- Used to identify it in Kubernetes
+
+### 4️⃣ `spec`
+
+- Defines how the Pod should run
+
+### 5️⃣ `containers`
+
+```yaml
+containers:
+  - name: springboot-app-container
+```
+
+- A Pod can have multiple containers
+- Here we have one container
+- `-` means list item
+
+### 6️⃣ `image`
+
+```yaml
+image: myrepo/springboot-app:1.0
+```
+
+- Docker image that contains your Spring Boot app
+
+### 7️⃣ `ports`
+
+```yaml
+ports:
+  - containerPort: 8080
+```
+
+- Tells Kubernetes: 👉 "This container listens on port 8080"
+- Spring Boot runs on 8080 by default
+
+⚠️ **Note:**
+This does NOT expose the app outside. For external access, you need:
+- Service (ClusterIP / NodePort / LoadBalancer)
+- or Ingress
+
+---
+
+</details>
