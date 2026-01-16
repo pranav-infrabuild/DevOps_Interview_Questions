@@ -554,3 +554,101 @@ System.getenv("DB_PASSWORD");
 
 
 </details>
+
+### Question 9:How do you define CPU and memory requests and limits for a Pod in Kubernetes?
+
+
+<details>
+
+
+---
+
+## What the Requirement Says 
+
+**Minimum guaranteed resources (requests):**
+- CPU: 250m
+- Memory: 256Mi
+
+**Maximum allowed resources (limits):**
+- CPU: 500m
+- Memory: 512Mi
+
+👉 Kubernetes will **guarantee** the request  
+👉 Kubernetes will **not allow** usage beyond the limit
+
+---
+
+
+## ✅ Correct Pod YAML (Final Answer)
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: app-with-resources
+  labels:
+    app: resource-demo
+spec:
+  containers:
+    - name: app
+      image: node:18
+      ports:
+        - containerPort: 3000
+      resources:
+        requests:
+          cpu: "250m"
+          memory: "256Mi"
+        limits:
+          cpu: "500m"
+          memory: "512Mi"
+```
+
+---
+
+## Simple Explanation (Real-time Scenario)
+
+### 1️⃣ requests
+
+```yaml
+requests:
+  cpu: "250m"
+  memory: "256Mi"
+```
+
+👉 **Means:**
+- Kubernetes **guarantees** this much resource
+- Pod will be scheduled only on a node that has at least this much free
+
+---
+
+### 2️⃣ limits
+
+```yaml
+limits:
+  cpu: "500m"
+  memory: "512Mi"
+```
+
+👉 **Means:**
+- Pod **cannot exceed** this usage
+- If memory exceeds → Pod is **OOMKilled**
+- If CPU exceeds → Pod is **throttled**
+
+---
+
+## CPU & Memory Meaning (Very Simple)
+
+- `250m` CPU = 0.25 CPU core
+- `500m` CPU = 0.5 CPU core
+- `Mi` = Mebibytes (used by Kubernetes)
+
+---
+
+## Interview-ready Explanation (2 Lines)
+
+> "I define `resources.requests` to guarantee minimum CPU and memory for the Pod, and `resources.limits` to cap maximum usage, ensuring stable and fair resource allocation in Kubernetes."
+
+---
+
+
+</details>
