@@ -555,7 +555,7 @@ System.getenv("DB_PASSWORD");
 
 </details>
 
-### Question 9:How do you define CPU and memory requests and limits for a Pod in Kubernetes?
+### Question 9: How do you define CPU and memory requests and limits for a Pod in Kubernetes?
 
 
 <details>
@@ -650,5 +650,135 @@ limits:
 
 ---
 
+
+</details>
+
+### Question 10: How to keep environment-specific settings separate in Kubernetes
+
+<details>
+   
+This is about:
+- Having different configs for Test / Prod
+- Same application & deployment YAML
+- Different values like URL, DB host, log level
+- Without changing code ❌
+
+---
+
+✅ **Separate ConfigMaps per environment**
+
+### configmap-test.yaml
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+data:
+  APP_URL: "https://test.example.internal"
+  DB_HOST: "test-db.internal"
+  APP_MODE: "test"
+  LOG_LEVEL: "debug"
+```
+
+### configmap-prod.yaml
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+data:
+  APP_URL: "https://prod.example.com"
+  DB_HOST: "prod-db.internal"
+  APP_MODE: "production"
+  LOG_LEVEL: "info"
+```
+
+### 🔑 Key Idea
+
+- **Same ConfigMap name:** `app-config`
+- **Different values** per environment
+- Application doesn't care which env it is running in
+- Kubernetes injects correct config
+
+---
+
+## 🔹 Why Same ConfigMap Name?
+
+Because:
+- Deployment YAML stays unchanged
+- Only ConfigMap changes per environment
+- Clean & scalable approach
+
+---
+
+
+✅ **CI/CD driven deployment**
+
+```bash
+echo "Deploying to environment: $ENV"
+```
+
+### Step 1️⃣ Apply environment-specific ConfigMap
+
+```bash
+kubectl apply -f k8s/configmap-${ENV}.yaml
+```
+
+**Examples:**
+- `ENV=test` → `configmap-test.yaml`
+- `ENV=prod` → `configmap-prod.yaml`
+
+### Step 2️⃣ Apply shared Deployment
+
+```bash
+kubectl apply -f k8s/deployment.yaml
+```
+
+✔️ Same deployment  
+✔️ Same image  
+✔️ Different configuration
+
+---
+
+## 🔹 Real-world Flow (Simple)
+
+| Environment | ConfigMap applied       |
+|-------------|-------------------------|
+| Test        | configmap-test.yaml     |
+| Prod        | configmap-prod.yaml     |
+
+**Deployment always uses:**
+
+```yaml
+envFrom:
+  - configMapRef:
+      name: app-config
+```
+
+---
+
+## 🔹 Why This is a BEST PRACTICE 🚀
+
+- ✅ No hardcoding
+- ✅ Same YAML across environments
+- ✅ Easy rollback
+- ✅ CI/CD friendly
+- ✅ Clean separation of concerns
+
+---
+
+## 🔹 Interview-ready Answer (Short)
+
+> "We keep environment-specific settings separate by creating different ConfigMaps for each environment while using a shared Deployment YAML. During deployment, the pipeline applies the appropriate ConfigMap based on the environment."
+
+---
+
+## 🔹 Interview-ready Answer (Strong)
+
+> "I use environment-specific ConfigMaps like `configmap-test.yaml` and `configmap-prod.yaml` with the same name. The CI/CD pipeline applies the correct ConfigMap before deploying the application, ensuring clean configuration separation without changing deployment code."
+
+---
 
 </details>
