@@ -782,3 +782,149 @@ envFrom:
 ---
 
 </details>
+
+### Question 10. You've deployed an application to Kubernetes, but it crashes immediately on startup with the error: "DB_HOST environment variable is not set" **Question:** What is the root cause for this?
+
+<details>
+
+
+
+### **Step 1: Observe the Application Failure**
+When you run `kubectl get pods`, you see:
+- Pod name: `my-app-7c9f8d6b5d-xkq9m`
+- Status: `CrashLoopBackOff` 
+- Ready: `0/1`
+- Restarts: `4`
+
+When you check the logs with `kubectl logs my-app-7c9f8d6b5d-xkq9m`, you see:
+```
+Error: DB_HOST environment variable is not set
+```
+
+**Conclusion:** The issue is configuration-related, not a problem with the application code itself.
+
+---
+
+### **Step 2: Verify the ConfigMap Exists and Has the Correct Keys**
+You check if the ConfigMap exists:
+```bash
+kubectl get configmap app-config
+```
+Result: ConfigMap exists with 3 keys, age 10m
+
+Then you inspect its contents:
+```bash
+kubectl describe configmap app-config
+```
+Result shows the ConfigMap contains:
+- `DB_HOST: db.internal`
+- `DB_PORT: 5432`
+- `DB_USER: app_user`
+
+**Conclusion:** The ConfigMap exists and has all the required configuration data. So the problem is NOT with ConfigMap creation.
+
+---
+
+### **Step 3: Inspect the Deployment Configuration**
+You examine the deployment to see how it's configured:
+```bash
+kubectl get deployment my-app -o yaml
+```
+
+Looking at the relevant section:
+```yaml
+containers:
+- name: app
+  image: my-app:1.0
+```
+
+**Problem Found!** The deployment configuration shows the container with name and image, but there's NO reference to the ConfigMap. It's missing the `envFrom:` or `env:` section that would inject the ConfigMap values.
+
+---
+
+### **Step 4: Identify the Root Cause**
+The diagram shows the workflow:
+- ConfigMaps exist ✓
+- Deployment exists ✓
+- **But there's NO reference/connection between them** ✗
+
+The deployment doesn't reference the ConfigMap via:
+- `env` (individual environment variables)
+- `envFrom` (all keys from ConfigMap)
+- Volume mount
+
+---
+
+### **Step 5: Fix — Inject the ConfigMap into the Pod**
+Update the deployment to reference the ConfigMap:
+
+```yaml
+containers:
+- name: app
+  image: my-app:1.0
+  envFrom:
+  - configMapRef:
+      name: app-config
+```
+
+This tells Kubernetes: "Take all the keys from the `app-config` ConfigMap and inject them as environment variables into the container."
+
+---
+
+### **Step 6: Verify the Fix**
+After applying the fix with `kubectl apply -f deployment.yaml`:
+
+1. Check pods: `kubectl get pods`
+   - Status: `Running` ✓
+   - Ready: `1/1` ✓
+
+2. Check logs: `kubectl logs my-app-7c9f8d6b5d-r9k2p`
+   - Output: `Application started successfully` ✓
+
+The diagram shows the complete flow:
+**ConfigMaps → Application Config → Deployment → Application Started**
+
+---
+
+## Summary
+
+**Root Cause:** The deployment was created without referencing the ConfigMap, so the environment variables (like DB_HOST) were never injected into the pod.
+
+**Solution:** Add the `envFrom` section in the deployment YAML to reference the ConfigMap, allowing Kubernetes to inject those configuration values as environment variables into the container.
+
+**Key Learning:** Creating a ConfigMap alone isn't enough—you must explicitly reference it in your deployment configuration for the values to be available to your application.
+
+---
+
+## Additional Notes
+
+### Three Ways to Use ConfigMaps:
+
+1. **envFrom** (inject all keys as environment variables):
+```yaml
+envFrom:
+- configMapRef:
+    name: app-config
+```
+
+2. **env** (inject specific keys):
+```yaml
+env:
+- name: DB_HOST
+  valueFrom:
+    configMapKeyRef:
+      name: app-config
+      key: DB_HOST
+```
+
+3. **Volume mount** (mount as files):
+```yaml
+volumes:
+- name: config
+  configMap:
+    name: app-config
+volumeMounts:
+- name: config
+  mountPath: /etc/config
+```
+</details>
