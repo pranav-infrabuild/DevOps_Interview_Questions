@@ -928,3 +928,203 @@ volumeMounts:
   mountPath: /etc/config
 ```
 </details>
+
+
+### Question 11. A user tries to visit `admin.example.com` to access the Admin App, but instead they're getting the Main App!
+
+
+<details>
+
+
+- **Expected:** Admin App should load ✅
+- **Actually happening:** Main App is loading ❌
+- **Both services are running fine** ✓
+- **Using a single Ingress resource** ✓
+
+**Question:** What mistake in the Ingress rules could cause this issue?
+
+---
+
+## Simple Explanation
+
+Think of Ingress like a **traffic police officer** at a busy intersection. When a user types a website address, Ingress decides which application to send them to.
+
+### **Real-World Analogy**
+Imagine you have two restaurants:
+- **Restaurant A** (Main App) - at "example.com"
+- **Restaurant B** (Admin App) - at "admin.example.com"
+
+A delivery person comes looking for "admin.example.com" but keeps getting sent to Restaurant A instead of Restaurant B. Why? The directions (rules) are in the wrong order!
+
+---
+
+## Step-by-Step Solution
+
+### **Step 1: Observe the Problem**
+When you test the website:
+```bash
+curl -i http://admin.example.com
+```
+Response: `HTTP/1.1 200 OK`
+
+**What's happening:**
+- User goes to `admin.example.com` ✓
+- Ingress routes to Admin App ✓
+- **BUT** when checking in reality, it's loading the Main App! ❌
+
+---
+
+### **Step 2: Inspect the Ingress Rules**
+Let's look at the Ingress configuration:
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app-ingress
+spec:
+  rules:
+  # FIRST RULE
+  - host: example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: main-service
+            port:
+              number: 80
+  
+  # SECOND RULE
+  - host: admin.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: admin-service
+            port:
+              number: 80
+```
+
+**Key observation:** Both rules use `path: /` with `pathType: Prefix`
+
+---
+
+### **Step 3: Identify the Root Cause**
+
+**The Problem: Rules Order Matters!**
+
+Here's what's happening:
+- `example.com` is a **broader match** (matches ANY subdomain including admin.example.com)
+- `admin.example.com` is a **more specific match**
+
+**In Kubernetes Ingress, the FIRST matching rule wins!**
+
+Since `example.com` is listed first and uses a catch-all path `/`, it matches requests to `admin.example.com` too!
+
+**Think of it like this:**
+```
+User visits: admin.example.com
+↓
+Rule 1: "example.com" with path "/" → MATCHES! ✓ (Too broad!)
+↓
+Routes to: main-service ❌ (Wrong!)
+
+Rule 2 never gets checked!
+```
+
+---
+
+### **Step 4: Fix the Ingress Rule Order**
+
+**Solution: Put the most specific rule FIRST!**
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app-ingress
+spec:
+  rules:
+  # FIRST RULE - Most specific (admin subdomain)
+  - host: admin.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: admin-service
+            port:
+              number: 80
+  
+  # SECOND RULE - Less specific (main domain)
+  - host: example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: main-service
+            port:
+              number: 80
+```
+
+**What changed:** We **switched the order** of the rules!
+
+---
+
+### **Step 5: Verify the Fix**
+
+After applying the corrected Ingress:
+
+```bash
+kubectl logs -n ingress-nginx \
+  -l app.kubernetes.io/name=ingress-nginx \
+  --tail=50
+```
+
+You should see:
+```
+"GET / HTTP/1.1" 200 ... "admin.example.com" ... upstream: admin-service:80
+```
+
+**Now when you visit `admin.example.com`, you see the Admin Dashboard!** ✅
+
+---
+
+## Summary
+
+### **Root Cause**
+The Ingress rules were in the **wrong order**. The broader rule (`example.com`) was checked first and matched everything, including `admin.example.com`.
+
+### **Solution**
+Reorder the rules so that **more specific rules come first**:
+1. First: `admin.example.com` → admin-service
+2. Second: `example.com` → main-service
+
+### **Key Learning**
+In Kubernetes Ingress:
+- **Order matters!** Rules are checked from top to bottom.
+- **Most specific rules should be listed first**
+- Think of it like a checklist - once a match is found, it stops looking!
+
+---
+
+## Important Rules to Remember
+
+### **Rule Ordering Best Practices**
+
+1. **Most specific → Least specific**
+   ```
+   ✓ admin.example.com (very specific)
+   ✓ api.example.com (specific)
+   ✓ example.com (general)
+   ```
+
+
+</details>
