@@ -258,3 +258,72 @@ Interpolation in Terraform is done using the `${}` syntax. Here's how you can us
 
 
 </details>
+
+
+### Question 13. What is Terraform Drift ? 
+
+<details>
+
+Terraform drift occurs when Azure resources managed by Terraform are modified outside Terraform.
+
+📌 **Terraform state file says one thing, but Azure shows something else.**
+
+### Azure Example:
+- ✅ Terraform creates an Azure VM with size `Standard_B2s`
+- ⚠️ Someone manually changes it in the Azure Portal to `Standard_D4s`
+
+💥 **That mismatch is Terraform drift**
+
+When you run:
+- `terraform plan` → drift is detected
+- `terraform apply` → Azure VM is reverted to `Standard_B2s`
+
+---
+
+## ⚠️ Important Interview Clarification
+
+❌ If someone manually creates a new Azure resource (VM, Storage Account, NSG)  
+❌ and it is **not defined in Terraform code**  
+➡️ **That is NOT drift**
+
+**Terraform only tracks:**
+> Azure resources present in its state file  
+> Everything else is ignored.
+
+---
+
+## 👉 Why Does Drift Happen in Azure?
+
+- 🖱️ Manual changes via Azure Portal
+- 💻 Changes made using Azure CLI / PowerShell
+- 🤖 Another automation tool modifying the same resource
+- 🚨 Emergency production fixes without updating Terraform code
+
+---
+
+## 👉 How Do You Detect Terraform Drift in Azure?
+
+- `terraform plan` → compares code vs actual Azure state
+- `terraform refresh` → syncs Terraform state with Azure
+- 🔄 Automated drift detection via Azure DevOps / GitHub Actions
+
+---
+
+## 👉 How Do You Prevent Drift in Azure?
+
+- 🔒 Restrict Azure access using **RBAC**
+- 🔑 Only Terraform service principal can modify resources
+- 💾 Use remote backend (Azure Storage Account) with **state locking**
+- 📋 Enforce policy:  
+  > **If Terraform manages it — no Azure Portal changes**
+
+---
+
+## ✅ Best Azure Interview Answer
+
+> *"Terraform drift occurs when Azure resources managed by Terraform are modified outside Terraform.*
+> 
+> *I prevent it using Azure RBAC, remote state with locking in Azure Storage, and drift detection in CI/CD pipelines.*
+> 
+> *If drift occurs, `terraform apply` restores the Azure resources to the desired state."*
+</details>
