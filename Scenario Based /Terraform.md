@@ -752,3 +752,104 @@ E --> F[Purge sensitive data from version control]
 ---
 </details>
 
+
+### Question 13. Describe a real incident caused by Terraform state corruption. How did you fix it?
+
+<details>
+
+
+
+## 🔹 What Happened?
+
+Terraform state was stored in **Azure Blob Storage**. During a `terraform apply`, the **Azure DevOps build agent crashed** due to a disk issue.
+
+### As a result:
+
+✅ **Some Azure resources were successfully created:**
+- VMs
+- NICs
+- NSGs
+
+❌ **But the Terraform state file was not fully updated**
+
+⚠️ **The state lock was released unexpectedly**
+
+This caused the **Terraform state to become inconsistent** with actual Azure resources.
+
+---
+
+## 🔹 Impact
+
+### Azure Portal showed:
+✅ All resources **already existed**
+
+### Terraform state thought:
+❌ Resources **did not exist**
+
+### When we ran `terraform plan`, it showed:
+💥 Terraform wanted to **recreate all resources**
+
+⚠️ **This was risky and could have caused production issues.**
+
+---
+
+## 🔹 How We Fixed It
+
+### 1️⃣ **Immediately stopped all Terraform runs**
+- 🛑 Disabled pipelines
+- ✋ Ensured no parallel applies were running
+
+### 2️⃣ **Verified actual resources in Azure Portal**
+- ✅ Confirmed VMs, NICs, and NSGs were healthy
+
+### 3️⃣ **Re-attached resources to Terraform state**
+Used:
+```bash
+terraform import
+```
+to map existing Azure resources back into the Terraform state file
+
+### 4️⃣ **Ran `terraform plan`**
+- ✅ Confirmed no destructive or duplicate changes
+
+### 5️⃣ **Ran `terraform apply` safely**
+- ✅ Infrastructure and state were fully synced again
+
+---
+
+## 🎯 Key Takeaways
+
+### 🔒 **Prevention Measures Implemented:**
+- ✅ Enabled **state locking** with Azure Blob Storage lease
+- ✅ Added **retry logic** in CI/CD pipelines
+- ✅ Implemented **state backup** before every apply
+- ✅ Set up **alerting** for failed Terraform runs
+- ✅ Documented **disaster recovery procedures** for state corruption
+
+### 💡 **Interview Tip:**
+> *"State corruption taught me the importance of robust backend configuration, state locking, and having a clear rollback plan. Now I always ensure state backups are automated and test the `terraform import` workflow regularly."*
+
+---
+
+## 📋 Example: Terraform Import Commands Used
+
+```bash
+# Import Azure VM
+terraform import azurerm_linux_virtual_machine.vm /subscriptions/{subscription-id}/resourceGroups/{rg-name}/providers/Microsoft.Compute/virtualMachines/{vm-name}
+
+# Import Network Interface
+terraform import azurerm_network_interface.nic /subscriptions/{subscription-id}/resourceGroups/{rg-name}/providers/Microsoft.Network/networkInterfaces/{nic-name}
+
+# Import Network Security Group
+terraform import azurerm_network_security_group.nsg /subscriptions/{subscription-id}/resourceGroups/{rg-name}/providers/Microsoft.Network/networkSecurityGroups/{nsg-name}
+```
+
+---
+
+## ✅ Final Result
+
+🎉 **Zero downtime**  
+🎉 **All resources preserved**  
+🎉 **State fully recovered**  
+🎉 **Production remained stable**
+</details>
