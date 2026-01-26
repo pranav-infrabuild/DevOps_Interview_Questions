@@ -1413,3 +1413,167 @@ affinity:
 
 > *"Pod Anti-Affinity prevents multiple replicas from being scheduled on the same node. By default, Kubernetes doesn't enforce this, so if a node fails, all pods could go down. I use `podAntiAffinity` with `requiredDuringSchedulingIgnoredDuringExecution` and `topologyKey: kubernetes.io/hostname` to ensure each replica runs on a different node. For critical services, I also use zone-level anti-affinity and Pod Disruption Budgets to maintain high availability during cluster maintenance or failures."*
 </details>
+
+
+### Question 13. You updated a Kubernetes Secret, but the pod is still using old values!** Why is this happening? How do you fix it?
+
+<details>
+
+## ❓ Q1. Why is the pod not reflecting new changes after updating a Secret?
+
+**Answer:**
+
+Kubernetes **does not automatically restart pods** when a Secret is updated.
+
+### How Secrets are consumed:
+
+| Method | Behavior After Update |
+|--------|----------------------|
+| **Environment variables** | ❌ Pod uses old value until restarted |
+| **Mounted volume** | ✅ File updates, but app may still need reload |
+
+**The running pod continues using the old value until it is restarted.**
+
+### Example:
+
+```yaml
+# Secret used as environment variable
+env:
+- name: DB_PASSWORD
+  valueFrom:
+    secretKeyRef:
+      name: db-secret
+      key: password
+```
+❌ Updating `db-secret` won't affect running pods automatically
+
+```yaml
+# Secret mounted as volume
+volumeMounts:
+- name: secret-volume
+  mountPath: /etc/secrets
+volumes:
+- name: secret-volume
+  secret:
+    secretName: db-secret
+```
+✅ File updates in ~60 seconds, but app needs to reload config
+
+---
+
+## ❓ Q2. You updated a Kubernetes Secret but the POD didn't pick the changes. What would you do?
+
+**Answer:**
+
+I would **restart the pod** so that it reloads the updated Secret.
+
+⚠️ **The safest way is to restart the Deployment, not the pod manually.**
+
+**Why?**
+- ✅ Ensures proper rolling update
+- ✅ Maintains high availability
+- ✅ Follows Kubernetes best practices
+- ✅ Triggers health checks
+- ✅ Updates all replicas consistently
+
+---
+
+## ❓ Q3. How do you restart pods in Kubernetes properly?
+
+### ✅ **Recommended Way (Deployment Restart)**
+
+```bash
+kubectl rollout restart deployment <deployment-name>
+```
+
+### **Explanation:**
+
+When you run this command:
+1. ✅ Kubernetes creates **new pods** with updated configuration
+2. ✅ Old pods are **terminated gradually** (rolling update)
+3. ✅ Ensures **zero downtime**
+4. ✅ New pods pick up:
+   - Updated Secrets
+   - Updated ConfigMaps
+   - New environment variables
+   - Latest image (if tag is same)
+
+### **Example:**
+
+```bash
+# Restart deployment named "my-app"
+kubectl rollout restart deployment my-app
+
+# Check rollout status
+kubectl rollout status deployment my-app
+
+# View rollout history
+kubectl rollout history deployment my-app
+```
+
+**Output:**
+```
+deployment.apps/my-app restarted
+Waiting for deployment "my-app" rollout to finish: 1 out of 3 new replicas have been updated...
+Waiting for deployment "my-app" rollout to finish: 2 out of 3 new replicas have been updated...
+Waiting for deployment "my-app" rollout to finish: 3 out of 3 new replicas have been updated...
+deployment "my-app" successfully rolled out
+```
+
+---
+
+## ❓ Q4. What happens when you delete a pod manually?
+
+```bash
+kubectl delete pod <pod-name>
+```
+
+**Answer:**
+
+1. ✅ The specified pod is **deleted immediately**
+2. ✅ If it belongs to a **Deployment/ReplicaSet**:
+   - Kubernetes automatically creates a **new pod**
+   - The new pod picks the **latest configuration**
+
+### **Example:**
+
+```bash
+# Delete specific pod
+kubectl delete pod my-app-5d8f7b9c4-xz7k2
+
+# Kubernetes immediately creates a new pod
+# New pod name: my-app-5d8f7b9c4-abc12
+```
+
+### ⚠️ **Important Notes:**
+
+- ❌ This works, but it is **not the best practice** in production
+- ❌ No controlled rollout
+- ❌ No rollback capability
+- ❌ Potential for brief downtime
+- ❌ Not scalable for multiple pods
+- ❌ Doesn't update deployment annotations
+
+---
+
+## ❓ Q5. Difference between `kubectl rollout restart` and `kubectl delete pod`?
+
+| Feature | `kubectl rollout restart` | `kubectl delete pod` |
+|---------|--------------------------|---------------------|
+| **Method** | Controlled rolling update | Manual pod deletion |
+| **Best Practice** | ✅ Yes | ❌ No |
+| **Zero Downtime** | ✅ Guaranteed | ⚠️ Possible downtime |
+| **Affects All Replicas** | ✅ Yes | ❌ No (only specified pod) |
+| **Rollback Support** | ✅ Yes | ❌ No |
+| **Production Safe** | ✅ Yes | ⚠️ Not recommended |
+| **Scalability** | ✅ Works for all pods | ❌ Manual, not scalable |
+| **Deployment History** | ✅ Creates revision | ❌ No history |
+| **Use Case** | Production deployments | Quick testing/debugging |
+
+### 🎯 **Interview Line:**
+
+> *"I prefer restarting the deployment instead of deleting pods manually because it provides a controlled rollout with zero downtime and maintains deployment history for rollbacks."*
+
+
+   
+</details>
