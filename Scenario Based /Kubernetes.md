@@ -1128,3 +1128,288 @@ In Kubernetes Ingress:
 
 
 </details>
+
+### Question 12. If a backend service has **3 replicas**, Kubernetes might schedule:
+- ❌ All 3 pods on **one node** **This is risky!**  If that node fails → All pods go down → Service outage ?
+
+
+<details>
+
+
+
+## ❓ Q1. What is Pod Anti-Affinity in Kubernetes?
+
+**Answer:**
+
+Pod Anti-Affinity is a **Kubernetes rule** that prevents pods from being scheduled together on the same node (or same zone).
+
+👉 It is mainly used to **spread replicas across nodes** to improve:
+- ✅ High availability
+- ✅ Fault tolerance
+
+---
+
+## ❓ Q2. What problem does Pod Anti-Affinity solve?
+
+**Answer:**
+
+By default, Kubernetes can schedule **multiple pod replicas on the same node**.
+
+**If that node fails:**
+- ❌ All pods on that node go down
+- ❌ Service becomes unavailable
+
+**Pod Anti-Affinity ensures:**
+- ✅ Pods are placed on **different nodes**
+- ✅ Failure of **one node** does not bring down the entire service
+
+---
+
+## ❓ Q3. How does Pod Anti-Affinity help?
+
+**Answer:**
+
+Using Pod Anti-Affinity, Kubernetes will try to:
+- 🎯 Place each replica on a **different node**
+- 🎯 Distribute workload across the cluster
+- 🎯 Prevent single point of failure
+
+**Before Anti-Affinity:**
+```
+Node-1: [Pod-1, Pod-2, Pod-3] ❌ All eggs in one basket
+Node-2: [ ]
+Node-3: [ ]
+```
+
+**After Anti-Affinity:**
+```
+Node-1: [Pod-1] ✅
+Node-2: [Pod-2] ✅
+Node-3: [Pod-3] ✅
+```
+
+---
+
+## ❓ Q4. What does `requiredDuringSchedulingIgnoredDuringExecution` mean?
+
+**Answer:**
+
+It means:
+
+### 🔹 **Required during scheduling**
+→ Pod will **NOT** be scheduled unless the rule is satisfied
+
+### 🔹 **Ignored during execution**
+→ Once the pod is running, Kubernetes will **not move it**, even if the rule is later broken
+
+👉 **Rule is checked only at scheduling time, not after.**
+
+**Alternative:**
+- `preferredDuringSchedulingIgnoredDuringExecution` → Soft rule (best effort, not mandatory)
+
+---
+
+## ❓ Q5. Explain the Anti-Affinity YAML snippet in simple words
+
+```yaml
+affinity:
+  podAntiAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+    - labelSelector:
+        matchExpressions:
+        - key: app
+          operator: In
+          values:
+          - my-backend
+      topologyKey: "kubernetes.io/hostname"
+```
+
+**Answer:**
+
+This rule says:
+
+> 🚫 **Do not place this pod on a node**  
+> **If that node already has a pod with label `app=my-backend`**
+
+**Use `hostname` to ensure one pod per node**
+
+👉 **Result:** Backend pods will be spread across different nodes
+
+---
+
+## ❓ Q6. What is `topologyKey: kubernetes.io/hostname`?
+
+**Answer:**
+
+`topologyKey` defines **where pods should not be placed together**.
+
+| topologyKey | Meaning |
+|-------------|---------|
+| `kubernetes.io/hostname` | Different **nodes** |
+| `topology.kubernetes.io/zone` | Different **zones** (e.g., us-east-1a, us-east-1b) |
+| `topology.kubernetes.io/region` | Different **regions** (e.g., us-east, us-west) |
+
+**Example:**
+```yaml
+# Spread across different availability zones
+topologyKey: "topology.kubernetes.io/zone"
+```
+
+---
+
+## ❓ Q7. Does Kubernetes allow all pods on the same node by default?
+
+**Answer:**
+
+✅ **Yes**
+
+By default, Kubernetes **does not prevent** multiple pods from running on the same node.
+
+That's why **Anti-Affinity rules are needed** for high availability.
+
+---
+
+## ❓ Q8. Is this fault tolerance enabled by default?
+
+**Answer:**
+
+❌ **No.**
+
+Kubernetes does **not guarantee** fault tolerance by default.
+
+**You must explicitly configure:**
+- ✅ Pod Anti-Affinity
+- ✅ Pod Disruption Budgets (PDB)
+- ✅ Multiple nodes across zones
+- ✅ Resource requests and limits
+
+---
+
+## ❓ Q9. What happens if there are not enough nodes?
+
+**Answer:**
+
+If you use:
+```yaml
+requiredDuringSchedulingIgnoredDuringExecution
+```
+
+**And there are fewer nodes than replicas:**
+- ⚠️ Some pods will remain in **Pending** state
+- ⚠️ Because Kubernetes **cannot break the rule**
+
+**Example:**
+- 5 replicas with anti-affinity
+- Only 3 nodes available
+- Result: 3 pods running, 2 pods pending
+
+**Solution:**
+- Use `preferredDuringSchedulingIgnoredDuringExecution` (soft rule)
+- Or add more nodes to the cluster
+
+---
+
+## ❓ Q10. When should you use Pod Anti-Affinity?
+
+**Answer:**
+
+Use it when:
+- ✅ Running **critical services**
+- ✅ Using **multiple replicas**
+- ✅ You want **high availability**
+- ✅ Node failure should **not affect all pods**
+
+**Examples:**
+- Database clusters (MongoDB, PostgreSQL)
+- Microservices with replicas
+- Stateful applications
+- Mission-critical APIs
+
+---
+
+## 📋 Complete YAML Example
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-backend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: my-backend
+  template:
+    metadata:
+      labels:
+        app: my-backend
+    spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - my-backend
+            topologyKey: "kubernetes.io/hostname"
+      containers:
+      - name: backend
+        image: my-backend:v1.0
+        ports:
+        - containerPort: 8080
+```
+
+---
+
+## 🎯 Comparison: Required vs Preferred
+
+| Feature | Required | Preferred |
+|---------|----------|-----------|
+| **Strictness** | Hard rule | Soft rule (best effort) |
+| **Pod state if cannot satisfy** | Pending | Running (may ignore rule) |
+| **Use case** | Critical HA requirements | Nice-to-have distribution |
+| **Risk** | Pods may not schedule | All pods might end up on same node |
+
+---
+
+## 🚀 Advanced Example: Zone-Level Anti-Affinity
+
+```yaml
+affinity:
+  podAntiAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+    - labelSelector:
+        matchExpressions:
+        - key: app
+          operator: In
+          values:
+          - my-backend
+      topologyKey: "topology.kubernetes.io/zone"
+```
+
+**Result:** Each pod replica will be in a **different availability zone**
+
+---
+
+## 💡 Best Practices
+
+### ✅ DO:
+- Use anti-affinity for **critical stateful workloads**
+- Combine with **Pod Disruption Budgets**
+- Test failover scenarios
+- Monitor pod distribution across nodes
+
+### ❌ DON'T:
+- Use `required` anti-affinity without enough nodes
+- Forget to label your pods correctly
+- Over-complicate affinity rules
+- Ignore resource requests/limits
+
+---
+
+## ✅ Best Interview Answer
+
+> *"Pod Anti-Affinity prevents multiple replicas from being scheduled on the same node. By default, Kubernetes doesn't enforce this, so if a node fails, all pods could go down. I use `podAntiAffinity` with `requiredDuringSchedulingIgnoredDuringExecution` and `topologyKey: kubernetes.io/hostname` to ensure each replica runs on a different node. For critical services, I also use zone-level anti-affinity and Pod Disruption Budgets to maintain high availability during cluster maintenance or failures."*
+</details>
