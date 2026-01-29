@@ -191,3 +191,129 @@ fi
 
 > *"This script uses `df -h` to generate a human-readable disk usage report and redirects the output to a file. In production, I would use an absolute path like `/var/log/disk_usage.txt` and add timestamping. I'd also implement monitoring to alert when disk usage exceeds thresholds, and use `>>` if I want to track usage over time."*
 </details>
+
+
+### 2. Backup Script
+<details>
+
+
+```bash
+#!/bin/bash
+tar -czf backup_$(date +%F).tar.gz /path/to/directory
+```
+
+---
+
+## 🔍 What Does It Do?
+
+Creates a compressed backup of a directory with today's date in the filename.
+
+---
+
+## 🛠️ Command Breakdown
+
+| Part | Symbol | What It Does |
+|------|--------|--------------|
+| `tar` | 📦 | Tool to archive files |
+| `-c` | ➕ | **C**reate a new archive |
+| `-z` | 🗜️ | Compress using **g**zip |
+| `-f` | 📝 | Specify the **f**ile name |
+| `$(date +%F)` | 📅 | Adds today's date (YYYY-MM-DD) |
+| `/path/to/directory` | 📂 | Folder you want to back up |
+
+---
+
+## 📤 Example Output
+
+```
+backup_2026-01-29.tar.gz
+```
+
+---
+
+## 📍 Where Is The File Stored?
+
+⚠️ The backup file is created in the **current directory** where you run the script.
+
+### 💡 Save to a Specific Location
+
+```bash
+tar -czf /backup/backup_$(date +%F).tar.gz /path/to/directory
+```
+
+This saves the backup to `/backup/` instead.
+
+---
+
+## 🔄 Auto-Delete Old Backups
+
+Add this line to keep only the last 7 days of backups:
+
+```bash
+find /backup -name "backup_*.tar.gz" -mtime +7 -delete
+```
+
+**Full script with cleanup:**
+
+```bash
+#!/bin/bash
+tar -czf /backup/backup_$(date +%F).tar.gz /path/to/directory
+find /backup -name "backup_*.tar.gz" -mtime +7 -delete
+```
+
+---
+
+## ⏰ Schedule with Cron
+
+Run backup automatically every day at 2 AM:
+
+```bash
+crontab -e
+```
+
+Add this line:
+
+```
+0 2 * * * /path/to/your/backup_script.sh
+```
+
+### 📋 Cron Schedule Examples
+
+| Schedule | Cron Expression | Description |
+|----------|----------------|-------------|
+| Daily at 2 AM | `0 2 * * *` | Every day |
+| Every 6 hours | `0 */6 * * *` | 4 times a day |
+| Weekly (Sunday 3 AM) | `0 3 * * 0` | Once a week |
+| Monthly (1st, 2 AM) | `0 2 1 * *` | Once a month |
+
+---
+
+## ✅ Quick Start Checklist
+
+- [ ] Replace `/path/to/directory` with your actual folder
+- [ ] Make the script executable: `chmod +x backup_script.sh`
+- [ ] Test it: `./backup_script.sh`
+- [ ] Check the backup file was created
+- [ ] (Optional) Set up cron scheduling
+- [ ] (Optional) Add auto-cleanup for old backups
+
+---
+
+## 🆘 Troubleshooting
+
+| Problem | Solution |
+|---------|----------|
+| Permission denied | Run with `sudo` or check folder permissions |
+| File not found | Verify the path to your directory is correct |
+| No space left | Check disk space with `df -h` |
+| Cron not running | Check logs: `grep CRON /var/log/syslog` |
+
+---
+
+**🎯 Pro Tip:** Always test your backup and practice restoring from it! A backup is only good if you can restore it.
+
+To extract your backup:
+```bash
+tar -xzf backup_2026-01-29.tar.gz
+```
+</details>
