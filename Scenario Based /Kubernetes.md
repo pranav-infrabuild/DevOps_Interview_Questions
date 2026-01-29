@@ -1577,3 +1577,109 @@ kubectl delete pod my-app-5d8f7b9c4-xz7k2
 
    
 </details>
+
+
+### Question 14. A developer wants to change some configurations for debugging purposes in their pod. But in the process, they do not want to impact any other deployment.What is the safe and isolated way to achieve this?
+
+
+<details>
+
+
+The safest and isolated way is to **create a separate debug pod** instead of modifying the existing deployment.
+
+### **Why this works:**
+- ✅ Existing deployments remain **unchanged**
+- ✅ **No risk** to production or running applications
+- ✅ Debugging can be done safely in **isolation**
+- ✅ Can be deleted after debugging without affecting anything
+- ✅ Multiple developers can debug simultaneously
+
+---
+
+## 🛠️ How It Is Done
+
+### **Step 1: Create a new Pod YAML file**
+### **Step 2: Set required environment variables** (for example, `LOG_LEVEL=debug`)
+### **Step 3: Apply this YAML** using `kubectl apply`
+### **Step 4: Check logs** from this debug pod only
+### **Step 5: Delete the debug pod** when done
+
+---
+
+## 📋 Example Idea
+
+Create a debug pod named: `debug-myapp`
+
+**Configuration:**
+- ✅ Same image as the app
+- ✅ Logging level set to `debug`
+- ✅ Additional debugging tools installed
+- ✅ Used only for troubleshooting
+- ✅ Isolated from production traffic
+
+**✅ This approach allows debugging without affecting any other deployment.**
+
+---
+
+## 🎯 Complete Example
+
+### **Original Production Deployment**
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+      - name: myapp
+        image: myapp:v1.0
+        env:
+        - name: LOG_LEVEL
+          value: "info"
+        - name: ENV
+          value: "production"
+```
+
+⚠️ **DO NOT MODIFY THIS** - it affects all 3 replicas in production
+
+---
+
+### **Create Separate Debug Pod**
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: debug-myapp
+  labels:
+    app: myapp-debug
+    purpose: debugging
+spec:
+  containers:
+  - name: myapp-debug
+    image: myapp:v1.0
+    env:
+    - name: LOG_LEVEL
+      value: "debug"           # ✅ Debug logging enabled
+    - name: DEBUG_MODE
+      value: "true"
+    - name: ENV
+      value: "debug"
+    - name: VERBOSE
+      value: "true"
+    command: ["/bin/sh"]       # ✅ Keep pod running for debugging
+    args: ["-c", "while true; do sleep 3600; done"]
+```
+
+
+</details>
