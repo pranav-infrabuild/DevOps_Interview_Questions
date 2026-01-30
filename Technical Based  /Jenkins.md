@@ -272,3 +272,42 @@ Plugins allow Jenkins to connect with:
 - Pull code from repositories
 - **Example:** Git plugin
 </details>
+
+### Question 5. Explain Difference between Scripted and Declarative Jenkins Pipelines ?
+
+<details>
+
+## 🔹 Scripted Pipeline
+
+- Uses **Groovy scripting language**
+- Gives **more flexibility and control**
+- You can write complex logic (loops, conditions, custom code)
+- But it needs **more coding effort**
+- Slightly **harder to read and maintain**
+
+👉 **Best when you need advanced or complex pipeline logic**
+
+---
+
+## 🔹 Declarative Pipeline
+
+- Uses a **simple and structured syntax**
+- **Easy to read, write, and maintain**
+- Follows **predefined rules and format**
+- **Less flexible** than scripted, but clean and clear
+
+👉 **Best for standard CI/CD pipelines and beginners**
+
+---
+
+## Quick Comparison
+
+| Feature | Scripted Pipeline | Declarative Pipeline |
+|---------|------------------|---------------------|
+| **Language** | Groovy scripting | Structured syntax |
+| **Flexibility** | High | Moderate |
+| **Complexity** | Can handle complex logic | Better for standard workflows |
+| **Readability** | Harder to read | Easy to read |
+| **Learning Curve** | Steeper | Beginner-friendly |
+| **Best For** | Advanced/complex pipelines | Standard CI/CD pipelines |
+</details>
