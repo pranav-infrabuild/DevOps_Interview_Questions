@@ -239,3 +239,36 @@ Can be:
 
 ---
 </details>
+
+### Question 4. What is Jenkins Plugins ?
+<details>
+
+### Jenkins plugins are used to extend and enhance the functionality of Jenkins.
+
+👉 Jenkins by default is very basic  
+👉 Plugins add extra features and powers
+
+## Simple Analogy
+
+Think of Jenkins as a **mobile phone** 📱  
+Plugins are **apps** you install to add new features.
+
+## What do Jenkins Plugins do?
+
+Jenkins plugins help Jenkins to:
+
+### 🔹 Add Additional Features
+- Extra options and capabilities
+- Makes Jenkins more powerful
+
+### 🔹 Integrate with Other Tools
+Plugins allow Jenkins to connect with:
+- **Git, GitHub, Bitbucket** (source code)
+- **Docker, Kubernetes**
+- **Cloud platforms** (AWS, Azure)
+- **Slack, Email** (notifications)
+
+### 🔹 Source Code Management
+- Pull code from repositories
+- **Example:** Git plugin
+</details>
