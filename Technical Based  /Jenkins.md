@@ -495,3 +495,85 @@ A Jenkinsfile defines:
 ---
 
 </details>
+
+
+### Question 9.  How Do Jenkins Build Triggers Work?
+
+<details>
+
+Jenkins **continuously waits for an event**.
+
+**When the event occurs** → Jenkins starts the build automatically.
+
+---
+
+## Common Types of Jenkins Build Triggers
+
+### 🔹 1. Build Periodically (Cron Schedule)
+
+Runs the job at a **fixed time**
+
+**Example:**
+- Every night
+- Every hour
+
+👉 Useful for scheduled builds and checks.
+
+---
+
+### 🔹 2. When Changes Are Pushed (Source Code Changes)
+
+Triggered when code is **pushed to Git**
+- Uses Git webhooks or polling
+
+👉 Common in CI pipelines.
+
+---
+
+### 🔹 3. When Other Build Jobs Complete
+
+One job starts after another finishes
+- Called **upstream / downstream jobs**
+
+👉 Useful for multi-step pipelines.
+
+---
+
+### 🔹 4. Based on Specific Events or Conditions
+
+- Custom conditions
+- External triggers
+- Manual API triggers
+
+---
+
+## Simple Flow Example
+
+**1️⃣ Developer pushes code to Git**  
+↓  
+**2️⃣ Git sends webhook to Jenkins**  
+↓  
+**3️⃣ Jenkins trigger activates**  
+↓  
+**4️⃣ Jenkins job starts automatically**
+
+---
+
+## Why Build Triggers Are Important?
+
+✅ **Enable automation**  
+✅ **Faster feedback**  
+✅ **Reduce manual work**  
+✅ **Support CI/CD best practices**
+
+---
+
+## Quick Reference Table
+
+| Trigger Type | How It Works | Best Use Case |
+|--------------|--------------|---------------|
+| **Build Periodically** | Runs on schedule (cron) | Nightly builds, regular checks |
+| **SCM Changes** | Triggered by Git push | Continuous Integration |
+| **Upstream Jobs** | After another job completes | Multi-stage pipelines |
+| **Custom/API** | Manual or event-based | Special conditions, integrations |
+</details>
