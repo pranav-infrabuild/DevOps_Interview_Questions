@@ -741,3 +741,115 @@ Stages can run:
 ---
 
 </details>
+
+### Question 12.How Do You Troubleshoot Jenkins Build Failures?
+
+<details>
+When a Jenkins build fails, the goal is to **find where and why it failed**, then **fix it**.
+
+---
+
+## Step-by-Step Troubleshooting
+
+### 🔹 1. Review Build Logs
+
+- Open the failed build
+- Check the build logs
+- Look at the last failed step
+
+👉 Most issues are visible here.
+
+---
+
+### 🔹 2. Check Console Output
+
+- Console output shows **command execution details**
+- Errors usually appear in **red**
+
+👉 This tells you exactly which command failed.
+
+---
+
+### 🔹 3. Read Error Messages Carefully
+
+Look for:
+- Syntax errors
+- Missing files
+- Permission issues
+- Network failures
+
+👉 Error messages give strong clues.
+
+---
+
+### 🔹 4. Enable Verbose Logging
+
+- Turn on **debug** or **verbose mode**
+- Shows more detailed logs
+
+👉 Useful when the error is not clear.
+
+---
+
+### 🔹 5. Check Jenkins Server and Agent Configuration
+
+Verify:
+- Correct agent is used
+- Tools (Java, Maven, Docker) are installed
+- Environment variables are set
+
+---
+
+### 🔹 6. Check Resource Constraints
+
+- **Disk space**
+- **Memory (RAM)**
+- **CPU usage**
+
+👉 Lack of resources often causes random failures.
+
+---
+
+### 🔹 7. Verify Dependencies and Code Changes
+
+- Check recent code changes
+- Confirm required dependencies are available
+- Roll back if needed
+
+---
+
+## Troubleshooting Workflow
+
+**1️⃣ Build fails**  
+↓  
+**2️⃣ Review build logs**  
+↓  
+**3️⃣ Check console output for errors**  
+↓  
+**4️⃣ Read error messages**  
+↓  
+**5️⃣ Enable verbose logging (if needed)**  
+↓  
+**6️⃣ Verify configuration & resources**  
+↓  
+**7️⃣ Check dependencies & recent changes**  
+↓  
+**8️⃣ Fix issue and rebuild**
+
+---
+
+## Common Build Failure Causes
+
+| Issue Type | Common Causes | Where to Look |
+|------------|---------------|---------------|
+| **Code Issues** | Syntax errors, compilation failures | Console output, error messages |
+| **Configuration** | Wrong agent, missing tools | Jenkins configuration, agent setup |
+| **Resources** | Out of disk space, low memory | Server metrics, system logs |
+| **Dependencies** | Missing libraries, version conflicts | Build logs, dependency files |
+| **Permissions** | File access denied, Git credentials | Console output, security settings |
+| **Network** | Connection timeout, unreachable URLs | Console output, network logs |
+
+---
+
+
+</details>
