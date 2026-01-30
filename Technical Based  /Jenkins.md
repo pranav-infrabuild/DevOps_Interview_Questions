@@ -141,3 +141,56 @@ pipeline {
 
 </details>
 
+
+
+### Question 2. What is a Jenkins Pipeline ?
+
+<details>
+
+**A Jenkins Pipeline is a way to define your entire software delivery process as code.**
+
+### In simple words:
+👉 **It tells Jenkins how to build, test, and deploy your application step by step, using a script.**
+
+---
+
+## 📋 Key Components Explained
+
+### 1️⃣ **Suite of Plugins**
+
+- Jenkins Pipeline is **not a single feature**
+- It is a **collection (suite) of Jenkins plugins**
+- These plugins work together to support pipelines
+
+**Core Pipeline Plugins:**
+- Pipeline plugin
+- Pipeline: Declarative plugin
+- Pipeline: Stage View plugin
+- Pipeline: Groovy plugin
+
+👉 **That's why Jenkins is very flexible and extensible.**
+
+---
+
+### 2️⃣ **Pipeline as Code**
+
+The pipeline is written as **code** (usually in a file called `Jenkinsfile`)
+
+This file is stored in the **same Git repository** as your application code
+
+**Example structure:**
+```
+my-app/
+├── src/
+├── pom.xml
+├── Dockerfile
+└── Jenkinsfile  ← Pipeline definition
+```
+
+
+## ⭐ One-Line Definition (For Interviews)
+
+> **"A Jenkins Pipeline is a suite of plugins that allows us to define build, test, and deployment workflows as code, which can be version-controlled along with application code."**
+
+---
+</details>
