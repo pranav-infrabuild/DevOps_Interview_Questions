@@ -312,7 +312,7 @@ Plugins allow Jenkins to connect with:
 | **Best For** | Advanced/complex pipelines | Standard CI/CD pipelines |
 </details>
 
-### Question 5. How to Secure Jenkins ?
+### Question 6. How to Secure Jenkins ?
 
 <details>
 
@@ -377,4 +377,62 @@ Use **HTTPS** instead of HTTP
 - [ ] Install and update security plugins
 - [ ] Regularly update Jenkins to latest version
 - [ ] Review user permissions periodically
+</details>
+
+
+### Question 7. Explain the Concept of Jenkins Job DSL ?
+
+<details>
+
+# Concept of Jenkins Job DSL
+
+**Jenkins Job DSL (Domain-Specific Language)** is used to create and manage Jenkins jobs using **code** instead of clicking in the UI.
+
+## Simple Explanation
+
+- **Normally:** 👉 You create Jenkins jobs manually from the UI
+- **With Job DSL:** 👉 You write code once, and Jenkins creates jobs automatically
+
+---
+
+## Key Points
+
+### 🔹 Jenkins Jobs Programmatically
+
+- Jobs are created using **code**
+- No need to manually configure jobs one by one
+
+### 🔹 Groovy-Based DSL
+
+- Job DSL uses **Groovy language**
+- Easy to write and reusable
+
+### 🔹 Create Jobs, Views, and Configurations
+
+Using Job DSL, you can create:
+- Jenkins jobs
+- Views (folders, dashboards)
+- Other job configurations
+
+### 🔹 Version Controlled
+
+- Job DSL code is stored in **Git**
+- Changes can be tracked and rolled back
+
+### 🔹 Managed with Application Code
+
+- Job definitions live along with application code
+- Makes CI/CD consistent across environments
+
+---
+
+## Why Job DSL is Useful?
+
+✅ **Avoids manual errors**  
+✅ **Easy to create hundreds of jobs**  
+✅ **Faster Jenkins setup**  
+✅ **Infrastructure / Jobs as Code concept**
+
+---
+
 </details>
