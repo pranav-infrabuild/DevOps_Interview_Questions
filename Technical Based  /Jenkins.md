@@ -194,3 +194,48 @@ my-app/
 
 ---
 </details>
+
+
+### Question 3.  What is a Jenkins Agent (Node)?
+
+<details>
+
+**A Jenkins Agent (also called a Node) is a machine that actually runs the job.**
+
+### Key Concept:
+👉 **Jenkins does not do the work itself.**  
+👉 **It sends the work to agents.**
+
+---
+
+## 🧠 In Simple Words
+
+| Component | Role | Description |
+|-----------|------|-------------|
+| **Jenkins Server (Master)** | 🧠 **Brain** | Decides what to do, schedules jobs |
+| **Jenkins Agent (Node)** | 💪 **Worker** | Actually executes the work |
+
+**The server decides what to do,**  
+**the agent decides where and runs it.**
+
+---
+
+## 🔧 What Does a Jenkins Agent Do?
+
+A Jenkins Agent:
+
+- ✅ **Runs build, test, and deployment tasks**
+- ✅ **Executes jobs** sent by the Jenkins server
+- ✅ **Provides execution environment** for pipelines
+- ✅ **Reports results** back to master
+
+### **Agent Types:**
+
+Can be:
+- 🖥️ **Physical machine** (dedicated server)
+- ☁️ **Virtual machine** (VM in cloud)
+- 🐳 **Docker container** (most flexible)
+- ☸️ **Kubernetes pod** (for cloud-native)
+
+---
+</details>
