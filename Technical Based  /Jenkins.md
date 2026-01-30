@@ -654,3 +654,90 @@ Artifacts can be:
 ---
 
 </details>
+
+### Question 11. Explain the Concept of Jenkins Pipeline Stages
+
+<details>
+
+**Jenkins pipeline stages** represent the different **phases (steps)** of a software delivery process.
+
+👉 Each stage shows **what is happening** at that point in the pipeline.
+
+## In Simple Words
+
+- A pipeline is **divided into stages**
+- Each stage performs **one major task**
+- Stages make the pipeline **clear and easy to understand**
+
+---
+
+## Common Jenkins Pipeline Stages
+
+Typical stages are:
+
+- **Build** – compile code, build artifacts
+- **Test** – run unit or integration tests
+- **Deploy** – deploy application
+- **Notify** – send email or Slack notification
+
+---
+
+## What Does a Stage Contain?
+
+Each stage can have:
+
+✅ One or more **build steps**  
+✅ **Tests or actions**  
+✅ **Shell commands or scripts**
+
+---
+
+## How Do Stages Run?
+
+Stages can run:
+
+### 🔹 Sequentially
+- One after another
+- Most common approach
+
+### 🔹 In Parallel
+- Multiple stages run at the same time
+- Saves time
+
+### 🔹 Conditionally
+- Runs only if certain conditions are met
+- **Example:** deploy only if tests pass
+
+---
+
+## Pipeline Stages Flow Example
+
+### Sequential Execution:
+**Stage 1: Build**  
+↓  
+**Stage 2: Test**  
+↓  
+**Stage 3: Deploy**  
+↓  
+**Stage 4: Notify**
+
+### Parallel Execution:
+**Stage 1: Build**  
+↓  
+**Stage 2a: Unit Tests** ⟷ **Stage 2b: Integration Tests**  
+↓  
+**Stage 3: Deploy**
+
+---
+
+## Why Stages Are Important?
+
+✅ **Organize pipeline into clear phases**  
+✅ **Easy to understand and debug**  
+✅ **Visual representation in Jenkins UI**  
+✅ **Enable parallel execution for faster builds**  
+✅ **Support conditional logic**
+
+---
+
+</details>
