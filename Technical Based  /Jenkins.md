@@ -311,3 +311,70 @@ Plugins allow Jenkins to connect with:
 | **Learning Curve** | Steeper | Beginner-friendly |
 | **Best For** | Advanced/complex pipelines | Standard CI/CD pipelines |
 </details>
+
+### Question 5. How to Secure Jenkins ?
+
+<details>
+
+
+Jenkins can be secured by using **authentication**, **authorization**, **encryption**, and **security plugins**.
+
+## Simple Explanation (Step by Step)
+
+### 🔐 1. Enable Authentication
+
+**Authentication** means **who can log in** to Jenkins.
+
+Jenkins supports:
+- **LDAP** – login using company directory
+- **Active Directory** – Windows-based authentication
+- **OAuth** – login using Google, GitHub, etc.
+
+👉 Only valid users can access Jenkins.
+
+---
+
+### 🧑‍💼 2. Use Role-Based Access Control (RBAC)
+
+**Authorization** means **what users can do** after login.
+
+**Assign roles to users and groups**
+
+**Example:**
+- **Admin** → full access
+- **Developer** → run builds
+- **Viewer** → read-only access
+
+👉 This prevents unauthorized changes.
+
+---
+
+### 🔒 3. Enable HTTPS Encryption
+
+Use **HTTPS** instead of HTTP
+
+**Encrypts data between:**
+- Browser and Jenkins
+- Jenkins and agents
+
+👉 Protects passwords and sensitive data.
+
+---
+
+### 🛡️ 4. Install Security Plugins
+
+- Install Jenkins security plugins
+- Helps protect against vulnerabilities
+- Adds extra layers of protection
+
+---
+
+## Quick Security Checklist
+
+- [ ] Enable authentication (LDAP, OAuth, Active Directory)
+- [ ] Configure Role-Based Access Control (RBAC)
+- [ ] Enable HTTPS encryption
+- [ ] Install and update security plugins
+- [ ] Regularly update Jenkins to latest version
+- [ ] Review user permissions periodically
+</details>
