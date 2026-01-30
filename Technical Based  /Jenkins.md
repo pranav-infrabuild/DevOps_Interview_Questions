@@ -436,3 +436,62 @@ Using Job DSL, you can create:
 ---
 
 </details>
+
+### Question 8. What is a Jenkinsfile?
+
+<details>
+
+A **Jenkinsfile** is a text file written in **Groovy syntax** that tells Jenkins how to run a pipeline.
+
+👉 It defines **what Jenkins should do** and **in what order**.
+
+## In Simple Words
+
+**Jenkinsfile = Pipeline instructions**
+- Written as **code**
+- Stored in **Git** along with application code
+
+---
+
+## What Does a Jenkinsfile Contain?
+
+A Jenkinsfile defines:
+
+### 🔹 Pipeline Configuration
+- Overall setup of the pipeline
+
+### 🔹 Stages
+- **Example:** Build, Test, Deploy
+
+### 🔹 Steps
+- Actual commands inside each stage
+
+### 🔹 Post-Build Actions
+- Actions after build (success, failure, notifications)
+
+---
+
+## Why Jenkinsfile is Important?
+
+✅ **CI/CD process is written as code**  
+✅ **Easy to maintain and update**  
+✅ **Same pipeline for all environments**  
+✅ **Version controlled using Git**
+
+---
+
+## How is Jenkinsfile Used?
+
+### Workflow:
+
+**1️⃣ Developer writes Jenkinsfile**  
+↓  
+**2️⃣ Stores it in the project repository**  
+↓  
+**3️⃣ Jenkins reads the Jenkinsfile**  
+↓  
+**4️⃣ Jenkins executes stages step by step**
+
+---
+
+</details>
