@@ -577,3 +577,80 @@ One job starts after another finishes
 | **Upstream Jobs** | After another job completes | Multi-stage pipelines |
 | **Custom/API** | Manual or event-based | Special conditions, integrations |
 </details>
+
+
+### Question 10. What Are Jenkins Build Artifacts?
+<details>
+
+**Jenkins build artifacts** are the **files produced during the build process**.
+
+👉 They are the **output of a Jenkins job**.
+
+## In Simple Words
+
+**Build runs** → **files are created** → **those files are artifacts**
+
+Artifacts are **saved** so they can be used later.
+
+---
+
+## Examples of Build Artifacts
+
+Jenkins build artifacts can be:
+
+### 🔹 Files from the Build Process
+- Any output files created during build
+
+### 🔹 Compiled Binaries
+- `.jar`, `.war`, `.exe`, `.zip`
+- Docker images (indirectly)
+
+### 🔹 Test Results
+- Unit test reports
+- Coverage reports
+
+### 🔹 Documentation and Archives
+- Logs
+- Reports
+- Packaged files
+
+---
+
+## Where Are Artifacts Stored?
+
+**On the Jenkins server**
+
+**Or in external artifact repositories like:**
+- Nexus
+- Artifactory
+- Azure Artifacts
+- S3
+
+---
+
+## How Are Build Artifacts Used?
+
+Artifacts can be:
+
+✅ **Downloaded manually**  
+✅ **Passed to downstream jobs**  
+✅ **Used for deployment**  
+✅ **Archived for future reference**
+
+---
+
+## Artifact Workflow
+
+**1️⃣ Jenkins runs the build**  
+↓  
+**2️⃣ Build process creates files**  
+↓  
+**3️⃣ Files are saved as artifacts**  
+↓  
+**4️⃣ Artifacts are stored (Jenkins or external repo)**  
+↓  
+**5️⃣ Artifacts are used for deployment or testing**
+
+---
+
+</details>
