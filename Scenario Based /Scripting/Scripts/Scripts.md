@@ -317,3 +317,97 @@ To extract your backup:
 tar -xzf backup_2026-01-29.tar.gz
 ```
 </details>
+
+
+### 3. Docker Health Check Script
+
+<details>
+
+
+
+## Overview
+
+A lightweight bash script for monitoring Docker container health status. This script checks if a specified container is running and returns appropriate exit codes for monitoring systems.
+
+## Script
+
+```bash
+#!/bin/bash
+CONTAINER="my_container"
+if docker inspect -f '{{.State.Running}}' "$CONTAINER" 2>/dev/null | grep -q true; then
+    echo "OK: Container is running"
+    exit 0
+else
+    echo "CRITICAL: Container is down"
+    exit 1
+fi
+```
+
+## How It Works
+
+1. **Container Variable**: Defines the target container name in `CONTAINER` variable
+2. **Docker Inspect**: Uses `docker inspect` to check the container's running state
+3. **Error Handling**: Redirects errors to `/dev/null` to suppress error messages
+4. **Status Check**: Greps for `true` to verify the container is running
+5. **Exit Codes**: Returns `0` for success, `1` for failure (standard monitoring convention)
+
+## Usage
+
+### Basic Setup
+
+1. Save the script to a file:
+   ```bash
+   nano docker-health-check.sh
+   ```
+
+2. Make it executable:
+   ```bash
+   chmod +x docker-health-check.sh
+   ```
+
+3. Update the container name:
+   ```bash
+   CONTAINER="your_container_name"
+   ```
+
+4. Run the script:
+   ```bash
+   ./docker-health-check.sh
+   ```
+
+
+- Docker installed and running
+- Appropriate permissions to execute Docker commands
+- Bash shell environment
+
+## Best Practices
+
+1. **Use environment variables** for container names in production
+2. **Log output** to a file for troubleshooting
+3. **Set up alerts** for critical failures
+4. **Test thoroughly** before deploying to production
+5. **Consider using Docker's native health checks** in `docker-compose.yml`
+
+## Troubleshooting
+
+### Permission Denied
+Add user to docker group:
+```bash
+sudo usermod -aG docker $USER
+```
+
+### Container Not Found
+Verify container name:
+```bash
+docker ps -a --format "{{.Names}}"
+```
+
+### Script Not Executing
+Check file permissions and shebang line:
+```bash
+ls -l docker-health-check.sh
+head -n 1 docker-health-check.sh
+```
+
+
+</details>
