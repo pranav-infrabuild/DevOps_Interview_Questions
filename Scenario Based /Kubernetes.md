@@ -1747,3 +1747,62 @@ DevOps isn't about reacting. It's about building systems that recover automatica
 
 
 </details>
+
+### Question 16. Your API is getting slower over time. Same code, same infrastructure. What's going on?
+<details>
+
+
+---
+
+## ✅ The Answer
+
+### 🔍 Step 1: Check the Database First
+
+If nothing changed in the code or infrastructure, I'd look at the **database first**. This sounds like a classic case of **missing indexes**.
+
+---
+
+### 📚 Step 2: Understand Why It Happens
+
+**Q: But the app worked fine before?**
+
+**A:** Exactly! It always does... **until the data grows**.
+
+Without indexes, every query has to scan the entire table just to find a few rows. As your database gets bigger, each request takes longer.
+
+**Real-world example:** 
+> It's like trying to find one word in a thousand-page book without a bookmark. 📖
+
+---
+
+### ✅ Step 3: Add Indexes to Fix Performance
+
+Adding indexes solves the problem, especially on columns used in:
+
+- 🔹 **WHERE** clauses
+- 🔹 **JOIN** operations  
+- 🔹 **ORDER BY** statements
+
+**How it helps:**
+The database can jump straight to what it needs instead of reading everything.
+
+---
+
+### ⚖️ Step 4: Understand the Trade-offs
+
+**Q: Do indexes have any downside?**
+
+**A:** Yes, slightly slower writes. But the trade-off is worth it!
+
+| Without Indexes | With Indexes |
+|----------------|--------------|
+| ❌ Slow reads (queries scan entire table) | ✅ Fast reads (direct lookup) |
+| ✅ Fast writes | ⚠️ Slightly slower writes |
+| 💀 API dies slowly over time | 🚀 API stays performant |
+
+**Bottom line:** Without indexes, your API dies one slow query at a time.
+
+---
+
+
+</details>
