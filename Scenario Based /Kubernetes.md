@@ -1683,3 +1683,67 @@ spec:
 
 
 </details>
+
+
+### Question 15. It's 3:00 AM. You get a call. Production is down and users are freaking out. You check the logs and it says "out of memory". What would you do to make sure this never happens again?**
+
+
+<details>
+
+---
+
+
+### 🔧 Step 1: Don't Just Restart - Fix the Root Cause
+
+First, I wouldn't just restart the container and hope it works. That's only a temporary fix. I need to solve the real problem.
+
+---
+
+### 🎛️ Step 2: Set Resource Limits in Kubernetes
+
+I would set **resource requests and limits** for every container:
+
+- **Requests** = Reserve minimum CPU and memory needed
+- **Limits** = Cap the maximum resources allowed
+
+**Why?** Without limits, one pod can eat up all the memory (like that one teammate who finishes all the pizza before anyone else gets a slice! 🍕)
+
+---
+
+### 📈 Step 3: Enable Horizontal Pod Autoscaling (HPA)
+
+When traffic suddenly spikes, **Horizontal Pod Autoscaling** helps:
+
+- 📊 Load increases → Kubernetes automatically spins up more pods
+- 📉 Traffic drops → It scales back down
+
+**Benefits:**
+- Balances the pressure
+- Saves costs
+- Prevents crashes
+
+---
+
+### 📊 Step 4: Add Monitoring & Alerts
+
+Use monitoring tools to catch problems early:
+
+- 🔍 **Prometheus** - Tracks metrics
+- 📉 **Grafana** - Visualizes data
+- 🐕 **DataDog** - Sends alerts
+
+These tools track memory usage and trigger alerts **before** it hits the danger zone.
+
+---
+
+## 🎯 The Goal
+
+**Prevent the 3:00 AM panic!**
+
+DevOps isn't about reacting. It's about building systems that recover automatically while you sleep peacefully. 😴
+
+---
+
+
+
+</details>
