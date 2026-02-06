@@ -411,3 +411,144 @@ head -n 1 docker-health-check.sh
 
 
 </details>
+
+### 4. Production-Grade System Health Check Script 
+<details>
+
+## Overview
+A simple bash script for monitoring basic system health metrics including CPU load, memory usage, disk usage, and resource-intensive processes.
+
+## Script
+
+```bash
+#!/bin/bash
+
+echo "===== SYSTEM HEALTH CHECK ====="
+
+echo -e "\nCPU Load:"
+uptime
+
+echo -e "\nMemory Usage (MB):"
+free -m
+
+echo -e "\nDisk Usage:"
+df -h
+
+echo -e "\nTop 5 Memory Consuming Processes:"
+ps aux --sort=-%mem | head -n 6
+```
+
+## Usage
+
+### Make the script executable:
+```bash
+chmod +x health-check.sh
+```
+
+### Run the script:
+```bash
+./health-check.sh
+```
+
+
+
+### 1. `echo -e "\nCPU Load:"`
+**Print Section Label with Newline**
+- `echo -e`: The `-e` flag enables interpretation of backslash escapes
+- `\n`: Newline character that creates a blank line before the text
+- Improves readability by adding spacing between sections
+
+### 2. `uptime`
+**Display System Uptime and Load**
+- Shows how long the system has been running
+- Displays current time
+- Shows number of logged-in users
+- **Load averages**: Three numbers representing system load over 1, 5, and 15 minutes
+  - Values < 1.0 = system is idle
+  - Values = number of CPU cores = fully utilized
+  - Values > number of CPU cores = system is overloaded
+
+**Example output:**
+```
+10:23:45 up 5 days, 3:15, 2 users, load average: 0.52, 0.58, 0.59
+```
+
+### 3. `free -m`
+**Display Memory Usage in Megabytes**
+- `free`: Command to display memory statistics
+- `-m`: Flag to show values in megabytes (MB) instead of kilobytes
+
+**Columns explained:**
+- **total**: Total installed RAM
+- **used**: Memory currently in use
+- **free**: Completely unused memory
+- **shared**: Memory used by tmpfs (temporary file systems)
+- **buff/cache**: Memory used for buffers and cache (can be freed if needed)
+- **available**: Estimate of memory available for starting new applications
+
+**Example output:**
+```
+              total        used        free      shared  buff/cache   available
+Mem:           7821        3456        1234         123        3131        3987
+Swap:          2047           0        2047
+```
+
+### 4. `df -h`
+**Display Disk Filesystem Usage**
+- `df`: "Disk Free" - reports filesystem disk space usage
+- `-h`: "Human-readable" format (shows sizes in KB, MB, GB instead of bytes)
+
+**Columns explained:**
+- **Filesystem**: Device or partition name
+- **Size**: Total size of the filesystem
+- **Used**: Amount of space used
+- **Avail**: Available space remaining
+- **Use%**: Percentage of space used
+- **Mounted on**: Directory where the filesystem is mounted
+
+**Example output:**
+```
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/sda1        50G   23G   25G  48% /
+/dev/sda2       100G   67G   28G  71% /home
+```
+
+### 5. `ps aux --sort=-%mem | head -n 6`
+**Display Top Memory-Consuming Processes**
+
+This is a pipeline of two commands:
+
+#### `ps aux --sort=-%mem`
+- `ps`: "Process Status" - displays information about running processes
+- `a`: Show processes for all users
+- `u`: Display in user-oriented format (shows username)
+- `x`: Include processes not attached to a terminal
+- `--sort=-%mem`: Sort by memory usage in descending order (highest first)
+  - The minus sign `-` means descending order
+  - `%mem` is the column to sort by
+
+#### `| head -n 6`
+- `|`: Pipe operator - sends output of first command to second command
+- `head`: Command to display the first lines of input
+- `-n 6`: Show first 6 lines (1 header + 5 processes)
+
+**Columns explained:**
+- **USER**: Owner of the process
+- **PID**: Process ID (unique identifier)
+- **%CPU**: Percentage of CPU used
+- **%MEM**: Percentage of physical memory used
+- **VSZ**: Virtual memory size in KB
+- **RSS**: Resident Set Size - physical memory used in KB
+- **TTY**: Terminal associated with the process (? means no terminal)
+- **STAT**: Process state (R=running, S=sleeping, Z=zombie, etc.)
+- **START**: Time when process started
+- **TIME**: Total CPU time consumed
+- **COMMAND**: The command/program running
+
+**Example output:**
+```
+USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+mysql     1234  2.1 15.3 234567 98765 ?        Ssl  Jan01  45:23 /usr/sbin/mysqld
+apache    5678  0.8  8.2 123456 67890 ?        S    10:15   2:34 /usr/sbin/apache2
+```
+</details>
