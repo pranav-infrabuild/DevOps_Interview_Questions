@@ -116,3 +116,73 @@ Keep configs **version-controlled**
 ---
 
 </details>
+
+### Question 2. The CI pipeline just failed with the error: "No space left on device". Everything was running smoothly yesterday. What's the first thing we should look at?
+<details>
+
+---
+
+## ✅ The Answer
+
+### 🔍 Step 1: Identify the Root Cause
+
+The error **"No space left on device"** usually means the build server has filled up with:
+
+- 🐳 Old Docker images
+- 📝 Build logs
+- 📦 Leftover artifacts
+
+**Why it happens:** Over time, these accumulate quietly until the disk is completely full.
+
+---
+
+### 🧹 Step 2: Immediate Fix - Clean Docker Resources
+
+Start by cleaning up unused Docker resources.
+
+**Command:**
+```bash
+docker system prune -af
+```
+
+**What it does:**
+- ✅ Removes all unused images
+- ✅ Removes stopped containers
+- ✅ Removes unused cache layers
+
+⚠️ **Warning:** Use carefully! This removes ALL unused Docker resources.
+
+---
+
+### 📂 Step 3: Clean CI Tool Artifacts
+
+CI tools like **Jenkins** or **GitLab** often store:
+
+- 📝 Large log files
+- 📦 Old build artifacts
+
+**Solution:**
+- 🔄 Rotate logs regularly
+- 📥 Archive old builds
+- 🗑️ Automatically clean on a schedule
+
+---
+
+### 🚨 Step 4: Prevent Future Issues - Monitor & Alert
+
+Set up **disk usage monitoring and alerts**:
+
+**Best Practice:**
+- 📊 Set threshold alert at **70-80%** disk usage
+- 🔔 Get notified before disk fills up
+- ⏰ Schedule automated cleanup jobs
+
+**Benefits:**
+- ✅ Saves hours of debugging
+- ✅ Prevents sudden failures
+- ✅ Keeps CI pipeline running smoothly
+
+---
+
+
+</details>
