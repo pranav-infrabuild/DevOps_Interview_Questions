@@ -1806,3 +1806,256 @@ The database can jump straight to what it needs instead of reading everything.
 
 
 </details>
+
+### Question 17. Two pods in different namespaces are unable to communicate with each other. Walk me through your first step in diagnosing this.
+<details>
+
+### 🔍 Step 1: Check Network Policies
+
+My first step would be to check the **network policies** applied to both namespaces.
+
+**Why?** 
+- By default, Kubernetes is **permissive** → All traffic is allowed
+- Unless a network policy restricts it
+
+**Most common cause:** An **ingress** or **egress** rule is blocking cross-namespace traffic.
+
+---
+
+### 🔎 What to Look For in Network Policies
+
+I would check for:
+
+1. **Deny-all defaults**
+   - Policies that block all traffic by default
+   
+2. **Namespace-scoped policies**
+   - Rules that restrict traffic between namespaces
+   
+3. **Label selectors that don't match**
+   - Incorrect pod labels
+   - Mismatched selectors
+
+⚠️ **Important:** Even **one misconfigured selector** can isolate a pod entirely!
+
+---
+
+### 🌐 Step 2: Test DNS Resolution
+
+**If network policies are NOT the issue**, move to DNS resolution.
+
+**How to test:**
+
+```bash
+# Exec into one of the pods
+kubectl exec -it <pod-name> -n <namespace> -- /bin/sh
+
+# Test DNS resolution
+nslookup <service-name>.<namespace>.svc.cluster.local
+
+# Or test with curl
+curl <service-name>.<namespace>.svc.cluster.local
+```
+
+---
+
+### 🚨 Common DNS Issues
+
+Communication can fail because:
+
+- ❌ **Service name is incorrect**
+- ❌ **Namespace isn't appended** to service name
+- ❌ **CoreDNS is facing issues**
+
+**Why this matters:** Verify that the pod can resolve the service address before diving deeper into network troubleshooting.
+
+---
+
+## 🎯 Diagnostic Flow Chart
+
+```
+Pod A (namespace-1) ❌ Cannot communicate ❌ Pod B (namespace-2)
+          ↓
+    Step 1: Check Network Policies
+          ↓
+    ✅ Policies OK? → Step 2: Test DNS
+    ❌ Policies blocking? → Fix network policy
+          ↓
+    Step 2: DNS Resolution Test
+          ↓
+    ✅ DNS works? → Check other issues (firewall, service config)
+    ❌ DNS fails? → Fix DNS/CoreDNS/Service naming
+```
+
+---
+
+## 📝 Complete Troubleshooting Steps
+
+| Step | Action | Command/Check | Fix |
+|------|--------|---------------|-----|
+| 1️⃣ | Check Network Policies | `kubectl get networkpolicies -n <namespace>` | Update ingress/egress rules |
+| 2️⃣ | Verify label selectors | `kubectl describe networkpolicy <policy-name>` | Fix pod labels/selectors |
+| 3️⃣ | Test DNS resolution | `nslookup <service>.<namespace>.svc.cluster.local` | Fix service name or CoreDNS |
+| 4️⃣ | Test with curl | `curl <service>.<namespace>.svc.cluster.local` | Verify connectivity |
+
+---
+
+## 🛠️ Detailed Commands
+
+### Check Network Policies
+
+```bash
+# List all network policies in a namespace
+kubectl get networkpolicies -n namespace-1
+kubectl get networkpolicies -n namespace-2
+
+# Describe specific policy
+kubectl describe networkpolicy <policy-name> -n <namespace>
+
+# Check if any default deny policies exist
+kubectl get networkpolicies --all-namespaces | grep -i deny
+```
+
+---
+
+### Test DNS Resolution
+
+```bash
+# Exec into pod
+kubectl exec -it pod-a -n namespace-1 -- /bin/sh
+
+# Test DNS lookup (full service name format)
+nslookup service-b.namespace-2.svc.cluster.local
+
+# Test connectivity with curl
+curl http://service-b.namespace-2.svc.cluster.local:8080
+
+# Check if CoreDNS is running
+kubectl get pods -n kube-system | grep coredns
+```
+
+---
+
+### Kubernetes Service Naming Convention
+
+```
+<service-name>.<namespace>.svc.cluster.local
+     ↓              ↓         ↓       ↓
+  Service      Namespace  Service  Cluster
+   Name         Name      Keyword  Domain
+```
+
+**Example:**
+- Service: `my-api`
+- Namespace: `production`
+- Full DNS name: `my-api.production.svc.cluster.local`
+
+---
+
+## 🔧 Network Policy Example
+
+### Allow Cross-Namespace Traffic
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-cross-namespace
+  namespace: namespace-1
+spec:
+  podSelector:
+    matchLabels:
+      app: pod-a
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          name: namespace-2
+    - podSelector:
+        matchLabels:
+          app: pod-b
+```
+
+---
+
+## ✅ This Answer Shows Understanding Of:
+
+- 🔍 Systematic troubleshooting approach
+- 🌐 Kubernetes networking concepts
+- 🛡️ Network policies (ingress/egress)
+- 🔎 Label selectors and pod matching
+- 🌐 DNS resolution in Kubernetes
+- 📋 CoreDNS functionality
+- 🎯 Step-by-step diagnostic methodology
+
+---
+
+## 🤔 Did She Answer Correctly?
+
+**Yes! Excellent answer!** She demonstrated:
+
+✅ **Logical first step** (network policies)  
+✅ **Understanding of Kubernetes defaults** (permissive by default)  
+✅ **Knowledge of common issues** (label selectors, deny-all)  
+✅ **Systematic approach** (step 1 → step 2)  
+✅ **DNS troubleshooting skills**  
+✅ **Practical testing methods** (nslookup, curl)  
+✅ **Root cause thinking** (verify before diving deeper)
+
+---
+
+## 🎓 Key Takeaways
+
+### 1. Kubernetes Network Default Behavior
+- ✅ **Permissive by default** → All pods can communicate
+- ❌ Network policies can **restrict** this
+
+### 2. Troubleshooting Order
+1. **Network Policies** (most common issue)
+2. **DNS Resolution** (naming and CoreDNS)
+3. **Other factors** (firewall, service config)
+
+### 3. Common Mistakes
+- ❌ Forgetting to append namespace in service name
+- ❌ Misconfigured label selectors
+- ❌ Deny-all policies without proper exceptions
+
+---
+
+## 💭 Remember:
+
+> **"Start with network policies, then verify DNS. One misconfigured selector can isolate a pod entirely!"** 🚀
+
+---
+
+## 📚 Quick Reference
+
+### Service Name Formats
+
+```bash
+# Within same namespace
+curl http://service-name:8080
+
+# Cross-namespace (SHORT)
+curl http://service-name.namespace-name:8080
+
+# Cross-namespace (FULL DNS)
+curl http://service-name.namespace-name.svc.cluster.local:8080
+```
+
+### Debug Commands
+
+```bash
+# Check pod connectivity
+kubectl exec -it pod-a -- ping pod-b-ip
+
+# Check service endpoints
+kubectl get endpoints -n <namespace>
+
+# View CoreDNS logs
+kubectl logs -n kube-system -l k8s-app=kube-dns
+
+# Test network policy
+kubectl run test-pod --rm -it --image=busybox -- sh
+```
+</details>
