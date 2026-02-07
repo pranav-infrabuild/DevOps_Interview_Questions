@@ -552,3 +552,256 @@ mysql     1234  2.1 15.3 234567 98765 ?        Ssl  Jan01  45:23 /usr/sbin/mysql
 apache    5678  0.8  8.2 123456 67890 ?        S    10:15   2:34 /usr/sbin/apache2
 ```
 </details>
+
+### Question 5. Service Monitoring Script 
+
+<details>
+
+
+```bash
+#!/bin/bash
+
+SERVICE="nginx"
+
+if ! systemctl is-active --quiet $SERVICE; then
+  echo "$SERVICE is down. Restarting..."
+  systemctl start $SERVICE
+else
+  echo "$SERVICE is running"
+fi
+```
+
+---
+
+## Line-by-Line Explanation
+
+### Line 1: `#!/bin/bash`
+**The Shebang Line**
+
+```bash
+#!/bin/bash
+```
+
+**What it does:**
+- Tells the operating system which interpreter to use
+- `#!` is called a "shebang" or "hashbang"
+- `/bin/bash` is the path to the Bash shell
+
+**Why it matters:**
+- Without it, the system might use a different shell (sh, zsh, etc.)
+- Ensures consistent behavior across different systems
+- Makes the script executable directly (./script.sh instead of bash script.sh)
+
+**Alternative shebangs:**
+```bash
+#!/bin/sh          # Use POSIX shell (more portable)
+#!/usr/bin/env bash # Find bash in system PATH (more flexible)
+```
+
+---
+
+### Line 2: `SERVICE="nginx"`
+**Variable Declaration**
+
+```bash
+SERVICE="nginx"
+```
+
+**What it does:**
+- Creates a variable named `SERVICE`
+- Assigns the value `"nginx"` to it
+- No spaces around the `=` sign (important in Bash!)
+
+**Why use a variable?**
+✅ **Reusability** - Change service name in one place
+```bash
+SERVICE="nginx"    # Monitor nginx
+SERVICE="apache2"  # Monitor Apache
+SERVICE="docker"   # Monitor Docker
+SERVICE="mysql"    # Monitor MySQL
+```
+
+✅ **Readability** - Makes code self-documenting
+✅ **Maintainability** - Easy to update
+
+**Common mistake:**
+```bash
+SERVICE = "nginx"  # ❌ WRONG! Spaces cause errors
+SERVICE="nginx"    # ✅ CORRECT
+```
+
+---
+
+### Line 3: `if ! systemctl is-active --quiet $SERVICE; then`
+**The Condition Check**
+
+```bash
+if ! systemctl is-active --quiet $SERVICE; then
+```
+
+Let's break this down into parts:
+
+#### Part 1: `systemctl is-active`
+**What it does:**
+- Checks if a service is currently running
+- Returns exit code 0 if active (running)
+- Returns exit code 3 if inactive (stopped)
+
+**Try it yourself:**
+```bash
+systemctl is-active nginx
+# Output: active (if running)
+# Output: inactive (if stopped)
+
+echo $?  # Shows the exit code
+# 0 = active
+# 3 = inactive
+```
+
+#### Part 2: `--quiet`
+**What it does:**
+- Suppresses all output (silent mode)
+- Only returns the exit code
+- Keeps script output clean
+
+**Comparison:**
+```bash
+# Without --quiet
+systemctl is-active nginx
+# Output: active
+
+# With --quiet
+systemctl is-active --quiet nginx
+# Output: (nothing, just exit code)
+```
+
+#### Part 3: `!` (Negation operator)
+**What it does:**
+- Reverses the result
+- Turns success (0) into failure (1)
+- Turns failure (non-zero) into success (0)
+
+**Logic:**
+```bash
+# Service is running (exit code 0)
+systemctl is-active nginx    # Returns 0 (true)
+! systemctl is-active nginx  # Returns 1 (false)
+
+# Service is stopped (exit code 3)
+systemctl is-active nginx    # Returns 3 (false)
+! systemctl is-active nginx  # Returns 0 (true)
+```
+
+#### Part 4: `$SERVICE`
+**What it does:**
+- Expands to the value of the SERVICE variable
+- `$SERVICE` becomes `nginx`
+
+**Complete translation:**
+```bash
+if ! systemctl is-active --quiet $SERVICE; then
+```
+Means: **"If the service is NOT active (running)..."**
+
+---
+
+### Line 4: `echo "$SERVICE is down. Restarting..."`
+**Print Status Message**
+
+```bash
+echo "$SERVICE is down. Restarting..."
+```
+
+**What it does:**
+- `echo` prints text to the terminal
+- `$SERVICE` is replaced with `nginx`
+- Outputs: `nginx is down. Restarting...`
+
+**Why use quotes?**
+```bash
+echo "$SERVICE is down"     # ✅ Variable expands properly
+echo '$SERVICE is down'     # ❌ Prints literally: $SERVICE is down
+```
+
+**Double vs Single quotes:**
+- **Double quotes** `"..."` - Variables are expanded
+- **Single quotes** `'...'` - Everything is literal (no expansion)
+
+---
+
+### Line 5: `systemctl start $SERVICE`
+**Start the Service**
+
+```bash
+systemctl start $SERVICE
+```
+
+**What it does:**
+- Attempts to start the nginx service
+- Uses systemd to manage the service
+- Runs with current user's permissions
+
+**Important notes:**
+⚠️ **Requires root/sudo privileges**
+```bash
+systemctl start nginx        # ❌ May fail without permissions
+sudo systemctl start nginx   # ✅ Works with proper permissions
+```
+
+**Other systemctl commands:**
+```bash
+systemctl start nginx      # Start service
+systemctl stop nginx       # Stop service
+systemctl restart nginx    # Restart service
+systemctl reload nginx     # Reload config without restart
+systemctl status nginx     # Show detailed status
+systemctl enable nginx     # Start on boot
+systemctl disable nginx    # Don't start on boot
+```
+
+---
+
+### Line 6: `else`
+**Alternative Branch**
+
+```bash
+else
+```
+
+**What it does:**
+- Marks the beginning of the alternative code path
+- Executes only if the `if` condition is **false**
+- In this case: if the service **IS** running
+
+**Flow:**
+```
+if service is NOT running:
+    restart it
+else:                    ← We are here
+    service is running
+```
+
+---
+
+### Line 7: `echo "$SERVICE is running"`
+**Success Message**
+
+```bash
+echo "$SERVICE is running"
+```
+
+**What it does:**
+- Prints confirmation that service is active
+- Outputs: `nginx is running`
+- Only executes when service is already running
+
+---
+
+### Line 8: `fi`
+**End of If Statement**
+
+```bash
+fi
+```
+
+</details>
