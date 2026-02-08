@@ -64,3 +64,149 @@ You can verify expiry details using:
 sudo chage -l kareem
 ```
 </details>
+
+### Question 5. What happened? **You ran:** `git reset --hard`
+
+<details>
+
+
+**Result:** Lost 48 hours of work
+
+---
+
+### You checked:
+
+```bash
+git log
+```
+
+**Output:** ❌ Nothing there → **Panic mode**
+
+---
+
+## Good News: Your Code is NOT Gone
+
+### Why the code is NOT lost
+
+🔹 **Git keeps a hidden history**
+
+- `git log` → shows project history
+- `git reflog` → shows **your actions history**
+
+👉 `git reflog` tracks **every move of HEAD**:
+- Branch switch
+- Commit
+- Reset
+- Rebase
+- Everything
+
+**Think of it as:**
+> Git's secret undo button
+
+---
+
+## The ONE Command That Saves You 🧯
+
+```bash
+git reflog
+```
+
+### Example Output:
+
+```text
+abc1234 HEAD@{0}: reset: moving to HEAD~1
+def5678 HEAD@{1}: commit: Added payment logic
+ghi9012 HEAD@{2}: commit: Fixed bug in authentication
+jkl3456 HEAD@{3}: checkout: moving from main to feature-branch
+```
+
+**Each line is a restore point.**
+
+---
+
+## How to Recover Your Lost Code
+
+### ✅ 2 Steps Only
+
+#### 1️⃣ Find the commit before disaster
+
+```bash
+git reflog
+```
+
+**Copy the commit hash** (example: `abc1234`)
+
+---
+
+#### 2️⃣ Restore it
+
+```bash
+git reset --hard abc1234
+```
+
+✅ **Boom — your work is back!**
+
+---
+
+## Why This Works
+
+### Easy Explanation
+
+**Git is like a file system:**
+
+1. Deleting or resetting does **NOT** erase data immediately
+2. Git only removes the **label** (branch/HEAD pointer)
+3. The data stays as a **dangling commit**
+4. Git cleans it up **weeks later**, not immediately
+
+**So you still have time ⏳**
+
+---
+
+## Complete Recovery Example
+
+### Step-by-Step Walkthrough
+
+#### Before Disaster:
+```bash
+# You have commits
+git log --oneline
+# abc1234 Added payment logic
+# def5678 Fixed authentication bug
+# ghi9012 Initial commit
+```
+
+#### The Mistake:
+```bash
+# Accidentally reset to previous commit
+git reset --hard HEAD~2
+
+# Check git log
+git log --oneline
+# ghi9012 Initial commit
+# ❌ Your last 2 commits are gone!
+```
+
+#### The Recovery:
+```bash
+# 1. Check reflog
+git reflog
+# abc1234 HEAD@{0}: reset: moving to HEAD~2
+# def5678 HEAD@{1}: commit: Fixed authentication bug
+# abc1234 HEAD@{2}: commit: Added payment logic  ← This one!
+
+# 2. Restore to the commit you want
+git reset --hard abc1234
+
+# 3. Verify recovery
+git log --oneline
+# abc1234 Added payment logic  ✅
+# def5678 Fixed authentication bug  ✅
+# ghi9012 Initial commit  ✅
+```
+
+**✅ Everything is back!**
+
+---
+
+</details>
