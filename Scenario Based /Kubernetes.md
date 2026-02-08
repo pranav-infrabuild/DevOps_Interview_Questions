@@ -2059,3 +2059,149 @@ kubectl logs -n kube-system -l k8s-app=kube-dns
 kubectl run test-pod --rm -it --image=busybox -- sh
 ```
 </details>
+
+
+### Question 18. Your application works fine inside the Kubernetes cluster, but users cannot access it from outside (browser/internet). Why?
+
+<details>
+
+---
+
+
+### 1️⃣ Why does it work inside the cluster?
+
+Inside a Kubernetes cluster, pods and services communicate using:
+- **ClusterIP** (internal-only service type)
+- **Internal DNS names** (e.g., `service-name.namespace.svc.cluster.local`)
+
+This internal network is **private** and **NOT exposed to the internet**.
+
+✅ Internal communication working is normal.
+
+---
+
+### 2️⃣ Why doesn't it work from outside?
+
+Kubernetes does **NOT** expose services to the internet by default.
+
+For external users to reach your app, Kubernetes needs an **entry point** from the internet:
+- **Ingress**
+- **External Load Balancer** (Service type: `LoadBalancer`)
+
+❌ If neither exists → traffic cannot enter the cluster
+
+---
+
+### 3️⃣ What should you check FIRST? 🏆
+
+**Interview Gold Point:**
+👉 Check whether an **Ingress** or **LoadBalancer** service is configured
+
+**If:**
+- ❌ No Ingress
+- ❌ No LoadBalancer service
+
+**Then:**
+- The app will work internally
+- But will **never** be accessible externally
+
+---
+
+### 4️⃣ What if Ingress exists but it STILL doesn't work?
+
+Even if Ingress is present, access can fail if:
+
+**DNS A record is wrong:**
+- DNS does NOT point to the correct Load Balancer IP
+- DNS does NOT point to the correct hostname
+
+**Result:**
+- Traffic never reaches the cluster
+- Users get timeout / site not reachable
+
+---
+
+## Troubleshooting Commands
+
+### 1️⃣ Check if Service is exposed externally
+
+```bash
+kubectl get svc
+```
+
+**👉 Look for:**
+- `TYPE` = `LoadBalancer` or `NodePort`
+- `EXTERNAL-IP` should NOT be `<none>`
+
+---
+
+### 2️⃣ Check Ingress exists or not
+
+```bash
+kubectl get ingress
+```
+
+**👉 If empty → no external entry point ❌**
+
+---
+
+### 3️⃣ Describe Ingress (check rules & backend)
+
+```bash
+kubectl describe ingress <ingress-name>
+```
+
+**👉 Check:**
+- Host name
+- Service name
+- Port
+
+---
+
+### 4️⃣ Check Ingress Controller is running
+
+```bash
+kubectl get pods -n ingress-nginx
+```
+
+**👉 Pods should be `Running`**
+
+---
+
+### 5️⃣ Get Load Balancer IP / Hostname
+
+```bash
+kubectl get svc -n ingress-nginx
+```
+
+**👉 Note the `EXTERNAL-IP`**
+
+---
+
+### 6️⃣ Verify DNS mapping
+
+```bash
+nslookup your-domain.com
+```
+
+**or**
+
+```bash
+dig your-domain.com
+```
+
+**👉 Output IP must match Load Balancer IP**
+
+---
+
+### 7️⃣ Quick internal test (proves app works)
+
+```bash
+kubectl exec -it <pod-name> -- curl http://<service-name>:<port>
+```
+
+**👉 If this works → issue is external routing**
+
+---
+
+</details>
