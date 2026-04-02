@@ -111,3 +111,51 @@ crontab -e
 
 ---
 </details>
+
+### Question 3: Explain the Booting Process of Linux
+
+<details>
+<summary><b>Click to Expand</b></summary>
+
+### ✅ Definition:
+Booting is the process of starting a Linux system from **power ON → usable state**.
+
+---
+
+### 🔄 Step-by-Step Process:
+
+### 🔹 1. BIOS / UEFI
+- Performs **POST (hardware check)**
+- Finds bootable device
+
+---
+
+### 🔹 2. Bootloader (GRUB)
+- Loads Linux kernel into memory
+- Allows kernel selection
+
+---
+
+### 🔹 3. Kernel Initialization
+- Initializes hardware
+- Mounts root filesystem `/`
+- Loads drivers
+
+---
+
+### 🔹 4. systemd (Init System)
+- First process (**PID 1**)
+- Starts all services
+- Handles dependencies
+
+---
+
+### 🔹 5. Login Stage
+- CLI → Terminal login
+- GUI → Desktop loads
+
+---
+
+### ⚡ Flow Diagram:
+```bash
+BIOS/UEFI → GRUB → Kernel → systemd → Services → Login
