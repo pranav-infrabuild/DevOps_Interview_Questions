@@ -606,3 +606,38 @@ Together, they allow you to **build, share, and run applications** in a portable
 
 </details>
 
+### Question 33: How to convert a modified container into a new Docker image?
+<details>
+
+#### Definition
+Use docker commit to snapshot a running/stopped container into a new image.
+
+---
+
+#### Commands
+
+    # Find the container ID
+    docker ps -a
+
+    # Commit container to a new image
+    docker commit <container_id> my-custom-image:v2
+
+    # Verify the new image
+    docker images | grep my-custom-image
+
+    # Run new image
+    docker run -d my-custom-image:v2
+
+---
+
+#### Real-time Example
+
+A developer manually installed curl and jq inside a debug container to test something. Instead of rebuilding from scratch, we used docker commit to snapshot it as a debug image for the team. But long-term, we added those packages to the actual Dockerfile.
+
+---
+
+#### Best Practice
+
+docker commit is a quick fix — always move changes back into the Dockerfile for repeatability and auditability.
+
+</details>
