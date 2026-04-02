@@ -386,6 +386,62 @@ spec:
 
 </details>
 
+### 20.Question: What is Ingress and how do you use it?
+<details>
+
+#### Definition
+Ingress is a Kubernetes resource that manages external HTTP/HTTPS traffic routing to internal services — like a reverse proxy or load balancer at the cluster level.
+
+---
+
+#### Flow
+
+    Internet → Ingress Controller (nginx/Azure AGIC)
+                   ↓
+       /api     → api-service:8080
+       /web     → frontend-service:3000
+       /admin   → admin-service:9090
+
+---
+
+#### Configuration
+
+    apiVersion: networking.k8s.io/v1
+    kind: Ingress
+    metadata:
+      name: app-ingress
+      annotations:
+        nginx.ingress.kubernetes.io/rewrite-target: /
+    spec:
+      rules:
+      - host: myapp.example.com
+        http:
+          paths:
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: api-service
+                port:
+                  number: 8080
+
+---
+
+#### Real-time Example
+
+We used NGINX Ingress Controller on AKS. All microservices were internal ClusterIP services. The Ingress handled SSL termination (cert-manager + Let's Encrypt), path-based routing, and rate limiting annotations — all in one place instead of creating separate LoadBalancers per service.
+
+---
+
+#### Best Practice
+
+Use cert-manager with Ingress for automatic TLS certificate management.
+
+</details>
+
+---
+---
+
 ## Some Commands 
 
 <details>
