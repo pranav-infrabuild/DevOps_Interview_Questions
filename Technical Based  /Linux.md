@@ -1,161 +1,203 @@
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:000000,100:FFD700&height=140&section=header&text=%F0%9F%90%A7%20LINUX%20TECHNICAL%20QUESTIONS&fontSize=28&fontColor=ffffff" />
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:000000,100:FFD700&height=170&section=header&text=%F0%9F%90%A7%20LINUX%20TECHNICAL%20QUESTIONS&fontSize=34&fontColor=ffffff&animation=fadeIn" />
 </p>
 
+<p align="center">
+  <b>🚀 Linux Interview Preparation | DevOps | SRE</b><br>
+  <i>Structured notes with practical real-time understanding</i>
+</p>
 
-### Question 1: What is kernal in Linux ?
+---
+
+## 🧠 Linux Technical Questions
+
+---
+
+### 📌 Question 1: What is kernal in Linux ?
 <details>
+<summary><b>🔽 View Answer</b></summary>
 
+#### Definition
 - In Linux, the kernel is the core part of the operating system that acts as a bridge between the hardware of your computer and the software applications. It manages and controls all the hardware resources like CPU, memory, and storage, allowing programs to use them without having to know how they work at a low level.
 
+</details>
+
+---
+
+### 📌 Question 2: How to Install Cronie and Start crond Service on RHEL ?
+<details>
+<summary><b>🔽 View Answer</b></summary>
+
+#### Installation
+
+    sudo yum install -y cronie
+
+> Note: On newer Fedora versions, `dnf` replaces `yum`, so the command would be:
+
+    sudo dnf install -y cronie
+
+---
+
+#### Enable Service
+
+    sudo systemctl enable crond
+
+---
+
+#### Start Service
+
+    sudo systemctl start crond
+
+---
+
+#### Check Status
+
+    sudo systemctl status crond
+
+---
+
+#### Schedule Jobs
+
+    crontab -e
+
+Example:
+
+    0 5 * * * /home/user/backup.sh
+
+---
+
+#### Explanation
+
+- `yum` is the package manager for RHEL, CentOS, and older Fedora systems.  
+- `install` tells `yum` to install the package.  
+- `-y` automatically answers "yes" to any prompts during installation.  
+- `cronie` is the package that contains the **cron daemon**, which is the service responsible for running scheduled tasks on Linux.  
+- `systemctl` is the command used to manage **systemd services**.  
+- `enable` tells systemd to automatically start the service at **boot time**.  
+- `start` tells systemd to **immediately start the service** without rebooting.  
+
+---
+
+#### Real-time Note
+
+- Even if you start the cron service manually, it will stop after a reboot unless it is enabled to start automatically.
 
 </details>
 
+---
 
-### Question 2: How to Install Cronie and Start crond Service on RHEL ?
+### 📌 Question 3: Explain the booting process of Linux.
 <details>
+<summary><b>🔽 View Answer</b></summary>
 
-## **1. Install cronie package**
-
-```bash
-sudo yum install -y cronie
-```
-
-### **Explanation:**
-
-* `yum` is the package manager for RHEL, CentOS, and older Fedora systems.
-* `install` tells `yum` to install the package.
-* `-y` automatically answers "yes" to any prompts during installation.
-* `cronie` is the package that contains the **cron daemon**, which is the service responsible for running scheduled tasks on Linux.
-
-> **Note:** On newer Fedora versions, `dnf` replaces `yum`, so the command would be:
-
-```bash
-sudo dnf install -y cronie
-```
+#### Definition
+The sequence of steps a Linux system follows from power-on to a usable state.
 
 ---
 
-## **2. Enable crond service to start on boot**
+#### Practical Explanation
 
-```bash
-sudo systemctl enable crond
-```
-
-### **Explanation:**
-
-* `systemctl` is the command used to manage **systemd services**.
-* `enable` tells systemd to automatically start the service at **boot time**.
-* `crond` is the cron daemon service that executes scheduled tasks.
-
-**Why this is important:**
-Even if you start the cron service manually, it will stop after a reboot unless it is enabled to start automatically.
+- BIOS/UEFI → checks hardware (POST), finds bootable device  
+- Bootloader (GRUB) → loads the Linux kernel into memory  
+- Kernel → initializes hardware, mounts root filesystem  
+- Init/Systemd → starts system services and processes  
+- Login prompt → system ready for user  
 
 ---
 
-## **3. Start crond service immediately**
+#### Real-time Example
 
-```bash
-sudo systemctl start crond
-```
+On an Azure VM, when the instance restarts after a patch, systemd brings up services like sshd, docker, and nginx in the correct order based on service dependencies.
 
-### **Explanation:**
-
-* `start` tells systemd to **immediately start the service** without rebooting.
-* After running this, the cron daemon is actively running in the background, ready to execute scheduled tasks.
-
----
-
-## **4. Check status of crond service**
-
-```bash
-sudo systemctl status crond
-```
-
-### **Explanation:**
-
-* This command lets you verify whether the `crond` service is running correctly.
-* The output includes:
-
-  * `Active: active (running)` → service is running properly
-  * `Loaded:` → shows whether the service is enabled at boot
-  * `Main PID:` → the process ID of the cron daemon
-
-**Example Output:**
-
-```
-● crond.service - Command Scheduler
-   Loaded: loaded (/usr/lib/systemd/system/crond.service; enabled; vendor preset: enabled)
-   Active: active (running) since Fri 2025-09-20 19:00:00 IST; 2min ago
- Main PID: 1234 (crond)
-```
-
----
-
-## **5. Schedule jobs with crontab (optional next step)**
-
-Once the service is running, you can schedule tasks using:
-
-```bash
-crontab -e
-```
-
-* Opens your personal cron table (list of scheduled tasks) in a text editor.
-* Example cron entry:
-
-```
-0 5 * * * /home/user/backup.sh
-```
-
-* This runs `backup.sh` every day at 5:00 AM.
-
----
 </details>
 
-### Question 3: Explain the Booting Process of Linux
+---
 
+### 📌 Question 4: What are services in Linux?
 <details>
-<summary><b>Click to Expand</b></summary>
+<summary><b>🔽 View Answer</b></summary>
 
-### ✅ Definition:
-Booting is the process of starting a Linux system from **power ON → usable state**.
-
----
-
-### 🔄 Step-by-Step Process:
-
-### 🔹 1. BIOS / UEFI
-- Performs **POST (hardware check)**
-- Finds bootable device
+#### Definition
+Background processes (daemons) that run continuously to provide functionality.
 
 ---
 
-### 🔹 2. Bootloader (GRUB)
-- Loads Linux kernel into memory
-- Allows kernel selection
+#### Practical Explanation
+Managed by systemd, services start automatically at boot, can be stopped/started/restarted, and have defined dependencies.
 
 ---
 
-### 🔹 3. Kernel Initialization
-- Initializes hardware
-- Mounts root filesystem `/`
-- Loads drivers
+#### Commands
+
+    systemctl status nginx        # Check nginx service
+    systemctl restart docker      # Restart Docker daemon
+    systemctl enable kubelet      # Auto-start kubelet on boot
+    journalctl -u nginx --since "1 hour ago"  # Check service logs
 
 ---
 
-### 🔹 4. systemd (Init System)
-- First process (**PID 1**)
-- Starts all services
-- Handles dependencies
+#### Real-time Example
+
+In production, if a deployment causes the app service to crash, I'd run systemctl status and journalctl to quickly diagnose before rollback.
+
+</details>
 
 ---
 
-### 🔹 5. Login Stage
-- CLI → Terminal login
-- GUI → Desktop loads
+### 📌 Question 5: How do you check open ports in Linux?
+<details>
+<summary><b>🔽 View Answer</b></summary>
+
+#### Definition
+Identifying which network ports are actively listening or connected on a system.
 
 ---
 
-### ⚡ Flow Diagram:
-```bash
-BIOS/UEFI → GRUB → Kernel → systemd → Services → Login
+#### Practical Explanation & Commands
+
+    ss -tuln
+    netstat -tuln
+    ss -tuln | grep :8080
+    lsof -i :443
+    sudo fuser 80/tcp
+
+---
+
+#### Real-time Example
+
+During a Kubernetes pod networking issue, I used ss -tuln on the node to verify if the NodePort 30080 was actually open, then cross-checked with iptables -L to debug the routing.
+
+</details>
+
+---
+
+### 📌 Question 6: Explain the Linux file system structure.
+<details>
+<summary><b>🔽 View Answer</b></summary>
+
+#### Definition
+A hierarchical directory layout where everything starts from root /.
+
+</details>
+
+---
+
+### 📌 Question 7: Command to check OS version in Linux?
+<details>
+<summary><b>🔽 View Answer</b></summary>
+
+#### Commands
+
+    cat /etc/os-release        # Most reliable — works everywhere  
+    lsb_release -a             # Detailed on Debian/Ubuntu  
+    uname -r                   # Kernel version  
+    hostnamectl                # OS + kernel + architecture together  
+    cat /etc/redhat-release    # RHEL/CentOS specific  
+
+---
+
+#### Real-time Example
+
+Before installing a new package or agent (like Datadog or Azure Monitor), I always run cat /etc/os-release first to confirm the distro and version, since package managers and install scripts differ between Ubuntu, RHEL, and Amazon Linux.
+
+</details>
