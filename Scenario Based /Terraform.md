@@ -950,5 +950,6 @@ We broke it into modules:
 We used separate state files per module with remote backend in Azure Blob Storage, and used `-target` during migration to avoid touching unrelated resources.  
 
 State was backed up before every change.
+
 </details>
 
