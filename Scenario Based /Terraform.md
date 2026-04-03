@@ -853,3 +853,102 @@ terraform import azurerm_network_security_group.nsg /subscriptions/{subscription
 🎉 **State fully recovered**  
 🎉 **Production remained stable**
 </details>
+
+### Question 14. How to add manually created infra into Terraform state?
+
+<details>
+
+**Definition:**  
+Use terraform import to bring existing resources under Terraform management without destroying and recreating them.
+
+---
+
+## Syntax
+
+terraform import <resource_type>.<resource_name> <azure_resource_id>
+
+---
+
+## Example: Import an existing Azure Resource Group
+
+terraform import azurerm_resource_group.myRG \
+/subscriptions/<sub-id>/resourceGroups/my-rg
+
+---
+
+## Example: Import an existing AKS cluster
+
+terraform import azurerm_kubernetes_cluster.aks \
+/subscriptions/<sub-id>/resourceGroups/my-rg/providers/Microsoft.ContainerService/managedClusters/my-aks
+
+---
+
+## Steps
+
+- Write the matching Terraform resource block in your .tf file  
+- Run terraform import with the Azure resource ID  
+- Run terraform plan — verify no unintended changes  
+- Adjust your .tf code to match actual state if needed  
+
+---
+
+## Real-time Example
+
+A team had manually created a storage account and VNet before Terraform was introduced.  
+
+We wrote the resource blocks, imported them with terraform import, ran terraform plan, and fixed attribute mismatches (like tags and SKU) until the plan showed No changes.  
+
+Then it was fully managed by Terraform.
+
+---
+
+## Best Practice
+
+Always run terraform plan after import before ever running terraform apply — import doesn't validate config correctness.
+
+</details>
+
+### Question 15. How to handle 1000+ changes in Terraform state?
+
+<details>
+
+**Definition:**  
+Large state files need targeted operations — running blind terraform apply on 1000+ changes is dangerous.
+
+---
+
+## Strategies:
+
+### 1. Use -target for selective applies
+
+- Apply only specific resource
+
+terraform apply -target=azurerm_kubernetes_cluster.aks  
+terraform apply -target=module.networking  
+
+---
+
+### 2. Split into modules/workspaces
+
+├── modules/  
+│   ├── networking/     # manage separately  
+│   ├── aks/  
+│   └── monitoring/  
+
+---
+
+## Real-time Example:
+
+We inherited a monolithic Terraform config with 800+ resources.  
+
+We broke it into modules:
+- networking  
+- AKS  
+- databases  
+- monitoring  
+
+We used separate state files per module with remote backend in Azure Blob Storage, and used `-target` during migration to avoid touching unrelated resources.  
+
+State was backed up before every change.
+</details>
+
