@@ -954,3 +954,160 @@ State was backed up before every change.
 
 </details>
 
+
+### 16. What happens if an InitContainer fails?
+
+<details>
+  
+**One line answer:** The main container will never start until the InitContainer succeeds.
+
+**Explain it like this:**
+
+"An InitContainer works like a bouncer outside a club — until the bouncer gives a green signal, nobody gets inside. If the InitContainer fails, Kubernetes keeps retrying it. You'll see the pod in CrashLoopBackOff state. Now, the behavior depends on the restartPolicy — if it's set to Always, Kubernetes will keep retrying indefinitely. But if it's Never, the pod fails permanently with no retries."
+
+**Real example to say:**
+"In one of our projects, we had an InitContainer that validated the database connection before the app started. One day the database went down — the InitContainer kept failing and the main application container never came up. We caught it immediately using kubectl describe pod, which clearly showed the InitContainer was crashing."
+
+**Debug commands to mention:**
+
+kubectl describe pod <pod-name>  
+kubectl logs <pod-name> -c <init-container-name>  
+
+</details>
+
+### 17. What happens when you delete a Pod from a StatefulSet?
+
+<details>
+
+**One line answer:** Nothing changes permanently — the same Pod comes back with the same name, same identity, and same storage.
+
+**Explain it like this:**
+
+"StatefulSet gives each Pod a permanent, stable identity — like mysql-0, mysql-1, mysql-2. If I delete mysql-0, Kubernetes immediately recreates it with the exact same name, reattaches the same Persistent Volume, and restores the same network identity. This is the key difference from a Deployment — in a Deployment, Pods have random names and are interchangeable. StatefulSets are designed for stateful applications like databases and message queues, where each instance needs to remember who it is and where its data lives."
+
+| Thing | Deployment | StatefulSet |
+|-------|-----------|-------------|
+| Pod Name | Random (app-x7k2p) | Fixed (app-0, app-1) |
+| After Delete | New random name | Same name recreated |
+| Storage | Shared or ephemeral | Dedicated PVC per Pod |
+| Identity | No fixed identity | Permanent identity |
+
+**Real example to say:**
+"We ran a Redis cluster on StatefulSet. One node became unhealthy, I deleted the pod — within 30 seconds it came back with the same name, same persistent volume attached, and rejoined the cluster automatically. Zero data loss."
+
+</details>
+
+### 18. Does a DaemonSet run on master nodes?
+
+<details>
+
+**One line answer:** No, not by default — master nodes have a taint that blocks regular pods including DaemonSets.
+
+**Explain it like this:**
+
+"DaemonSet runs one Pod on every node in the cluster. But master nodes have a special taint — node-role.kubernetes.io/control-plane:NoSchedule — which basically says 'only system-level pods are allowed here.' DaemonSet respects this taint by default and skips master nodes. However, if you need something like a monitoring agent or log collector to run on master nodes as well, you can explicitly add a toleration in the DaemonSet spec. Once that toleration is added, the DaemonSet will schedule a Pod on master nodes too."
+
+**Code to mention:**
+
+tolerations:  
+  - key: node-role.kubernetes.io/control-plane  
+    operator: Exists  
+    effect: NoSchedule  
+
+**Real example to say:**
+"We deployed Datadog agent as a DaemonSet for node-level metrics collection. Initially, master node data was missing from our dashboards. We added the toleration to the DaemonSet spec and the agent started running on master nodes as well — problem solved."
+
+</details>
+
+
+### 19. Rolling update is in progress and a new image is pushed mid-deploy — what happens?
+
+<details>
+
+**One line answer:** Kubernetes updates its target and continues the rollout toward the new image — it does not restart the entire deployment from scratch.
+
+**Explain it like this:**
+
+"Kubernetes works on a desired state model. When you push a new image mid-rollout, Kubernetes simply updates its desired state to the new image. Now — pods that were still on the old version will directly jump to the newest image, skipping the intermediate one. Pods that already updated to the intermediate version will eventually get updated to the latest one as well. The entire deployment does not restart — Kubernetes just adjusts its target and keeps reconciling until all pods match the latest desired state."
+
+**Flow to explain:**
+
+Rollout started → v1 to v2  
+New image pushed → v2 to v3  
+
+Result:  
+Pods still on v1 → go directly to v3  
+Pods already on v2 → get updated to v3  
+Goal: all pods on v3, no full restart  
+
+**Real example to say:**
+"We once had to push a hotfix while a rollout was already in progress. We simply ran kubectl set image with the new image tag — Kubernetes handled it gracefully, no downtime, all pods eventually moved to the latest version."
+
+**Bonus point to impress:**
+"If we're unsure about a rollout mid-way, we can use kubectl rollout pause to stop it, validate, and then kubectl rollout resume to continue — Kubernetes gives you full control."
+
+</details>
+
+
+### 20. Pod is stuck in Pending state — how do you troubleshoot it?
+
+<details>
+
+**One line answer:** Pending means the pod hasn't been scheduled on any node yet — there are 4 main reasons for this.
+
+**Explain it like this:**
+
+"Whenever I see a pod in Pending state, my first command is always kubectl describe pod <pod-name> — the Events section at the bottom almost always tells you exactly what's wrong. Then I check four things systematically."
+
+---
+
+### 🔴 Reason 1 — Not enough resources:
+
+"The pod is requesting more CPU or memory than any node currently has available. You'll see a message like Insufficient CPU or Insufficient memory in the events. Fix — either reduce resource requests or scale up the cluster."
+
+kubectl describe pod <pod-name>  
+kubectl top nodes  
+
+---
+
+### 🔴 Reason 2 — Node Selector or Affinity mismatch:
+
+"The pod has a nodeSelector or affinity rule looking for a specific label on a node — but no such node exists in the cluster."
+
+kubectl describe pod <pod-name>  
+kubectl get nodes --show-labels  
+
+---
+
+### 🔴 Reason 3 — Taint and Toleration issue:
+
+"A node has a taint applied which blocks pods unless they have matching tolerations."
+
+kubectl describe node <node-name>  
+kubectl describe pod <pod-name>  
+
+---
+
+### 🔴 Reason 4 — PVC not bound:
+
+"The pod is waiting for a Persistent Volume Claim to get bound."
+
+kubectl get pvc  
+kubectl describe pvc  
+
+---
+
+## Summary
+
+"So my standard troubleshooting flow for a Pending pod is — first kubectl describe pod to read the events, then check node resources, then verify node selectors and taints, and finally check PVC status."
+
+---
+
+## Quick Debug Flow
+
+kubectl describe pod <pod-name>  
+kubectl get nodes  
+kubectl describe node <node-name>  
+kubectl get pvc
+
+</details>
