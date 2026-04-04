@@ -439,6 +439,85 @@ Use cert-manager with Ingress for automatic TLS certificate management.
 
 </details>
 
+### 21.What is an InitContainer? 🔥
+
+<details>
+  
+### Simple Definition:
+An InitContainer is a special container that runs before your main application container starts inside a Pod. It must complete successfully — only then the main container gets to run.
+
+---
+
+## Explain it like this to interviewer:
+
+"An InitContainer is like a pre-check or setup step that runs before the actual application starts. Think of it like a flight pre-departure checklist — pilots run all safety checks before passengers board. Similarly, InitContainers do all the preparation work before the main app container comes up."
+
+---
+
+## What kind of work does it do?
+
+| Use Case            | Example                                      |
+|--------------------|----------------------------------------------|
+| Wait for a service | Wait until database is ready                 |
+| Pull configs       | Fetch config files before app starts         |
+| Set permissions    | chmod on a shared volume                    |
+| Run DB migrations  | Apply schema changes before app boots        |
+| Clone a git repo   | Pull latest code into a shared volume        |
+
+---
+
+## How it works — Flow:
+
+Pod starts  
+↓  
+InitContainer 1 runs → must finish ✅  
+↓  
+InitContainer 2 runs → must finish ✅  
+↓  
+Main Container starts 🚀  
+
+If ANY InitContainer fails → Main container never starts  
+Kubernetes keeps retrying the failed InitContainer  
+
+---
+
+## Real Example to say:
+
+"In our project, we had a microservice that needed the database to be fully ready before starting. We wrote an InitContainer that kept pinging the database every 5 seconds. Only when the DB responded successfully, the InitContainer exited with success — and then our main application container started. This completely eliminated the 'app crashed because DB wasn't ready yet' problem."
+
+---
+
+## Basic YAML example:
+
+apiVersion: v1  
+kind: Pod  
+metadata:  
+  name: my-app  
+spec:  
+  initContainers:  
+    - name: wait-for-db  
+      image: busybox  
+      command: ['sh', '-c',  
+        'until nc -z db-service 5432;  
+         do echo waiting for DB; sleep 5; done']  
+
+  containers:  
+    - name: main-app  
+      image: my-app:latest  
+      ports:  
+        - containerPort: 8080  
+
+---
+
+## Key Points to mention:
+
+- InitContainers run sequentially — one after another, not parallel  
+- They run to completion — not like normal containers that keep running  
+- If one fails → CrashLoopBackOff → main container never starts  
+- They can share volumes with the main container — useful to pass files/configs
+
+</details>
+
 ---
 ---
 
