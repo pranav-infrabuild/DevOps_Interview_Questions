@@ -95,4 +95,166 @@ After that, it builds a Docker image and performs a security scan using Trivy.
 If the image passes the scan, the pipeline logs into Azure Container Registry using a service connection, tags the image with the build ID for traceability, and pushes it to ACR.”
 
 ---
+---
 
+## 🔄 Flow in Simple Words
+
+```text
+Code → Install → Test → SonarQube → Docker Build → Trivy Scan → Push to ACR
+```
+
+---
+
+## 🧱 Step-by-Step (Super Simple)
+
+### 1. Trigger
+
+```yaml
+trigger:
+- main
+```
+
+👉 Pipeline runs automatically when code is pushed to `main` branch
+
+---
+
+### 2. Agent (Machine)
+
+```yaml
+pool:
+  vmImage: 'ubuntu-latest'
+```
+
+👉 Uses a Linux machine to run all steps
+
+---
+
+### 3. Variables
+
+```yaml
+variables:
+  imageName: 'myapp'
+  acrName: '<your-acr-name>'
+```
+
+👉 Stores reusable values like:
+
+* Docker image name
+* Azure Container Registry name
+
+---
+
+## ⚙️ Main Steps
+
+---
+
+### 4. Checkout Code
+
+```yaml
+- checkout: self
+```
+
+👉 Downloads your code from repo
+
+---
+
+### 5. Setup Python
+
+```yaml
+UsePythonVersion@0
+```
+
+👉 Installs Python 3.11
+
+---
+
+### 6. Install Dependencies
+
+```yaml
+pip install -r requirements.txt
+```
+
+👉 Installs required libraries
+
+---
+
+### 7. Run Tests
+
+```yaml
+pytest
+```
+
+👉 Checks if code is working correctly
+
+---
+
+### 8. SonarQube (Code Quality)
+
+```yaml
+SonarQubePrepare → Analyze → Publish
+```
+
+👉 Scans code for:
+
+* Bugs
+* Security issues
+* Code quality
+
+---
+
+### 9. Build Docker Image
+
+```yaml
+docker build
+```
+
+👉 Converts app into a container image
+
+---
+
+### 10. Trivy Scan (Security)
+
+```yaml
+trivy image
+```
+
+👉 Scans Docker image for vulnerabilities
+👉 Ensures it's safe to deploy
+
+---
+
+### 11. Login to Azure
+
+```yaml
+az acr login
+```
+
+👉 Connects to Azure Container Registry (ACR)
+
+---
+
+### 12. Tag Image
+
+```yaml
+docker tag
+```
+
+👉 Prepares image with ACR format
+
+---
+
+### 13. Push to ACR
+
+```yaml
+docker push
+```
+
+👉 Uploads image to ACR (private registry)
+
+---
+
+# 🎯 Final Simple Summary
+
+> “This pipeline automatically takes my code, tests it, checks quality using SonarQube, builds a Docker image, scans it for security using Trivy, and finally pushes it to Azure Container Registry.”
+
+---
