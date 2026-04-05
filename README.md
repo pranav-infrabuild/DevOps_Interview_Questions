@@ -32,7 +32,7 @@ This repository is a **treasure trove** of scenario-based and technical question
 | 9 | **Scripting 📜** | [Link](https://github.com/pranav-infrabuild/DevOps_Interview_Questions/blob/main/Scenario%20Based%20/Scripting.md) | [Link](https://github.com/pranav-infrabuild/DevOps_Interview_Questions/blob/main/Scenario%20Based%20/Scripting.md) |
 | 10 | **Jenkins ⚙️** | 🚧 *In progress* | 🚧 *In progress* |
 | 11 | **Networking 🌐** | [Link](https://github.com/pranav-infrabuild/DevOps_Interview_Questions/blob/main/Technical%20Based%20%20/Networking.md) | 🚧 *In progress* |
-
+| 12 | **System Design 🏗️** | [Link](https://github.com/pranav278/DevOps_Interview_Questions/blob/main/Technical%20Based%20%20/System-design.md) | 🚧 *In progress* |
 ---
 
 ## 📣 Contributions
