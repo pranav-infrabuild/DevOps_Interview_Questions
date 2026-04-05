@@ -1,4 +1,4 @@
-#  1. How would you design a scalable and highly available web application architecture?
+### 1. How would you design a scalable and highly available web application architecture?
 
 <details>
 
@@ -40,7 +40,7 @@
 
 </details>
 
-#  2. How do you design a CI/CD pipeline for a microservices-based application?
+### 2. How do you design a CI/CD pipeline for a microservices-based application?
 
 <details>
 
@@ -88,3 +88,55 @@
 
 </details>
 
+### 3. How do you design a Kubernetes-based deployment architecture?
+
+<details>
+
+## 🎯 Start with this:
+
+"When designing Kubernetes architecture, I think about four things — how traffic comes in, how apps are organized, how they scale, and how they stay secure."
+
+---
+
+## 🏗️ Architecture I would design:
+
+🌐 Internet  
+⬇️  
+🚪 Azure Application Gateway / NGINX Ingress  
+⬇️  
+
+☸️ Kubernetes Cluster (AKS)  
+├── 📂 Namespaces (dev / staging / prod)  
+│     ├── 🚀 Deployments (stateless apps)  
+│     ├── 🗄️ StatefulSets (databases, queues)  
+│     ├── 📡 DaemonSets (logging, monitoring agents)  
+│     └── ⏰ CronJobs (scheduled tasks)  
+├── 📈 HPA (Horizontal Pod Autoscaler)  
+├── 🖥️ Node Autoscaler (cluster-autoscaler)  
+├── 🔐 Network Policies (pod-to-pod security)  
+├── 👤 RBAC (who can do what)  
+└── 🔑 Secrets Store CSI (Azure Key Vault integration)  
+
+---
+
+## 🚀 Deployment strategy I use:
+
+strategy:  
+  type: RollingUpdate  
+  rollingUpdate:  
+    maxSurge: 1        # 1 extra pod during update  
+    maxUnavailable: 0  # zero downtime guaranteed  
+
+---
+
+## 💡 Real example to say:
+
+"We designed AKS with 3 node pools — system pool for Kubernetes components, application pool with auto-scaling from 3 to 20 nodes, and a spot instance pool for batch jobs to save 70% cost. Each team had their own namespace with RBAC — dev team couldn't touch production namespace. Ingress handled SSL termination and path-based routing for 15 microservices. HPA kept pods at optimal count based on CPU and custom queue-depth metrics."
+
+---
+
+## 🧠 Close with this:
+
+"A well-designed Kubernetes architecture should feel invisible to developers — they just push code and the platform handles everything else. That's the goal."
+
+</details>
