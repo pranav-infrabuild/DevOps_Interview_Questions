@@ -1,3 +1,6 @@
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:2699E6,100:FFB347&height=140&section=header&text=SYSTEM-DESIGN%20TECHNICAL%20BASED%20INTERVIEW%20QUESTIONS&fontSize=28&fontColor=fff" />
+
 ### 1. How would you design a scalable and highly available web application architecture?
 
 <details>

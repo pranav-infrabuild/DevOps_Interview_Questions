@@ -34,7 +34,9 @@ This repository is a **treasure trove** of scenario-based and technical question
 | 11 | **Jenkins ⚙️** | [Link](https://github.com/pranav278/DevOps_Interview_Questions/blob/main/Technical-Based%20%20/Jenkins.md) | [Link](https://github.com/pranav278/DevOps_Interview_Questions/blob/main/Scenario-Based%20/Jenkins.md) |
 | 12 | **Networking 🌐** | [Link](https://github.com/pranav-infrabuild/DevOps_Interview_Questions/blob/main/Technical-Based%20%20/Networking.md) | [Link](https://github.com/pranav-infrabuild/DevOps_Interview_Questions/blob/main/Scenario-Based%20/Networking.md) |
 | 13 | **System Design 🏗️** | [Link](https://github.com/pranav278/DevOps_Interview_Questions/blob/main/Technical-Based%20%20/System-design.md) | [Link](https://github.com/pranav-infrabuild/DevOps_Interview_Questions/blob/main/Scenario-Based%20/System-design.md) |
-| 14 | **Templates 📂** | [Link](https://github.com/pranav-infrabuild/DevOps_Interview_Questions/tree/main/Technical-Based%20%20/Templetes) | [Link](https://github.com/pranav278/DevOps_Interview_Questions/tree/main/Scenario-Based%20/Templates) |
+| 14 | **Templates 📂** | [Link](https://github.com/pranav-infrabuild/DevOps_Interview_Questions/tree/main/Technical-Based%20%20/Templetes.md) | [Link](https://github.com/pranav278/DevOps_Interview_Questions/tree/main/Scenario-Based%20/Templates.md) |
+| 15 | **Azure 🔐** | [Link](https://github.com/pranav-infrabuild/DevOps_Interview_Questions/tree/main/Technical-Based%20%20/Azure.md) | [Link](https://github.com/pranav278/DevOps_Interview_Questions/tree/main/Scenario-Based%20/Azure.md) |
+| 16 | **AWS 🛡️** | [Link](https://github.com/pranav-infrabuild/DevOps_Interview_Questions/tree/main/Technical-Based%20%20/AWS.md) | [Link](https://github.com/pranav278/DevOps_Interview_Questions/tree/main/Scenario-Based%20/AWS.md) |
 ---
 
 ## 📣 Contributions
