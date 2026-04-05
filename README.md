@@ -22,7 +22,7 @@ This repository is a **treasure trove** of scenario-based and technical question
 | 🔢 Sr. No. | 📌 Topic     | ⚙️ Technical Questions | 🎯 Scenario-Based Questions |
 |:--------:|:------------|:----------------------|:---------------------------|
 | 1 | **Git 🧬** | [Link](https://github.com/pranav-infrabuild/DevOps_Interview_Questions/blob/main/Technical-Based%20%20/Git.md) | [Link](https://github.com/pranav-infrabuild/DevOps_Interview_Questions/blob/main/Scenario-Based%20/Git.md) |
-| 2 | **Linux 🐧** | [Link](https://github.com/pranav-infrabuild/DevOps_Interview_Questions/blob/main/Technical-Based%20%20/Linux.md) | [Link]() |
+| 2 | **Linux 🐧** | [Link](https://github.com/pranav-infrabuild/DevOps_Interview_Questions/blob/main/Technical-Based%20%20/Linux.md) | [Link](https://github.com/pranav-infrabuild/DevOps_Interview_Questions/blob/main/Scenario-Based%20/Linux.md) |
 | 3 | **Docker 🐳** | [Link](https://github.com/pranav-infrabuild/DevOps_Interview_Questions/blob/main/Technical-Based%20%20/Docker.md) | [Link](https://github.com/pranav-infrabuild/DevOps_Interview_Questions/blob/main/Scenario-Based%20/Docker.md) |
 | 4 | **Terraform 🌍** | [Link](https://github.com/pranav278/DevOps_Interview_Questions/blob/main/Technical-Based%20%20/Terraform.md) | [Link](https://github.com/pranav-infrabuild/DevOps_Interview_Questions/blob/main/Scenario-Based%20/Terraform.md) |
 | 5 | **Kubernetes ☸️** | [Link](https://github.com/pranav278/DevOps_Interview_Questions/blob/main/Technical-Based%20%20/Kubernates.md) | [Link](https://github.com/pranav-infrabuild/DevOps_Interview_Questions/blob/main/Scenario-Based%20/Kubernetes.md) |
