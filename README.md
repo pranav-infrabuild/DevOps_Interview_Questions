@@ -27,12 +27,14 @@ This repository is a **treasure trove** of scenario-based and technical question
 | 4 | **Terraform 🌍** | [Link](https://github.com/pranav278/DevOps_Interview_Questions/blob/main/Technical%20Based%20%20/Terraform.md) | [Link](https://github.com/pranav-infrabuild/DevOps_Interview_Questions/blob/main/Scenario%20Based%20/Terraform.md) |
 | 5 | **Kubernetes ☸️** | [Link](https://github.com/pranav278/DevOps_Interview_Questions/blob/main/Technical%20Based%20%20/Kubernates.md) | [Link](https://github.com/pranav-infrabuild/DevOps_Interview_Questions/blob/main/Scenario%20Based%20/Kubernetes.md) |
 | 6 | **Ansible 🔧** | [Link](https://github.com/pranav278/DevOps_Interview_Questions/blob/main/Technical%20Based%20%20/Ansible.md) | 🚧 *In progress* |
-| 7 | **Helm ⛵** | [Link](https://github.com/pranav278/DevOps_Interview_Questions/blob/main/Technical%20Based%20%20/Helm.md) | 🚧 *In progress* |
-| 8 | **SonarQube 🔍** | [Link](https://github.com/pranav278/DevOps_Interview_Questions/blob/main/Technical%20Based%20%20/Sonarcube.md) | 🚧 *In progress* |
-| 9 | **Scripting 📜** | [Link](https://github.com/pranav-infrabuild/DevOps_Interview_Questions/blob/main/Scenario%20Based%20/Scripting.md) | [Link](https://github.com/pranav-infrabuild/DevOps_Interview_Questions/blob/main/Scenario%20Based%20/Scripting.md) |
-| 10 | **Jenkins ⚙️** | 🚧 *In progress* | 🚧 *In progress* |
-| 11 | **Networking 🌐** | [Link](https://github.com/pranav-infrabuild/DevOps_Interview_Questions/blob/main/Technical%20Based%20%20/Networking.md) | 🚧 *In progress* |
-| 12 | **System Design 🏗️** | [Link](https://github.com/pranav278/DevOps_Interview_Questions/blob/main/Technical%20Based%20%20/System-design.md) | 🚧 *In progress* |
+| 7 | **Chef 🍳** | [Link](https://github.com/pranav278/DevOps_Interview_Questions/blob/main/Technical%20Based%20%20/Chef.md) | 🚧 *In progress* |
+| 8 | **Helm ⛵** | [Link](https://github.com/pranav278/DevOps_Interview_Questions/blob/main/Technical%20Based%20%20/Helm.md) | 🚧 *In progress* |
+| 9 | **SonarQube 🔍** | [Link](https://github.com/pranav278/DevOps_Interview_Questions/blob/main/Technical%20Based%20%20/Sonarcube.md) | 🚧 *In progress* |
+| 10 | **Scripting 📜** | [Link](https://github.com/pranav-infrabuild/DevOps_Interview_Questions/blob/main/Scenario%20Based%20/Scripting.md) | [Link](https://github.com/pranav-infrabuild/DevOps_Interview_Questions/blob/main/Scenario%20Based%20/Scripting.md) |
+| 11 | **Jenkins ⚙️** | [Link](https://github.com/pranav278/DevOps_Interview_Questions/blob/main/Technical%20Based%20%20/Jenkins.md) | [Link](https://github.com/pranav278/DevOps_Interview_Questions/blob/main/Scenario%20Based%20/Jenkins.md) |
+| 12 | **Networking 🌐** | [Link](https://github.com/pranav-infrabuild/DevOps_Interview_Questions/blob/main/Technical%20Based%20%20/Networking.md) | 🚧 *In progress* |
+| 13 | **System Design 🏗️** | [Link](https://github.com/pranav278/DevOps_Interview_Questions/blob/main/Technical%20Based%20%20/System-design.md) | 🚧 *In progress* |
+| 14 | **Templates 📂** | [Link](https://github.com/pranav278/DevOps_Interview_Questions/tree/main/Technical%20Based%20%20/Templates) | [Link](https://github.com/pranav278/DevOps_Interview_Questions/tree/main/Scenario%20Based%20/Templates) |
 ---
 
 ## 📣 Contributions
