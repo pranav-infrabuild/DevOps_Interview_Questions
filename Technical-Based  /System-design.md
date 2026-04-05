@@ -140,3 +140,72 @@ strategy:
 "A well-designed Kubernetes architecture should feel invisible to developers — they just push code and the platform handles everything else. That's the goal."
 
 </details>
+
+### 4. How would you design a secure infrastructure in AWS/GCP/Azure?
+<Details>
+  
+## 🎯 Start with this:
+
+"Security is not a feature you add at the end — it has to be baked into every layer from day one. I follow the principle of defense in depth — multiple security layers, so even if one fails, others protect you."
+
+---
+
+## 🛡️ Security layers I design:
+
+### 🔑 Layer 1 — IDENTITY & ACCESS
+
+- No passwords — Managed Identities everywhere  
+- MFA enforced for all humans  
+- RBAC — least privilege principle  
+- Service Principals with limited scope  
+
+---
+
+### 🌐 Layer 2 — NETWORK SECURITY
+
+- VNet with private subnets for databases  
+- Public subnet only for Load Balancers  
+- NSG / Security Groups — whitelist only  
+- Private Endpoints — no public DB access  
+- Azure Firewall / WAF at edge  
+
+---
+
+### 🔒 Layer 3 — DATA SECURITY
+
+- Encryption at rest — AES 256  
+- Encryption in transit — TLS 1.2+  
+- Azure Key Vault for all secrets  
+- No secrets in code or environment variables  
+
+---
+
+### 🧩 Layer 4 — APPLICATION SECURITY
+
+- Container image scanning (Trivy/Defender)  
+- Dependency vulnerability scanning (Snyk)  
+- OWASP checks in CI pipeline  
+- Pod Security Standards in Kubernetes  
+
+---
+
+### 📊 Layer 5 — MONITORING & COMPLIANCE
+
+- Microsoft Defender for Cloud  
+- Azure Security Center — continuous assessment  
+- Audit logs for all actions  
+- Alerts on suspicious activity  
+
+---
+
+## 💡 Real example to say:
+
+"In our Azure setup, no resource had a public endpoint except the Application Gateway. Databases were on private subnets with Private Endpoints only. All secrets were in Azure Key Vault — fetched at runtime using Managed Identity, no passwords anywhere in code or pipelines. We ran automated CIS benchmark checks weekly and maintained a security score above 85% in Microsoft Defender. When our SOC team did a penetration test, they found zero critical vulnerabilities."
+
+---
+
+## 🧠 Close with this:
+
+"Security is a continuous process, not a one-time task. I believe in shift-left security — catch vulnerabilities in CI pipeline itself, not in production."
+
+</Details>
