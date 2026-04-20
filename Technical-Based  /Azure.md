@@ -258,3 +258,140 @@ It is responsible for:
 We use it to enable SSO across applications, enforce MFA for all users, and apply Conditional Access policies to restrict access based on device compliance or location."
 
 </details>
+
+---
+
+## 🌐 🔹 Q8. What Is a Subnet?
+
+<details>
+
+A Subnet is a **subdivision of a Virtual Network (VNet)**. It allows you to divide a large network into smaller segments for better organization, security, and scalability.
+
+---
+
+### 🔹 Example
+
+```
+VNet: 10.0.0.0/16 (65,536 IPs)
+
+├── Subnet: WebTier   → 10.0.1.0/24 (256 IPs)
+├── Subnet: AppTier   → 10.0.2.0/24 (256 IPs)
+└── Subnet: DBTier    → 10.0.3.0/24 (256 IPs)
+```
+
+---
+
+### 🔹 IP Calculation Example (/24)
+
+- Total IPs: **256**
+- Azure Reserved IPs:
+  - `.0` → Network address  
+  - `.1` → Default gateway  
+  - `.2` → Azure DNS  
+  - `.3` → Azure DNS  
+  - `.255` → Broadcast  
+
+✅ **Usable IPs:**  
+`256 - 5 = 251 usable IPs`  
+Range: **10.0.1.4 → 10.0.1.254**
+
+---
+
+### 🔹 Why Use Subnets?
+- Separate tiers (Web, App, DB)
+- Apply different **Network Security Groups (NSGs)**
+- Control traffic flow and improve security
+- Better IP address management
+
+---
+
+### 🔹 Interview Answer
+
+"A subnet is a logical subdivision of a VNet used to organize resources into tiers like web, app, and database. 
+
+In Azure, each subnet reserves 5 IP addresses — network, gateway, two DNS, and broadcast. So a /24 subnet provides 256 total IPs but only 251 usable. This is important for capacity planning in large deployments."
+
+</details>
+
+---
+
+## 🔗 🔹 Q9. What Is VNet Peering?
+
+<details>
+
+Connecting two Virtual Networks so resources can communicate privately using Microsoft's backbone — no public internet, no VPN, very low latency
+
+```
+VNet-A (10.0.0.0/16)  ←——Peering——→  VNet-B (10.1.0.0/16)
+VM: 10.0.1.4                          VM: 10.1.1.4
+```
+
+VM in VNet-A can ping VM in VNet-B as if they're on the same network.
+
+---
+
+### Types:
+
+#### Regional Peering: Same Azure region
+```text
+VNet-EastUS ←→ VNet-EastUS-2 (same region)
+```
+
+#### Global Peering: Different Azure regions
+```text
+VNet-EastUS ←→ VNet-WestEurope (cross-region)
+```
+
+---
+
+### Key Rules:
+
+VNet address spaces must not overlap (10.0.0.0/16 and 10.0.0.0/24 would conflict)
+
+Peering is non-transitive by default:
+
+```text
+VNet-A ←→ VNet-B ←→ VNet-C
+VNet-A CANNOT reach VNet-C automatically
+(Need to peer A-C directly, or use Azure Virtual WAN/Hub)
+```
+
+---
+
+### Interview Answer:
+
+"VNet peering connects two VNets privately over Microsoft's backbone with low latency and no bandwidth overhead. It's non-transitive — if A peers with B and B peers with C, A still can't reach C. For hub-and-spoke architectures with many VNets, we use Azure Virtual WAN or a hub VNet with peering to manage transitive routing."
+
+</details>
+
+---
+
+## 🛡️ 🔹 Q10. What is Application Security Group (ASG)
+
+<details>
+
+### Problem NSGs Alone Have:
+```text
+# Without ASG — you specify IP addresses
+Allow traffic from: 10.0.1.4, 10.0.1.5, 10.0.1.6 to port 1433
+```
+
+When IPs change or scale sets spin up new VMs, you have to update rules.
+
+---
+
+### How ASG Solves This:
+```text
+# Create ASGs (logical groups)
+ASG: WebServers   → Assign to all web VMs
+ASG: DBServers    → Assign to all database VMs
+
+# NSG rule uses ASG names instead of IPs
+Allow: WebServers → DBServers on port 1433
+```
+
+Now when new web VMs are added, just add them to the WebServers ASG — the NSG rule automatically applies.
+
+</details>
+
+
